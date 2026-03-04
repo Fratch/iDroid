@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>iDROID UI</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/idroid.css" />
+  </head>
+
+  <body>
+    <div id="idroid_ver">
+      <h2>iDROID VER 3.02</h2>
+    </div>
+    <div class="idroid">
+      <div id="dotgrid"></div>
+      <div id="white_rectangle"></div>
+
+      <!-- TOP BAR con TABS -->
+      <div class="tabs-container">
+        <div class="tabs-wrapper">
+          <input type="radio" name="tab" id="tab1" checked />
+          <label for="tab1" class="tab">MOTHER BASE</label>
+
+          <input type="radio" name="tab" id="tab2" />
+          <label for="tab2" class="tab">MAP</label>
+
+          <input type="radio" name="tab" id="tab3" />
+          <label for="tab3" class="tab">MISSIONS</label>
+        </div>
+
+        <!-- Pannelli delle tab (contenuto a fisso) -->
+        <div class="tab-panels">
+          <!-- ═══════════════════════════════════════
+               PANEL 1 — MOTHER BASE
+          ═══════════════════════════════════════ -->
+          <div class="tab-panel" id="panel-mission">
+            <nav class="mb-sidebar">
+              <div class="mb-sidebar-header">
+                <span class="mb-sidebar-label">SECTION</span>
+              </div>
+              <ul class="mb-nav">
+                <li class="mb-nav-item active" data-mb-section="tapes">
+                  <i class="fas fa-scroll mb-nav-icon"></i
+                  ><span>CASSETTE TAPES</span>
+                  <span class="mb-nav-count">48</span>
+                </li>
+                <li class="mb-nav-item" data-mb-section="staff">
+                  <i class="fas fa-users mb-nav-icon"></i><span>STAFF</span>
+                  <span class="mb-nav-count">312</span>
+                </li>
+                <li class="mb-nav-item" data-mb-section="resources">
+                  <i class="fas fa-boxes mb-nav-icon"></i><span>RESOURCES</span>
+                </li>
+                <li class="mb-nav-item" data-mb-section="development">
+                  <i class="fas fa-flask mb-nav-icon"></i
+                  ><span>DEVELOPMENT</span>
+                  <span class="mb-nav-badge">!</span>
+                </li>
+                <li class="mb-nav-item" data-mb-section="fobs">
+                  <i class="fas fa-satellite-dish mb-nav-icon"></i
+                  ><span>F.O.B.</span>
+                </li>
+              </ul>
+              <div class="mb-sidebar-stats">
+                <div class="mb-stat-row">
+                  <span class="mb-stat-label">HEROISM</span>
+                  <span class="mb-stat-val marsmonster">87,420</span>
+                </div>
+                <div class="mb-stat-row">
+                  <span class="mb-stat-label">COMBAT</span>
+                  <div class="mb-stat-bar">
+                    <div class="mb-stat-fill" style="width: 74%"></div>
+                  </div>
+                </div>
+                <div class="mb-stat-row">
+                  <span class="mb-stat-label">R&amp;D</span>
+                  <div class="mb-stat-bar">
+                    <div class="mb-stat-fill" style="width: 61%"></div>
+                  </div>
+                </div>
+                <div class="mb-stat-row">
+                  <span class="mb-stat-label">INTEL</span>
+                  <div class="mb-stat-bar">
+                    <div class="mb-stat-fill" style="width: 88%"></div>
+                  </div>
+                </div>
+                <div class="mb-stat-row">
+                  <span class="mb-stat-label">MEDICAL</span>
+                  <div class="mb-stat-bar">
+                    <div class="mb-stat-fill" style="width: 53%"></div>
+                  </div>
+                </div>
+              </div>
+            </nav>
+
+            <div class="mb-content">
+              <!-- TAPES -->
+              <div class="mb-section active" id="mb-tapes">
+                <div id="column_1" class="column">
+                  <div class="top_column">
+                    <div role="tablist" id="main_tablist">
+                      <button
+                        role="tab"
+                        aria-selected="true"
+                        class="tape_tab"
+                        aria-label="tapes"
+                      >
+                        <i class="fas fa-scroll"></i>
+                      </button>
+                      <button
+                        role="tab"
+                        class="tape_tab"
+                        aria-label="music"
+                        tabindex="-1"
+                        aria-hidden="true"
+                      >
+                        <i class="fas fa-music"></i>
+                      </button>
+                      <button
+                        role="tab"
+                        class="tape_tab"
+                        aria-label="tasks"
+                        tabindex="-1"
+                        aria-hidden="true"
+                      >
+                        <i class="fas fa-check"></i>
+                      </button>
+                    </div>
+                    <div role="tabpanel" id="main_tabpanel">
+                      <h1 id="tab_heading">Info</h1>
+                      <p>Listen to tape recordings of relevant intel</p>
+                    </div>
+                    <h3 class="default_heading">CASSETTE TAPES</h3>
+                  </div>
+                  <div id="column_1_tapes" class="column_tapes"></div>
+                  <div class="btn_settings">
+                    <button
+                      id="activeToStop"
+                      class="control_btn disabled_control"
+                      tabindex="-1"
+                      aria-hidden="true"
+                    >
+                      <span class="keyboard_key disabled_control"
+                        >[ SPACE ]</span
+                      >
+                      Stop
+                    </button>
+                    <button
+                      id="activeToContinue"
+                      class="control_btn disabled_control"
+                      tabindex="-1"
+                      aria-hidden="true"
+                    >
+                      <span class="keyboard_key disabled_control"
+                        >[ ENTER ]</span
+                      >
+                      Continue
+                    </button>
+                  </div>
+                </div>
+                <div id="column_2" class="column">
+                  <div class="top_column">
+                    <div id="media_box">
+                      <div id="media_box_headings">
+                        <h2>SELECTED CASSETTE TAPE</h2>
+                        <h3>
+                          <i class="fas fa-caret-left"></i> To Control Panel
+                        </h3>
+                      </div>
+                      <div id="tapes_playing">
+                        <div id="current_tape">
+                          <h2 id="current_tape_heading">
+                            CURRENT TAPE PLAYING
+                          </h2>
+                        </div>
+                        <div id="current_sub_tape">
+                          <h2 id="current_sub_tape_heading">TAPE PLAYING</h2>
+                        </div>
+                        <div id="progress_container">
+                          <i id="progress_audio" class="fas fa-volume-off"></i>
+                          <div id="progress_bar_container">
+                            <div id="progress">
+                              <div id="progress_current"></div>
+                            </div>
+                          </div>
+                          <p id="current_progress">
+                            <span id="current_now">0</span>/<span
+                              id="current_length"
+                              >0</span
+                            >
+                          </p>
+                        </div>
+                      </div>
+                      <div id="media_controls">
+                        <button id="back_btn" class="media_control_btn">
+                          <i class="fas fa-backward"></i>
+                        </button>
+                        <button
+                          class="media_control_btn disabled"
+                          tabindex="-1"
+                          aria-hidden="true"
+                        >
+                          <i class="fas fa-pause"></i>
+                        </button>
+                        <button id="stop_btn" class="media_control_btn">
+                          <i class="fas fa-stop"></i>
+                        </button>
+                        <button
+                          class="media_control_btn disabled"
+                          tabindex="-1"
+                          aria-hidden="true"
+                        >
+                          <i class="fas fa-forward"></i>
+                        </button>
+                        <button
+                          class="media_control_btn disabled"
+                          tabindex="-1"
+                          aria-hidden="true"
+                        >
+                          <i class="fas fa-retweet"></i>
+                        </button>
+                        <button class="media_control_btn">
+                          <i class="far fa-closed-captioning"></i>
+                        </button>
+                        <button
+                          class="media_control_btn disabled"
+                          tabindex="-1"
+                          aria-hidden="true"
+                        >
+                          <i class="fas fa-volume-down"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="column_2_tapes" class="column_tapes"></div>
+                </div>
+                <section class="content"><div class="grid"></div></section>
+              </div>
+
+              <!-- STAFF -->
+              <div class="mb-section" id="mb-staff">
+                <div class="mb-panel-header">
+                  <h2 class="mb-panel-title">STAFF MANAGEMENT</h2>
+                  <div class="mb-panel-controls">
+                    <span class="mb-filter-label">SORT BY</span>
+                    <button class="mb-filter-btn active">RANK</button>
+                    <button class="mb-filter-btn">SKILL</button>
+                    <button class="mb-filter-btn">UNIT</button>
+                  </div>
+                </div>
+                <div class="staff-layout">
+                  <div class="staff-list">
+                    <div class="staff-list-header">
+                      <span>NAME</span><span>UNIT</span><span>RANK</span
+                      ><span>SKILL</span><span>STATUS</span>
+                    </div>
+                    <div class="staff-row active" data-staff="1">
+                      <span class="staff-name"
+                        ><i class="fas fa-user staff-icon"></i> KAZUHIRA
+                        MILLER</span
+                      ><span class="staff-unit">COMMAND</span
+                      ><span class="staff-rank marsmonster">S+</span
+                      ><span class="staff-skill">MANAGEMENT</span
+                      ><span class="staff-status status-ok">ACTIVE</span>
+                    </div>
+                    <div class="staff-row" data-staff="2">
+                      <span class="staff-name"
+                        ><i class="fas fa-user staff-icon"></i> HUEY
+                        EMMERICH</span
+                      ><span class="staff-unit">R&amp;D</span
+                      ><span class="staff-rank marsmonster">A</span
+                      ><span class="staff-skill">ENGINEERING</span
+                      ><span class="staff-status status-ok">ACTIVE</span>
+                    </div>
+                    <div class="staff-row" data-staff="3">
+                      <span class="staff-name"
+                        ><i class="fas fa-user staff-icon"></i> CODE
+                        TALKER</span
+                      ><span class="staff-unit">INTEL</span
+                      ><span class="staff-rank marsmonster">S</span
+                      ><span class="staff-skill">LINGUISTICS</span
+                      ><span class="staff-status status-ok">ACTIVE</span>
+                    </div>
+                    <div class="staff-row" data-staff="4">
+                      <span class="staff-name"
+                        ><i class="fas fa-user staff-icon"></i> QUIET</span
+                      ><span class="staff-unit">COMBAT</span
+                      ><span class="staff-rank marsmonster">S+</span
+                      ><span class="staff-skill">SNIPING</span
+                      ><span class="staff-status status-ok">ACTIVE</span>
+                    </div>
+                    <div class="staff-row" data-staff="5">
+                      <span class="staff-name"
+                        ><i class="fas fa-user staff-icon"></i> OCELOT</span
+                      ><span class="staff-unit">COMMAND</span
+                      ><span class="staff-rank marsmonster">S+</span
+                      ><span class="staff-skill">INTERROGATION</span
+                      ><span class="staff-status status-warn">AWAY</span>
+                    </div>
+                    <div class="staff-row" data-staff="6">
+                      <span class="staff-name"
+                        ><i class="fas fa-user staff-icon"></i> D-HORSE</span
+                      ><span class="staff-unit">SUPPORT</span
+                      ><span class="staff-rank marsmonster">B</span
+                      ><span class="staff-skill">TRANSPORT</span
+                      ><span class="staff-status status-ok">ACTIVE</span>
+                    </div>
+                    <div class="staff-row" data-staff="7">
+                      <span class="staff-name"
+                        ><i class="fas fa-user staff-icon"></i> MBEKE, R.</span
+                      ><span class="staff-unit">MEDICAL</span
+                      ><span class="staff-rank marsmonster">A</span
+                      ><span class="staff-skill">SURGERY</span
+                      ><span class="staff-status status-err">INJURED</span>
+                    </div>
+                    <div class="staff-row" data-staff="8">
+                      <span class="staff-name"
+                        ><i class="fas fa-user staff-icon"></i> VASQUEZ,
+                        C.</span
+                      ><span class="staff-unit">COMBAT</span
+                      ><span class="staff-rank marsmonster">B+</span
+                      ><span class="staff-skill">CQC</span
+                      ><span class="staff-status status-ok">ACTIVE</span>
+                    </div>
+                  </div>
+                  <div class="staff-detail">
+                    <div class="staff-detail-header">
+                      <div class="staff-portrait">
+                        <i class="fas fa-user-secret"></i>
+                      </div>
+                      <div class="staff-detail-info">
+                        <h3 class="staff-detail-name">KAZUHIRA MILLER</h3>
+                        <div class="staff-detail-rank marsmonster">S+</div>
+                        <div class="staff-detail-unit">COMMAND UNIT</div>
+                      </div>
+                    </div>
+                    <div class="staff-detail-stats">
+                      <div class="detail-stat">
+                        <span class="ds-label">COMBAT</span>
+                        <div class="ds-bar">
+                          <div class="ds-fill" style="width: 72%"></div>
+                        </div>
+                        <span class="ds-val marsmonster">72</span>
+                      </div>
+                      <div class="detail-stat">
+                        <span class="ds-label">R&amp;D</span>
+                        <div class="ds-bar">
+                          <div class="ds-fill" style="width: 45%"></div>
+                        </div>
+                        <span class="ds-val marsmonster">45</span>
+                      </div>
+                      <div class="detail-stat">
+                        <span class="ds-label">INTEL</span>
+                        <div class="ds-bar">
+                          <div class="ds-fill" style="width: 91%"></div>
+                        </div>
+                        <span class="ds-val marsmonster">91</span>
+                      </div>
+                      <div class="detail-stat">
+                        <span class="ds-label">MEDICAL</span>
+                        <div class="ds-bar">
+                          <div class="ds-fill" style="width: 60%"></div>
+                        </div>
+                        <span class="ds-val marsmonster">60</span>
+                      </div>
+                      <div class="detail-stat">
+                        <span class="ds-label">MANAGEMENT</span>
+                        <div class="ds-bar">
+                          <div
+                            class="ds-fill accent-fill"
+                            style="width: 99%"
+                          ></div>
+                        </div>
+                        <span class="ds-val marsmonster accent-val">99</span>
+                      </div>
+                    </div>
+                    <div class="staff-detail-footer">
+                      <div class="sdf-row">
+                        <span class="sdf-label">LANGUAGE</span
+                        ><span class="sdf-val">ENGLISH / JAPANESE</span>
+                      </div>
+                      <div class="sdf-row">
+                        <span class="sdf-label">ORIGIN</span
+                        ><span class="sdf-val">USA</span>
+                      </div>
+                      <div class="sdf-row">
+                        <span class="sdf-label">JOINED</span
+                        ><span class="sdf-val marsmonster">1984.03.11</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RESOURCES -->
+              <div class="mb-section" id="mb-resources">
+                <div class="mb-panel-header">
+                  <h2 class="mb-panel-title">RESOURCES</h2>
+                </div>
+                <div class="resources-grid">
+                  <div class="res-category">
+                    <h4 class="res-cat-title">
+                      <i class="fas fa-cube"></i> MATERIALS
+                    </h4>
+                    <div class="res-item">
+                      <span class="res-name">COMMON METAL</span>
+                      <div class="res-bar-wrap">
+                        <div class="res-bar-fill" style="width: 85%"></div>
+                      </div>
+                      <span class="res-val marsmonster">8,540</span>
+                    </div>
+                    <div class="res-item">
+                      <span class="res-name">MINOR METAL</span>
+                      <div class="res-bar-wrap">
+                        <div class="res-bar-fill" style="width: 42%"></div>
+                      </div>
+                      <span class="res-val marsmonster">4,210</span>
+                    </div>
+                    <div class="res-item">
+                      <span class="res-name">PRECIOUS METAL</span>
+                      <div class="res-bar-wrap">
+                        <div class="res-bar-fill" style="width: 18%"></div>
+                      </div>
+                      <span class="res-val marsmonster">1,830</span>
+                    </div>
+                    <div class="res-item">
+                      <span class="res-name">BIOLOGICAL MATERIAL</span>
+                      <div class="res-bar-wrap">
+                        <div class="res-bar-fill" style="width: 61%"></div>
+                      </div>
+                      <span class="res-val marsmonster">6,120</span>
+                    </div>
+                    <div class="res-item">
+                      <span class="res-name">FUEL RESOURCES</span>
+                      <div class="res-bar-wrap">
+                        <div
+                          class="res-bar-fill res-warn"
+                          style="width: 12%"
+                        ></div>
+                      </div>
+                      <span class="res-val marsmonster res-warn-text"
+                        >1,200</span
+                      >
+                    </div>
+                    <div class="res-item">
+                      <span class="res-name">PLANTS</span>
+                      <div class="res-bar-wrap">
+                        <div class="res-bar-fill" style="width: 73%"></div>
+                      </div>
+                      <span class="res-val marsmonster">7,310</span>
+                    </div>
+                  </div>
+                  <div class="res-category">
+                    <h4 class="res-cat-title">
+                      <i class="fas fa-bolt"></i> POWER &amp; SUPPLY
+                    </h4>
+                    <div class="res-item">
+                      <span class="res-name">POWER SUPPLY</span>
+                      <div class="res-bar-wrap">
+                        <div class="res-bar-fill" style="width: 92%"></div>
+                      </div>
+                      <span class="res-val marsmonster">9,200</span>
+                    </div>
+                    <div class="res-item">
+                      <span class="res-name">MEDICAL SUPPLIES</span>
+                      <div class="res-bar-wrap">
+                        <div
+                          class="res-bar-fill res-warn"
+                          style="width: 23%"
+                        ></div>
+                      </div>
+                      <span class="res-val marsmonster res-warn-text"
+                        >2,300</span
+                      >
+                    </div>
+                    <div class="res-item">
+                      <span class="res-name">FOOD SUPPLY</span>
+                      <div class="res-bar-wrap">
+                        <div class="res-bar-fill" style="width: 55%"></div>
+                      </div>
+                      <span class="res-val marsmonster">5,500</span>
+                    </div>
+                  </div>
+                  <div class="res-category res-gmp">
+                    <h4 class="res-cat-title">
+                      <i class="fas fa-dollar-sign"></i> GMP BALANCE
+                    </h4>
+                    <div class="gmp-display marsmonster">999,999,999</div>
+                    <div class="gmp-sub">GROSS MILITARY PRODUCT</div>
+                    <div class="gmp-breakdown">
+                      <div class="gmp-row">
+                        <span>BASE INCOME</span
+                        ><span class="marsmonster">+124,800</span>
+                      </div>
+                      <div class="gmp-row">
+                        <span>MISSION REWARD</span
+                        ><span class="marsmonster">+48,000</span>
+                      </div>
+                      <div class="gmp-row gmp-expense">
+                        <span>STAFF COST</span
+                        ><span class="marsmonster">-62,400</span>
+                      </div>
+                      <div class="gmp-row gmp-expense">
+                        <span>PLATFORM MAINT.</span
+                        ><span class="marsmonster">-18,200</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DEVELOPMENT -->
+              <div class="mb-section" id="mb-development">
+                <div class="mb-panel-header">
+                  <h2 class="mb-panel-title">
+                    DEVELOPMENT <span class="new-badge">3 NEW</span>
+                  </h2>
+                  <div class="mb-panel-controls">
+                    <button class="mb-filter-btn active">ALL</button>
+                    <button class="mb-filter-btn">WEAPONS</button>
+                    <button class="mb-filter-btn">EQUIPMENT</button>
+                    <button class="mb-filter-btn">FULTON</button>
+                  </div>
+                </div>
+                <div class="dev-layout">
+                  <div class="dev-list">
+                    <div class="dev-item dev-complete">
+                      <div class="dev-icon"><i class="fas fa-gun"></i></div>
+                      <div class="dev-info">
+                        <span class="dev-name">AM MRS-4 ASSAULT RIFLE</span
+                        ><span class="dev-cat">WEAPONS / RIFLES</span>
+                      </div>
+                      <div class="dev-status-block">
+                        <span class="dev-status complete">COMPLETE</span
+                        ><span class="dev-cost marsmonster">48,000 GMP</span>
+                      </div>
+                    </div>
+                    <div class="dev-item dev-progress">
+                      <div class="dev-icon">
+                        <i class="fas fa-hard-hat"></i>
+                      </div>
+                      <div class="dev-info">
+                        <span class="dev-name">SNEAKING SUIT MK.II</span
+                        ><span class="dev-cat">EQUIPMENT / SUITS</span>
+                      </div>
+                      <div class="dev-status-block">
+                        <div class="dev-prog-bar">
+                          <div class="dev-prog-fill" style="width: 67%"></div>
+                        </div>
+                        <span class="dev-status in-prog">67% — 14H LEFT</span>
+                      </div>
+                    </div>
+                    <div class="dev-item dev-new">
+                      <div class="dev-icon">
+                        <i class="fas fa-parachute-box"></i>
+                      </div>
+                      <div class="dev-info">
+                        <span class="dev-name">FULTON UPGRADE LV.3</span
+                        ><span class="dev-cat">EQUIPMENT / FULTON</span>
+                      </div>
+                      <div class="dev-status-block">
+                        <span class="dev-status new">NEW</span
+                        ><span class="dev-cost marsmonster">92,000 GMP</span>
+                      </div>
+                    </div>
+                    <div class="dev-item dev-new">
+                      <div class="dev-icon">
+                        <i class="fas fa-crosshairs"></i>
+                      </div>
+                      <div class="dev-info">
+                        <span class="dev-name">SILENCER LV.5</span
+                        ><span class="dev-cat">WEAPONS / ATTACHMENTS</span>
+                      </div>
+                      <div class="dev-status-block">
+                        <span class="dev-status new">NEW</span
+                        ><span class="dev-cost marsmonster">31,000 GMP</span>
+                      </div>
+                    </div>
+                    <div class="dev-item dev-progress">
+                      <div class="dev-icon">
+                        <i class="fas fa-binoculars"></i>
+                      </div>
+                      <div class="dev-info">
+                        <span class="dev-name">NIGHT VISION GOGGLES LV.2</span
+                        ><span class="dev-cat">EQUIPMENT / OPTICS</span>
+                      </div>
+                      <div class="dev-status-block">
+                        <div class="dev-prog-bar">
+                          <div class="dev-prog-fill" style="width: 31%"></div>
+                        </div>
+                        <span class="dev-status in-prog">31% — 2D 6H LEFT</span>
+                      </div>
+                    </div>
+                    <div class="dev-item dev-new">
+                      <div class="dev-icon"><i class="fas fa-syringe"></i></div>
+                      <div class="dev-info">
+                        <span class="dev-name">ANESTHESIA CIGAR</span
+                        ><span class="dev-cat">EQUIPMENT / TOOLS</span>
+                      </div>
+                      <div class="dev-status-block">
+                        <span class="dev-status new">NEW</span
+                        ><span class="dev-cost marsmonster">18,500 GMP</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dev-detail-panel">
+                    <h4 class="dev-detail-title">R&amp;D PLATFORM LEVEL</h4>
+                    <div class="platform-levels">
+                      <div class="plat-row">
+                        <span class="plat-label">COMBAT UNIT</span
+                        ><span class="plat-lv marsmonster">LV 42</span>
+                        <div class="plat-bar">
+                          <div class="plat-fill" style="width: 78%"></div>
+                        </div>
+                      </div>
+                      <div class="plat-row">
+                        <span class="plat-label">R&amp;D UNIT</span
+                        ><span class="plat-lv marsmonster">LV 38</span>
+                        <div class="plat-bar">
+                          <div class="plat-fill" style="width: 63%"></div>
+                        </div>
+                      </div>
+                      <div class="plat-row">
+                        <span class="plat-label">SUPPORT UNIT</span
+                        ><span class="plat-lv marsmonster">LV 29</span>
+                        <div class="plat-bar">
+                          <div class="plat-fill" style="width: 48%"></div>
+                        </div>
+                      </div>
+                      <div class="plat-row">
+                        <span class="plat-label">INTEL UNIT</span
+                        ><span class="plat-lv marsmonster">LV 35</span>
+                        <div class="plat-bar">
+                          <div class="plat-fill" style="width: 58%"></div>
+                        </div>
+                      </div>
+                      <div class="plat-row">
+                        <span class="plat-label">MEDICAL UNIT</span
+                        ><span class="plat-lv marsmonster">LV 21</span>
+                        <div class="plat-bar">
+                          <div class="plat-fill" style="width: 35%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FOB -->
+              <div class="mb-section" id="mb-fobs">
+                <div class="mb-panel-header">
+                  <h2 class="mb-panel-title">FORWARD OPERATING BASES</h2>
+                </div>
+                <div class="fob-layout">
+                  <div class="fob-card fob-main">
+                    <div class="fob-card-header">
+                      <span class="fob-type">MAIN BASE</span
+                      ><span class="fob-status fob-secure">SECURE</span>
+                    </div>
+                    <div class="fob-name">DIAMOND DOGS HQ</div>
+                    <div class="fob-stats">
+                      <div class="fob-stat">
+                        <span class="fob-stat-label">SECURITY</span>
+                        <div class="fob-bar">
+                          <div class="fob-fill" style="width: 91%"></div>
+                        </div>
+                      </div>
+                      <div class="fob-stat">
+                        <span class="fob-stat-label">PLATFORMS</span
+                        ><span class="fob-num marsmonster">6 / 8</span>
+                      </div>
+                      <div class="fob-stat">
+                        <span class="fob-stat-label">STAFF ASSIGNED</span
+                        ><span class="fob-num marsmonster">312</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fob-card">
+                    <div class="fob-card-header">
+                      <span class="fob-type">F.O.B. #1</span
+                      ><span class="fob-status fob-secure">SECURE</span>
+                    </div>
+                    <div class="fob-name">STEEL PHANTOM</div>
+                    <div class="fob-stats">
+                      <div class="fob-stat">
+                        <span class="fob-stat-label">SECURITY</span>
+                        <div class="fob-bar">
+                          <div class="fob-fill" style="width: 74%"></div>
+                        </div>
+                      </div>
+                      <div class="fob-stat">
+                        <span class="fob-stat-label">PLATFORMS</span
+                        ><span class="fob-num marsmonster">3 / 8</span>
+                      </div>
+                      <div class="fob-stat">
+                        <span class="fob-stat-label">STAFF ASSIGNED</span
+                        ><span class="fob-num marsmonster">128</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fob-card fob-alert">
+                    <div class="fob-card-header">
+                      <span class="fob-type">F.O.B. #2</span
+                      ><span class="fob-status fob-danger">UNDER ATTACK</span>
+                    </div>
+                    <div class="fob-name">IRON RAMPART</div>
+                    <div class="fob-stats">
+                      <div class="fob-stat">
+                        <span class="fob-stat-label">SECURITY</span>
+                        <div class="fob-bar">
+                          <div
+                            class="fob-fill fob-fill-danger"
+                            style="width: 32%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="fob-stat">
+                        <span class="fob-stat-label">PLATFORMS</span
+                        ><span class="fob-num marsmonster">2 / 8</span>
+                      </div>
+                      <div class="fob-stat">
+                        <span class="fob-stat-label">STAFF ASSIGNED</span
+                        ><span class="fob-num marsmonster">64</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /panel-mission -->
+
+          <!-- ═══════════════════════════════════════
+               PANEL 2 — MAP
+          ═══════════════════════════════════════ -->
+          <div class="tab-panel" id="panel-map">
+            <div class="map-layout">
+              <nav class="map-sidebar">
+                <div class="map-sidebar-header">REGIONS</div>
+                <ul class="map-region-list">
+                  <li class="map-region active" data-region="afghanistan">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="map-region-info">
+                      <span class="map-region-name">AFGHANISTAN</span
+                      ><span class="map-region-sub">DA SMASEI LAMAN</span>
+                    </div>
+                    <span class="map-region-badge">12</span>
+                  </li>
+                  <li class="map-region" data-region="africa">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="map-region-info">
+                      <span class="map-region-name">CENTRAL AFRICA</span
+                      ><span class="map-region-sub">BWALA YA MASA</span>
+                    </div>
+                    <span class="map-region-badge">9</span>
+                  </li>
+                  <li class="map-region" data-region="soviet">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="map-region-info">
+                      <span class="map-region-name">SOVIET UNION</span
+                      ><span class="map-region-sub">RESTRICTED ACCESS</span>
+                    </div>
+                  </li>
+                </ul>
+                <div class="map-legend">
+                  <div class="legend-title">LEGEND</div>
+                  <div class="legend-item">
+                    <span class="legend-dot dot-outpost"></span>OUTPOST
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-dot dot-base"></span>MAIN BASE
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-dot dot-objective"></span>OBJECTIVE
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-dot dot-danger"></span>DANGER ZONE
+                  </div>
+                </div>
+                <div class="map-infil-box">
+                  <div class="map-infil-title">INFILTRATION</div>
+                  <div class="map-infil-val">EAST — LZ BRAVO</div>
+                  <div class="map-infil-title" style="margin-top: 8px">
+                    EXTRACTION
+                  </div>
+                  <div class="map-infil-val">NORTH — LZ ALPHA</div>
+                  <div class="map-infil-title" style="margin-top: 8px">
+                    WEATHER
+                  </div>
+                  <div class="map-infil-val">
+                    <i class="fas fa-cloud-moon"></i> NIGHT / OVERCAST
+                  </div>
+                </div>
+              </nav>
+
+              <div class="map-main">
+                <div class="map-title-overlay">
+                  AFGHANISTAN — DA SMASEI LAMAN
+                </div>
+                <div class="map-zoom-controls">
+                  <button class="map-zoom-btn" id="map-zoom-in">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button class="map-zoom-btn" id="map-zoom-out">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button class="map-zoom-btn" id="map-reset">
+                    <i class="fas fa-compress-alt"></i>
+                  </button>
+                </div>
+                <div class="map-viewport" id="mapViewport">
+                  <svg
+                    class="tactical-map"
+                    id="tacticalMap"
+                    viewBox="0 0 800 560"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect width="800" height="560" fill="#0f2a1a" />
+                    <ellipse
+                      cx="400"
+                      cy="280"
+                      rx="340"
+                      ry="220"
+                      fill="#112b1d"
+                      opacity="0.8"
+                    />
+                    <polygon
+                      points="120,80 300,40 480,60 600,120 680,200 700,320 620,420 480,480 280,500 150,440 80,340 60,200"
+                      fill="#142e1f"
+                      opacity="0.6"
+                    />
+                    <polyline
+                      points="50,400 120,320 200,350 280,280 360,300 440,240 520,260 600,200 700,240"
+                      stroke="#1a3d2a"
+                      stroke-width="3"
+                      fill="none"
+                      opacity="0.8"
+                    />
+                    <polyline
+                      points="80,200 160,150 240,170 320,120 420,140 500,100 580,130 660,90"
+                      stroke="#1a3d2a"
+                      stroke-width="2"
+                      fill="none"
+                      opacity="0.6"
+                    />
+                    <path
+                      d="M 100,500 Q 250,420 400,380 Q 550,340 700,300"
+                      stroke="#496d7b"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-dasharray="8,4"
+                      opacity="0.7"
+                    />
+                    <path
+                      d="M 400,50 L 400,380"
+                      stroke="#496d7b"
+                      stroke-width="1.5"
+                      fill="none"
+                      stroke-dasharray="6,4"
+                      opacity="0.5"
+                    />
+                    <path
+                      d="M 200,200 Q 300,280 400,280"
+                      stroke="#496d7b"
+                      stroke-width="1.5"
+                      fill="none"
+                      stroke-dasharray="4,4"
+                      opacity="0.4"
+                    />
+                    <path
+                      d="M 50,300 Q 150,280 250,320 Q 350,360 450,340 Q 550,320 650,350 L 750,360"
+                      stroke="#1a6ea0"
+                      stroke-width="3"
+                      fill="none"
+                      opacity="0.6"
+                    />
+                    <line
+                      x1="200"
+                      y1="0"
+                      x2="200"
+                      y2="560"
+                      stroke="#496d7b"
+                      stroke-width="0.5"
+                      opacity="0.2"
+                    />
+                    <line
+                      x1="400"
+                      y1="0"
+                      x2="400"
+                      y2="560"
+                      stroke="#496d7b"
+                      stroke-width="0.5"
+                      opacity="0.2"
+                    />
+                    <line
+                      x1="600"
+                      y1="0"
+                      x2="600"
+                      y2="560"
+                      stroke="#496d7b"
+                      stroke-width="0.5"
+                      opacity="0.2"
+                    />
+                    <line
+                      x1="0"
+                      y1="140"
+                      x2="800"
+                      y2="140"
+                      stroke="#496d7b"
+                      stroke-width="0.5"
+                      opacity="0.2"
+                    />
+                    <line
+                      x1="0"
+                      y1="280"
+                      x2="800"
+                      y2="280"
+                      stroke="#496d7b"
+                      stroke-width="0.5"
+                      opacity="0.2"
+                    />
+                    <line
+                      x1="0"
+                      y1="420"
+                      x2="800"
+                      y2="420"
+                      stroke="#496d7b"
+                      stroke-width="0.5"
+                      opacity="0.2"
+                    />
+                    <g
+                      class="map-marker"
+                      data-label="OUTPOST SHAGO"
+                      transform="translate(180,180)"
+                    >
+                      <circle
+                        r="6"
+                        fill="#496d7b"
+                        stroke="#7496a1"
+                        stroke-width="1.5"
+                      />
+                      <circle
+                        r="10"
+                        fill="none"
+                        stroke="#496d7b"
+                        stroke-width="1"
+                        opacity="0.5"
+                      />
+                      <text
+                        x="12"
+                        y="4"
+                        fill="#7496a1"
+                        font-size="9"
+                        font-family="monospace"
+                      >
+                        OUTPOST SHAGO
+                      </text>
+                    </g>
+                    <g
+                      class="map-marker"
+                      data-label="OUTPOST WAKH SIND"
+                      transform="translate(550,160)"
+                    >
+                      <circle
+                        r="6"
+                        fill="#496d7b"
+                        stroke="#7496a1"
+                        stroke-width="1.5"
+                      />
+                      <circle
+                        r="10"
+                        fill="none"
+                        stroke="#496d7b"
+                        stroke-width="1"
+                        opacity="0.5"
+                      />
+                      <text
+                        x="12"
+                        y="4"
+                        fill="#7496a1"
+                        font-size="9"
+                        font-family="monospace"
+                      >
+                        OUTPOST WAKH SIND
+                      </text>
+                    </g>
+                    <g
+                      class="map-marker"
+                      data-label="WAKH SIND BARRACKS"
+                      transform="translate(620,300)"
+                    >
+                      <circle
+                        r="6"
+                        fill="#496d7b"
+                        stroke="#7496a1"
+                        stroke-width="1.5"
+                      />
+                      <circle
+                        r="10"
+                        fill="none"
+                        stroke="#496d7b"
+                        stroke-width="1"
+                        opacity="0.5"
+                      />
+                      <text
+                        x="12"
+                        y="4"
+                        fill="#7496a1"
+                        font-size="9"
+                        font-family="monospace"
+                      >
+                        WAKH SIND BARRACKS
+                      </text>
+                    </g>
+                    <g
+                      class="map-marker map-base"
+                      data-label="DA SMASEI LAMAN"
+                      transform="translate(380,250)"
+                    >
+                      <rect
+                        x="-8"
+                        y="-8"
+                        width="16"
+                        height="16"
+                        fill="#274e5f"
+                        stroke="#a5bcc2"
+                        stroke-width="2"
+                      />
+                      <rect x="-4" y="-4" width="8" height="8" fill="#a5bcc2" />
+                      <circle
+                        r="20"
+                        fill="none"
+                        stroke="#a5bcc2"
+                        stroke-width="1"
+                        opacity="0.3"
+                        class="pulse-ring"
+                      />
+                      <text
+                        x="16"
+                        y="4"
+                        fill="#a5bcc2"
+                        font-size="10"
+                        font-family="monospace"
+                        font-weight="bold"
+                      >
+                        DA SMASEI LAMAN
+                      </text>
+                    </g>
+                    <g
+                      class="map-marker map-objective"
+                      data-label="OBJ: RESCUE INTEL AGENT"
+                      transform="translate(280,340)"
+                    >
+                      <polygon
+                        points="0,-10 8,5 -8,5"
+                        fill="#eeed53"
+                        stroke="#eeed53"
+                        stroke-width="1"
+                      />
+                      <text
+                        x="12"
+                        y="4"
+                        fill="#eeed53"
+                        font-size="9"
+                        font-family="monospace"
+                      >
+                        OBJ: RESCUE INTEL AGENT
+                      </text>
+                    </g>
+                    <g
+                      class="map-marker map-objective"
+                      data-label="OBJ: DESTROY COMMS"
+                      transform="translate(500,380)"
+                    >
+                      <polygon
+                        points="0,-10 8,5 -8,5"
+                        fill="#eeed53"
+                        stroke="#eeed53"
+                        stroke-width="1"
+                        opacity="0.7"
+                      />
+                      <text
+                        x="12"
+                        y="4"
+                        fill="#eeed53"
+                        font-size="9"
+                        font-family="monospace"
+                        opacity="0.7"
+                      >
+                        OBJ: DESTROY COMMS
+                      </text>
+                    </g>
+                    <circle
+                      cx="200"
+                      cy="420"
+                      r="40"
+                      fill="none"
+                      stroke="#c0392b"
+                      stroke-width="1.5"
+                      stroke-dasharray="4,4"
+                      opacity="0.7"
+                    />
+                    <text
+                      x="200"
+                      y="475"
+                      fill="#c0392b"
+                      font-size="9"
+                      font-family="monospace"
+                      text-anchor="middle"
+                      opacity="0.8"
+                    >
+                      DANGER ZONE
+                    </text>
+                    <g class="map-player" transform="translate(400,380)">
+                      <circle r="5" fill="#eeed53" />
+                      <circle
+                        r="12"
+                        fill="none"
+                        stroke="#eeed53"
+                        stroke-width="1.5"
+                        class="pulse-ring"
+                      />
+                      <circle
+                        r="20"
+                        fill="none"
+                        stroke="#eeed53"
+                        stroke-width="0.8"
+                        opacity="0.4"
+                        class="pulse-ring-2"
+                      />
+                      <text
+                        x="0"
+                        y="-18"
+                        fill="#eeed53"
+                        font-size="9"
+                        font-family="monospace"
+                        text-anchor="middle"
+                      >
+                        SNAKE
+                      </text>
+                    </g>
+                    <g transform="translate(740,50)">
+                      <circle
+                        r="22"
+                        fill="#0f2a1a"
+                        stroke="#496d7b"
+                        stroke-width="1.5"
+                      />
+                      <text
+                        x="0"
+                        y="-12"
+                        fill="#a5bcc2"
+                        font-size="9"
+                        text-anchor="middle"
+                        font-family="monospace"
+                      >
+                        N
+                      </text>
+                      <text
+                        x="0"
+                        y="16"
+                        fill="#7496a1"
+                        font-size="7"
+                        text-anchor="middle"
+                        font-family="monospace"
+                      >
+                        S
+                      </text>
+                      <text
+                        x="-14"
+                        y="4"
+                        fill="#7496a1"
+                        font-size="7"
+                        text-anchor="middle"
+                        font-family="monospace"
+                      >
+                        W
+                      </text>
+                      <text
+                        x="14"
+                        y="4"
+                        fill="#7496a1"
+                        font-size="7"
+                        text-anchor="middle"
+                        font-family="monospace"
+                      >
+                        E
+                      </text>
+                      <line
+                        x1="0"
+                        y1="-8"
+                        x2="0"
+                        y2="8"
+                        stroke="#a5bcc2"
+                        stroke-width="1.5"
+                      />
+                      <line
+                        x1="-8"
+                        y1="0"
+                        x2="8"
+                        y2="0"
+                        stroke="#7496a1"
+                        stroke-width="1"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="map-detail">
+                <div class="map-detail-section">
+                  <div class="map-detail-title">SELECTED MARKER</div>
+                  <div class="map-detail-name" id="mapSelectedName">
+                    DA SMASEI LAMAN
+                  </div>
+                  <div class="map-detail-type">
+                    MAIN BASE / ENEMY CONTROLLED
+                  </div>
+                </div>
+                <div class="map-detail-section">
+                  <div class="map-detail-title">ENEMY PRESENCE</div>
+                  <div class="map-enemy-row">
+                    <span>GUARDS</span><span class="marsmonster">24</span>
+                  </div>
+                  <div class="map-enemy-row">
+                    <span>SNIPERS</span><span class="marsmonster">3</span>
+                  </div>
+                  <div class="map-enemy-row">
+                    <span>ARMOR</span><span class="marsmonster">2</span>
+                  </div>
+                  <div class="map-enemy-row">
+                    <span>ALERT LV</span
+                    ><span class="map-alert-lv marsmonster">NORMAL</span>
+                  </div>
+                </div>
+                <div class="map-detail-section">
+                  <div class="map-detail-title">ENVIRONMENT</div>
+                  <div class="map-env-row">
+                    <i class="fas fa-clock"></i
+                    ><span class="marsmonster">03:42</span
+                    ><span>LOCAL TIME</span>
+                  </div>
+                  <div class="map-env-row">
+                    <i class="fas fa-thermometer-half"></i
+                    ><span class="marsmonster">14°C</span
+                    ><span>TEMPERATURE</span>
+                  </div>
+                  <div class="map-env-row">
+                    <i class="fas fa-eye"></i
+                    ><span class="marsmonster">LOW</span><span>VISIBILITY</span>
+                  </div>
+                </div>
+                <div class="map-detail-section">
+                  <div class="map-detail-title">QUICK ACTIONS</div>
+                  <button class="map-action-btn">
+                    <i class="fas fa-helicopter"></i> REQUEST EXTRACT
+                  </button>
+                  <button class="map-action-btn">
+                    <i class="fas fa-parachute-box"></i> SUPPLY DROP
+                  </button>
+                  <button class="map-action-btn">
+                    <i class="fas fa-binoculars"></i> RECON REQUEST
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /panel-map -->
+
+          <!-- ═══════════════════════════════════════
+               PANEL 3 — MISSIONS
+          ═══════════════════════════════════════ -->
+          <div class="tab-panel" id="panel-missions">
+            <div class="missions-layout">
+              <div class="missions-list-col">
+                <div class="missions-list-header">
+                  <span>MISSION LIST</span>
+                  <div class="missions-filters">
+                    <button class="mf-btn active" data-mfilter="all">
+                      ALL
+                    </button>
+                    <button class="mf-btn" data-mfilter="main">MAIN</button>
+                    <button class="mf-btn" data-mfilter="side">SIDE OPS</button>
+                    <button class="mf-btn" data-mfilter="extra">EXTRA</button>
+                  </div>
+                </div>
+                <div class="missions-list" id="missionsList">
+                  <div class="mission-row" data-mission="0" data-type="main">
+                    <div class="mission-num marsmonster">00</div>
+                    <div class="mission-info">
+                      <span class="mission-name">PROLOGUE: PHANTOM LIMBS</span
+                      ><span class="mission-loc"
+                        >MEDICAL PLATFORM — CYPRUS</span
+                      >
+                    </div>
+                    <div class="mission-meta">
+                      <span class="mission-rank marsmonster rank-s">S</span
+                      ><i class="fas fa-check-circle mission-complete"></i>
+                    </div>
+                  </div>
+                  <div class="mission-row" data-mission="1" data-type="main">
+                    <div class="mission-num marsmonster">01</div>
+                    <div class="mission-info">
+                      <span class="mission-name">PHANTOM LIMBS</span
+                      ><span class="mission-loc"
+                        >DA SMASEI LAMAN — AFGHANISTAN</span
+                      >
+                    </div>
+                    <div class="mission-meta">
+                      <span class="mission-rank marsmonster rank-a">A</span
+                      ><i class="fas fa-check-circle mission-complete"></i>
+                    </div>
+                  </div>
+                  <div
+                    class="mission-row selected"
+                    data-mission="2"
+                    data-type="main"
+                  >
+                    <div class="mission-num marsmonster">02</div>
+                    <div class="mission-info">
+                      <span class="mission-name"
+                        >DO YOU HEAR THE DESPERATE CRY?</span
+                      ><span class="mission-loc"
+                        >KIZIBA CAMP — CENTRAL AFRICA</span
+                      >
+                    </div>
+                    <div class="mission-meta">
+                      <span class="mission-rank marsmonster rank-none">—</span>
+                    </div>
+                  </div>
+                  <div class="mission-row" data-mission="3" data-type="main">
+                    <div class="mission-num marsmonster">03</div>
+                    <div class="mission-info">
+                      <span class="mission-name">WHERE DO THE BEES SLEEP?</span
+                      ><span class="mission-loc"
+                        >DA GHWANDAI KHAR — AFGHANISTAN</span
+                      >
+                    </div>
+                    <div class="mission-meta">
+                      <span class="mission-rank marsmonster rank-none">—</span>
+                    </div>
+                  </div>
+                  <div class="mission-row" data-mission="4" data-type="main">
+                    <div class="mission-num marsmonster">04</div>
+                    <div class="mission-info">
+                      <span class="mission-name">C2W</span
+                      ><span class="mission-loc"
+                        >LAMAR KHAATE PALACE — AFGHANISTAN</span
+                      >
+                    </div>
+                    <div class="mission-meta">
+                      <span class="mission-rank marsmonster rank-none">—</span>
+                    </div>
+                  </div>
+                  <div class="mission-row" data-mission="5" data-type="side">
+                    <div class="mission-num marsmonster">S-01</div>
+                    <div class="mission-info">
+                      <span class="mission-name"
+                        >EXTRACT THE WANDERING MOTHER BASE SOLDIER</span
+                      ><span class="mission-loc">AFGHANISTAN</span>
+                    </div>
+                    <div class="mission-meta">
+                      <span class="mission-rank marsmonster rank-b">B</span
+                      ><i class="fas fa-check-circle mission-complete"></i>
+                    </div>
+                  </div>
+                  <div class="mission-row" data-mission="6" data-type="side">
+                    <div class="mission-num marsmonster">S-02</div>
+                    <div class="mission-info">
+                      <span class="mission-name"
+                        >ELIMINATE THE RENEGADE THREAT</span
+                      ><span class="mission-loc">CENTRAL AFRICA</span>
+                    </div>
+                    <div class="mission-meta">
+                      <span class="mission-rank marsmonster rank-none">—</span>
+                    </div>
+                  </div>
+                  <div class="mission-row" data-mission="7" data-type="extra">
+                    <div class="mission-num marsmonster">E-01</div>
+                    <div class="mission-info">
+                      <span class="mission-name">CLOAKED IN SILENCE</span
+                      ><span class="mission-loc"
+                        >DA GHWANDAI KHAR — AFGHANISTAN</span
+                      >
+                    </div>
+                    <div class="mission-meta">
+                      <span class="mission-rank marsmonster rank-none">—</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mission-detail-col" id="missionDetail">
+                <div class="md-header">
+                  <div class="md-num marsmonster">02</div>
+                  <div class="md-title-block">
+                    <h2 class="md-title">DO YOU HEAR THE DESPERATE CRY?</h2>
+                    <div class="md-location">
+                      <i class="fas fa-map-marker-alt"></i> KIZIBA CAMP —
+                      CENTRAL AFRICA
+                    </div>
+                  </div>
+                </div>
+                <div class="md-body">
+                  <div class="md-section">
+                    <h4 class="md-section-title">BRIEFING</h4>
+                    <p class="md-brief">
+                      A former XOF soldier is being held prisoner in the Kiziba
+                      Camp. Extract him before the enemy decides his intel value
+                      has expired. Miller reports he may have info on Skull
+                      Face's movements.
+                    </p>
+                  </div>
+                  <div class="md-section">
+                    <h4 class="md-section-title">OBJECTIVES</h4>
+                    <div class="md-obj">
+                      <div class="md-obj-item primary">
+                        <i class="fas fa-circle md-obj-dot"></i
+                        ><span>Extract the prisoner from Kiziba Camp</span>
+                      </div>
+                      <div class="md-obj-item secondary">
+                        <i class="far fa-circle md-obj-dot"></i
+                        ><span>Eliminate the camp commander</span>
+                      </div>
+                      <div class="md-obj-item secondary">
+                        <i class="far fa-circle md-obj-dot"></i
+                        ><span>Complete without being detected</span>
+                      </div>
+                      <div class="md-obj-item secondary">
+                        <i class="far fa-circle md-obj-dot"></i
+                        ><span>Perform a perfect stealth extraction</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="md-two-col">
+                    <div class="md-section">
+                      <h4 class="md-section-title">RECOMMENDED LOADOUT</h4>
+                      <div class="md-loadout-row">
+                        <i class="fas fa-gun"></i><span>TRANQ PISTOL</span>
+                      </div>
+                      <div class="md-loadout-row">
+                        <i class="fas fa-binoculars"></i
+                        ><span>NIGHT VISION</span>
+                      </div>
+                      <div class="md-loadout-row">
+                        <i class="fas fa-parachute-box"></i
+                        ><span>FULTON LV.2</span>
+                      </div>
+                      <div class="md-loadout-row">
+                        <i class="fas fa-syringe"></i><span>COMPRESS</span>
+                      </div>
+                    </div>
+                    <div class="md-section">
+                      <h4 class="md-section-title">INTEL</h4>
+                      <div class="md-intel-row">
+                        <span>ENEMY COUNT</span
+                        ><span class="marsmonster">~18</span>
+                      </div>
+                      <div class="md-intel-row">
+                        <span>PATROL DOGS</span
+                        ><span class="marsmonster">YES</span>
+                      </div>
+                      <div class="md-intel-row">
+                        <span>ARMOR</span><span class="marsmonster">NONE</span>
+                      </div>
+                      <div class="md-intel-row">
+                        <span>TIME OF DAY</span
+                        ><span class="marsmonster">NIGHT</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="md-section">
+                    <h4 class="md-section-title">REWARD</h4>
+                    <div class="md-reward-row">
+                      <div class="md-reward-item">
+                        <span class="mr-label">GMP</span
+                        ><span class="mr-val marsmonster">80,000</span>
+                      </div>
+                      <div class="md-reward-item">
+                        <span class="mr-label">HEROISM</span
+                        ><span class="mr-val marsmonster">+200</span>
+                      </div>
+                      <div class="md-reward-item">
+                        <span class="mr-label">STAFF</span
+                        ><span class="mr-val marsmonster">1 PRISONER</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="md-actions">
+                  <button class="md-action-primary">
+                    <i class="fas fa-play"></i> BEGIN MISSION
+                  </button>
+                  <button class="md-action-secondary">
+                    <i class="fas fa-cog"></i> LOADOUT
+                  </button>
+                  <button class="md-action-secondary">
+                    <i class="fas fa-map"></i> VIEW MAP
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /panel-missions -->
+        </div>
+      </div>
+      <!-- /tabs-container -->
+
+      <!-- HUD BOTTOM -->
+      <div id="dialogueBox">
+        <div id="box_settings">
+          <div class="stats_settings">
+            <div class="containero">
+              <div class="blue-rectangle">
+                <div class="top-row">
+                  <div class="inner-rectangle">
+                    <div class="stats_section">
+                      <i class="fas fa-clock"></i>
+                      <p id="current_time">22:48</p>
+                    </div>
+                  </div>
+                  <div class="inner-rectangle">
+                    <div class="stats_section">
+                      <i class="fas fa-crown"></i>
+                      <p>999999</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="bottom-row">
+                  <div class="inner-rectangle">
+                    <div class="stats_section">
+                      <p>GMP</p>
+                      <p>999999</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/idroid.js"></script>
+    <script src="js/tapes_script.js"></script>
+    <!-- Script per il funzionamento delle tab -->
+    <script>
+      (function () {
+        /* MAIN TABS */
+        const radios = document.querySelectorAll('input[name="tab"]');
+        const panels = {
+          tab1: document.getElementById("panel-mission"),
+          tab2: document.getElementById("panel-map"),
+          tab3: document.getElementById("panel-missions"),
+        };
+
+        function switchTab() {
+          const id = document.querySelector('input[name="tab"]:checked').id;
+          Object.values(panels).forEach((p) => (p.style.display = "none"));
+          if (panels[id]) panels[id].style.display = "flex";
+        }
+
+        // Imposta display iniziale
+        switchTab();
+        radios.forEach((r) => r.addEventListener("change", switchTab));
+
+        /* MOTHER BASE SIDEBAR */
+        document.querySelectorAll(".mb-nav-item").forEach((item) => {
+          item.addEventListener("click", () => {
+            document
+              .querySelectorAll(".mb-nav-item")
+              .forEach((i) => i.classList.remove("active"));
+            document
+              .querySelectorAll(".mb-section")
+              .forEach((s) => s.classList.remove("active"));
+            item.classList.add("active");
+            const sec = document.getElementById("mb-" + item.dataset.mbSection);
+            if (sec) sec.classList.add("active");
+          });
+        });
+
+        /* STAFF LIST */
+        document.querySelectorAll(".staff-row").forEach((row) => {
+          row.addEventListener("click", () => {
+            document
+              .querySelectorAll(".staff-row")
+              .forEach((r) => r.classList.remove("active"));
+            row.classList.add("active");
+          });
+        });
+
+        /* FILTER BUTTONS (generic) */
+        document.querySelectorAll(".mb-filter-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            this.closest(".mb-panel-controls")
+              .querySelectorAll(".mb-filter-btn")
+              .forEach((b) => b.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+
+        /* MAP ZOOM */
+        let mapScale = 1;
+        const mapEl = document.getElementById("tacticalMap");
+        if (mapEl) {
+          document
+            .getElementById("map-zoom-in")
+            .addEventListener("click", () => {
+              mapScale = Math.min(mapScale + 0.2, 3);
+              mapEl.style.transform = `scale(${mapScale})`;
+            });
+          document
+            .getElementById("map-zoom-out")
+            .addEventListener("click", () => {
+              mapScale = Math.max(mapScale - 0.2, 0.6);
+              mapEl.style.transform = `scale(${mapScale})`;
+            });
+          document.getElementById("map-reset").addEventListener("click", () => {
+            mapScale = 1;
+            mapEl.style.transform = "scale(1)";
+          });
+          document.querySelectorAll(".map-marker").forEach((m) => {
+            m.style.cursor = "pointer";
+            m.addEventListener("click", () => {
+              if (m.dataset.label)
+                document.getElementById("mapSelectedName").textContent =
+                  m.dataset.label;
+            });
+          });
+        }
+        document.querySelectorAll(".map-region").forEach((r) => {
+          r.addEventListener("click", () => {
+            document
+              .querySelectorAll(".map-region")
+              .forEach((x) => x.classList.remove("active"));
+            r.classList.add("active");
+          });
+        });
+
+        /* MISSION FILTERS */
+        document.querySelectorAll(".mf-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            document
+              .querySelectorAll(".mf-btn")
+              .forEach((b) => b.classList.remove("active"));
+            this.classList.add("active");
+            const filter = this.dataset.mfilter;
+            document.querySelectorAll(".mission-row").forEach((row) => {
+              row.style.display =
+                filter === "all" || row.dataset.type === filter
+                  ? "flex"
+                  : "none";
+            });
+          });
+        });
+        document.querySelectorAll(".mission-row").forEach((row) => {
+          row.addEventListener("click", () => {
+            document
+              .querySelectorAll(".mission-row")
+              .forEach((r) => r.classList.remove("selected"));
+            row.classList.add("selected");
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

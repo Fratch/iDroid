@@ -1277,239 +1277,80 @@
           <!-- ═══════════════════════════════════════
                PANEL 3 — MISSIONS
           ═══════════════════════════════════════ -->
-          <div class="tab-panel" id="panel-missions">
-            <div class="missions-layout">
-              <div class="missions-list-col">
-                <div class="missions-list-header">
-                  <span>MISSION LIST</span>
-                  <div class="missions-filters">
-                    <button class="mf-btn active" data-mfilter="all">
-                      ALL
-                    </button>
-                    <button class="mf-btn" data-mfilter="main">MAIN</button>
-                    <button class="mf-btn" data-mfilter="side">SIDE OPS</button>
-                    <button class="mf-btn" data-mfilter="extra">EXTRA</button>
-                  </div>
-                </div>
-                <div class="missions-list" id="missionsList">
-                  <div class="mission-row" data-mission="0" data-type="main">
-                    <div class="mission-num marsmonster">00</div>
-                    <div class="mission-info">
-                      <span class="mission-name">PROLOGUE: PHANTOM LIMBS</span
-                      ><span class="mission-loc"
-                        >MEDICAL PLATFORM — CYPRUS</span
-                      >
-                    </div>
-                    <div class="mission-meta">
-                      <span class="mission-rank marsmonster rank-s">S</span
-                      ><i class="fas fa-check-circle mission-complete"></i>
-                    </div>
-                  </div>
-                  <div class="mission-row" data-mission="1" data-type="main">
-                    <div class="mission-num marsmonster">01</div>
-                    <div class="mission-info">
-                      <span class="mission-name">PHANTOM LIMBS</span
-                      ><span class="mission-loc"
-                        >DA SMASEI LAMAN — AFGHANISTAN</span
-                      >
-                    </div>
-                    <div class="mission-meta">
-                      <span class="mission-rank marsmonster rank-a">A</span
-                      ><i class="fas fa-check-circle mission-complete"></i>
-                    </div>
-                  </div>
-                  <div
-                    class="mission-row selected"
-                    data-mission="2"
-                    data-type="main"
-                  >
-                    <div class="mission-num marsmonster">02</div>
-                    <div class="mission-info">
-                      <span class="mission-name"
-                        >DO YOU HEAR THE DESPERATE CRY?</span
-                      ><span class="mission-loc"
-                        >KIZIBA CAMP — CENTRAL AFRICA</span
-                      >
-                    </div>
-                    <div class="mission-meta">
-                      <span class="mission-rank marsmonster rank-none">—</span>
-                    </div>
-                  </div>
-                  <div class="mission-row" data-mission="3" data-type="main">
-                    <div class="mission-num marsmonster">03</div>
-                    <div class="mission-info">
-                      <span class="mission-name">WHERE DO THE BEES SLEEP?</span
-                      ><span class="mission-loc"
-                        >DA GHWANDAI KHAR — AFGHANISTAN</span
-                      >
-                    </div>
-                    <div class="mission-meta">
-                      <span class="mission-rank marsmonster rank-none">—</span>
-                    </div>
-                  </div>
-                  <div class="mission-row" data-mission="4" data-type="main">
-                    <div class="mission-num marsmonster">04</div>
-                    <div class="mission-info">
-                      <span class="mission-name">C2W</span
-                      ><span class="mission-loc"
-                        >LAMAR KHAATE PALACE — AFGHANISTAN</span
-                      >
-                    </div>
-                    <div class="mission-meta">
-                      <span class="mission-rank marsmonster rank-none">—</span>
-                    </div>
-                  </div>
-                  <div class="mission-row" data-mission="5" data-type="side">
-                    <div class="mission-num marsmonster">S-01</div>
-                    <div class="mission-info">
-                      <span class="mission-name"
-                        >EXTRACT THE WANDERING MOTHER BASE SOLDIER</span
-                      ><span class="mission-loc">AFGHANISTAN</span>
-                    </div>
-                    <div class="mission-meta">
-                      <span class="mission-rank marsmonster rank-b">B</span
-                      ><i class="fas fa-check-circle mission-complete"></i>
-                    </div>
-                  </div>
-                  <div class="mission-row" data-mission="6" data-type="side">
-                    <div class="mission-num marsmonster">S-02</div>
-                    <div class="mission-info">
-                      <span class="mission-name"
-                        >ELIMINATE THE RENEGADE THREAT</span
-                      ><span class="mission-loc">CENTRAL AFRICA</span>
-                    </div>
-                    <div class="mission-meta">
-                      <span class="mission-rank marsmonster rank-none">—</span>
-                    </div>
-                  </div>
-                  <div class="mission-row" data-mission="7" data-type="extra">
-                    <div class="mission-num marsmonster">E-01</div>
-                    <div class="mission-info">
-                      <span class="mission-name">CLOAKED IN SILENCE</span
-                      ><span class="mission-loc"
-                        >DA GHWANDAI KHAR — AFGHANISTAN</span
-                      >
-                    </div>
-                    <div class="mission-meta">
-                      <span class="mission-rank marsmonster rank-none">—</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mission-detail-col" id="missionDetail">
-                <div class="md-header">
-                  <div class="md-num marsmonster">02</div>
-                  <div class="md-title-block">
-                    <h2 class="md-title">DO YOU HEAR THE DESPERATE CRY?</h2>
-                    <div class="md-location">
-                      <i class="fas fa-map-marker-alt"></i> KIZIBA CAMP —
-                      CENTRAL AFRICA
-                    </div>
-                  </div>
-                </div>
-                <div class="md-body">
-                  <div class="md-section">
-                    <h4 class="md-section-title">BRIEFING</h4>
-                    <p class="md-brief">
-                      A former XOF soldier is being held prisoner in the Kiziba
-                      Camp. Extract him before the enemy decides his intel value
-                      has expired. Miller reports he may have info on Skull
-                      Face's movements.
-                    </p>
-                  </div>
-                  <div class="md-section">
-                    <h4 class="md-section-title">OBJECTIVES</h4>
-                    <div class="md-obj">
-                      <div class="md-obj-item primary">
-                        <i class="fas fa-circle md-obj-dot"></i
-                        ><span>Extract the prisoner from Kiziba Camp</span>
-                      </div>
-                      <div class="md-obj-item secondary">
-                        <i class="far fa-circle md-obj-dot"></i
-                        ><span>Eliminate the camp commander</span>
-                      </div>
-                      <div class="md-obj-item secondary">
-                        <i class="far fa-circle md-obj-dot"></i
-                        ><span>Complete without being detected</span>
-                      </div>
-                      <div class="md-obj-item secondary">
-                        <i class="far fa-circle md-obj-dot"></i
-                        ><span>Perform a perfect stealth extraction</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="md-two-col">
-                    <div class="md-section">
-                      <h4 class="md-section-title">RECOMMENDED LOADOUT</h4>
-                      <div class="md-loadout-row">
-                        <i class="fas fa-gun"></i><span>TRANQ PISTOL</span>
-                      </div>
-                      <div class="md-loadout-row">
-                        <i class="fas fa-binoculars"></i
-                        ><span>NIGHT VISION</span>
-                      </div>
-                      <div class="md-loadout-row">
-                        <i class="fas fa-parachute-box"></i
-                        ><span>FULTON LV.2</span>
-                      </div>
-                      <div class="md-loadout-row">
-                        <i class="fas fa-syringe"></i><span>COMPRESS</span>
-                      </div>
-                    </div>
-                    <div class="md-section">
-                      <h4 class="md-section-title">INTEL</h4>
-                      <div class="md-intel-row">
-                        <span>ENEMY COUNT</span
-                        ><span class="marsmonster">~18</span>
-                      </div>
-                      <div class="md-intel-row">
-                        <span>PATROL DOGS</span
-                        ><span class="marsmonster">YES</span>
-                      </div>
-                      <div class="md-intel-row">
-                        <span>ARMOR</span><span class="marsmonster">NONE</span>
-                      </div>
-                      <div class="md-intel-row">
-                        <span>TIME OF DAY</span
-                        ><span class="marsmonster">NIGHT</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="md-section">
-                    <h4 class="md-section-title">REWARD</h4>
-                    <div class="md-reward-row">
-                      <div class="md-reward-item">
-                        <span class="mr-label">GMP</span
-                        ><span class="mr-val marsmonster">80,000</span>
-                      </div>
-                      <div class="md-reward-item">
-                        <span class="mr-label">HEROISM</span
-                        ><span class="mr-val marsmonster">+200</span>
-                      </div>
-                      <div class="md-reward-item">
-                        <span class="mr-label">STAFF</span
-                        ><span class="mr-val marsmonster">1 PRISONER</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="md-actions">
-                  <button class="md-action-primary">
-                    <i class="fas fa-play"></i> BEGIN MISSION
-                  </button>
-                  <button class="md-action-secondary">
-                    <i class="fas fa-cog"></i> LOADOUT
-                  </button>
-                  <button class="md-action-secondary">
-                    <i class="fas fa-map"></i> VIEW MAP
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /panel-missions -->
-        </div>
+<div class="tab-panel" id="panel-missions">
+  <ul>
+    <li class="menu-item">
+      <div class="menu-item-icon-wrap">
+        <i class="fas fa-parachute-box menu-item-icon"></i>
+        <span class="menu-item-badge">3</span>
+      </div>
+      <div>
+        <p class="menu-item-title">SUPPLY DROP</p>
+        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
+      </div>
+    </li>
+    <li class="menu-item">
+      <div class="menu-item-icon-wrap">
+        <i class="fas fa-parachute-box menu-item-icon"></i>
+        <span class="menu-item-badge">1</span>
+      </div>
+      <div>
+        <p class="menu-item-title">BUDDY SUPPORT</p>
+        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
+      </div>
+    </li>
+    <li class="menu-item">
+      <div class="menu-item-icon-wrap">
+        <i class="fas fa-parachute-box menu-item-icon"></i>
+        <!-- Nessun badge = nessuno span -->
+      </div>
+      <div>
+        <p class="menu-item-title">HELICOPTER</p>
+        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
+      </div>
+    </li>
+    <li class="menu-item">
+      <div class="menu-item-icon-wrap">
+        <i class="fas fa-parachute-box menu-item-icon"></i>
+        <span class="menu-item-badge">12</span>
+      </div>
+      <div>
+        <p class="menu-item-title">MISSION LIST</p>
+        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
+      </div>
+    </li>
+    <li class="menu-item">
+      <div class="menu-item-icon-wrap">
+        <i class="fas fa-parachute-box menu-item-icon"></i>
+        <span class="menu-item-badge">5</span>
+      </div>
+      <div>
+        <p class="menu-item-title">SIDE OPS LIST</p>
+        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
+      </div>
+    </li>
+    <li class="menu-item">
+      <div class="menu-item-icon-wrap">
+        <i class="fas fa-parachute-box menu-item-icon"></i>
+        <!-- badge dot senza numero per "nuovo contenuto" -->
+        <span class="menu-item-badge badge-dot"></span>
+      </div>
+      <div>
+        <p class="menu-item-title">CASSETTE TAPES</p>
+        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
+      </div>
+    </li>
+    <li class="menu-item">
+      <div class="menu-item-icon-wrap">
+        <i class="fas fa-parachute-box menu-item-icon"></i>
+      </div>
+      <div>
+        <p class="menu-item-title">LOGS</p>
+        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
+      </div>
+    </li>
+  </ul>
+</div>
       </div>
       <!-- /tabs-container -->
 
@@ -1539,6 +1380,10 @@
                       <p>GMP</p>
                       <p>999999</p>
                     </div>
+                    <div class="stats_section">
+                      <p>GMP</p>
+                      <p>999999</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1550,6 +1395,19 @@
 
     <script src="js/idroid.js"></script>
     <script src="js/tapes_script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+<!--     <script>
+  // Tilt globale su tutto l'idroid
+  $('.idroid').tilt({
+    maxTilt: 4,
+    perspective: 1200,
+    scale: 1.01,
+    speed: 1000,
+    glare: true,
+    maxGlare: 0.08,
+    easing: "cubic-bezier(.03,.98,.52,.99)"
+  });
+</script> -->
     <!-- Script per il funzionamento delle tab -->
     <script>
       (function () {

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="108.65684mm"
+   height="110.34356mm"
+   viewBox="0 0 108.65684 110.34356"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   sodipodi:docname="helicopter.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0998546"
+     inkscape:cx="266.39885"
+     inkscape:cy="248.66923"
+     inkscape:window-width="1200"
+     inkscape:window-height="1022"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" /><defs
+     id="defs1" /><path
+     id="path1"
+     style="display:inline;fill:#000000;stroke-width:3;paint-order:markers stroke fill"
+     d="m 148.75526,120.68824 -1.78594,0.0853 v 7.69668 l -5.10356,0.0429 -5.69836,5.52834 -7.86722,-0.12764 -15.09675,-5.06067 -13.523209,0.0408 v -3.69796 h 35.977129 v -3.06183 H 63.873621 v 3.06183 h 31.38413 v 3.7114 l -10.206095,0.031 -19.392098,12.24732 3.402376,4.08244 41.079666,0.25528 6.54947,-5.0183 19.26394,2.50941 1.89239,2.44481 5.6348,-0.10594 6.12366,-11.73727 -0.89297,-3.5295 7.059,0.0847 0.0853,-1.48828 -7.18715,-0.0853 z"
+     transform="translate(-54.083572,-78.277442)" /><path
+     id="path2"
+     style="stroke-width:0.974312;paint-order:markers stroke fill"
+     d="m 108.41199,78.277443 c -27.017998,0 -49.50624,19.480353 -54.224218,45.152357 h 3.193006 c 4.664425,-23.948126 25.719397,-42.004418 51.031212,-42.004418 25.31181,0 46.36729,18.056292 51.03171,42.004418 h 3.1925 C 157.91822,97.757796 135.42998,78.277443 108.41199,78.277443 Z M 54.083571,142.8875 c 4.482721,25.95876 27.106851,45.7335 54.328419,45.7335 27.22156,0 49.84569,-19.77474 54.32842,-45.7335 h -3.19301 c -4.43513,24.23565 -25.61994,42.58555 -51.13541,42.58555 -25.515477,0 -46.699783,-18.3499 -51.13491,-42.58555 z"
+     transform="translate(-54.083572,-78.277442)" /></svg>

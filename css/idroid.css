@@ -173,7 +173,7 @@ body,
     z-index: 99999;
     mix-blend-mode: screen;
     opacity: 0.6;
-    animation: scanBarSlide 7s linear infinite;
+    /* animation: scanBarSlide 7s linear infinite; */
 }
 
 @keyframes scanBarSlide {
@@ -1842,7 +1842,7 @@ button.active_topic {
 }
 
 .menu-item:hover .menu-item-icon-ghost {
-    left: 1px !important;
+    left: -1px !important;
     top: 7px !important;
 }
 

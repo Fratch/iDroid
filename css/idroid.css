@@ -161,8 +161,9 @@ body,
 }
 
 #white_rectangle {
-    position: absolute;
+    position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     height: 70px;
     background: rgb(255, 255, 255);
@@ -170,7 +171,11 @@ body,
     opacity: 0.2;
     overflow: hidden;
     animation: slideDown 7s linear infinite;
-    z-index: 99999;
+    z-index: 9999;
+
+    /* Stesso transform di .idroid */
+    transform: perspective(1200px) rotateX(5deg);
+    transform-origin: top center;
 }
 
 #white_rectangle::before {
@@ -185,8 +190,11 @@ body,
         repeating-conic-gradient(#002f5570 0 0.0001%, #0093a770 0 0.0002%) 60% 60%/250px 2500px;
     background-blend-mode: difference;
     animation: b 0.2s infinite alternate;
-    z-index: 0;
+    z-index: 9999;
     opacity: 0.3;
+    /* Stesso transform di .idroid */
+    transform: perspective(1200px) rotateX(5deg);
+    transform-origin: top center;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -203,6 +211,7 @@ body,
     display: inline-flex;
     justify-content: center;
     width: 100%;
+    z-index: 20;
 }
 
 .tabs-wrapper::before,
@@ -213,7 +222,7 @@ body,
     height: 2px;
     background-color: var(--border);
     pointer-events: none;
-    z-index: 0;
+    z-index: 20;
 }
 
 .tabs-wrapper::before {
@@ -246,7 +255,7 @@ body,
     position: relative;
     top: 6px;
     transition: all .15s ease;
-    z-index: 1;
+    z-index: 20;
     color: whitesmoke;
 }
 
@@ -258,14 +267,41 @@ body,
 #tab2:checked+label,
 #tab3:checked+label {
     top: 0;
-    background: linear-gradient(to bottom, var(--), transparent);
-    border-bottom-color: transparent;
+    background: linear-gradient(to bottom, var(--border), transparent);
+    border-bottom: 2px solid var(--glow-primary);
+    /* copre il bordo con il colore bg */
     box-shadow: 0 -3px 0 0 #fff, 0 0 12px rgba(255, 255, 255, 0.12), inset 0 0 20px rgba(255, 255, 255, 0.03);
-    z-index: 2;
-    backdrop-filter: blur(15px);
+    z-index: 22;
+    /* backdrop-filter: blur(30px); */
     margin-bottom: -6px;
     padding-bottom: 16px;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/*     --bg-primary: #122933;
+    --bg-secondary: #0f394c;
+    --ui-panel: #274e5f;
+    --border: #496d7b;
+    --text-secondary: #7496a1;
+    --text-primary: #d3feff;
+    --accent: #f7f852;
+    --glow-primary: 0 0 6px rgba(165, 188, 194, 0.35), 0 0 14px rgba(165, 188, 194, 0.12);
+    --glow-accent: 0 0 6px rgba(238, 237, 83, 0.6), 0 0 18px rgba(238, 237, 83, 0.25);
+    --glow-border: 0 0 4px rgba(73, 109, 123, 0.5), 0 0 10px rgba(73, 109, 123, 0.18);
+    --glow-danger: 0 0 6px rgba(231, 76, 60, 0.6), 0 0 16px rgba(231, 76, 60, 0.2);
+    --glow-ok: 0 0 5px rgba(76, 175, 80, 0.55), 0 0 12px rgba(76, 175, 80, 0.18);
+    --glow-blue: 0 0 5px rgba(74, 144, 217, 0.55), 0 0 12px rgba(74, 144, 217, 0.18); */
+
+/* Tab adiacente DESTRA alla tab attiva */
+#tab1:checked~label[for="tab2"],
+#tab2:checked~label[for="tab3"] {
+    border-left-color: transparent;
+}
+
+/* Tab adiacente SINISTRA alla tab attiva — usando :has() */
+label[for="tab1"]:has(~ #tab2:checked),
+label[for="tab2"]:has(~ #tab3:checked) {
+    border-right-color: transparent;
 }
 
 .tab-panels {
@@ -276,6 +312,20 @@ body,
     overflow: hidden;
     margin-top: -2px;
     padding-top: 20px;
+    z-index: 10;
+}
+
+.tab-panels::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    height: 15px;
+    border-left: 2px solid var(--border);
+    border-right: 2px solid var(--border);
+    pointer-events: none;
+    z-index: 20;
 }
 
 .tab-panel {
@@ -1735,7 +1785,7 @@ button.active_topic {
     height: 20px;
     padding: 0 4px;
     background: var(--accent);
-    color: #000;
+    color: var(--bg-primary);
     font-family: "Marsmonster", monospace;
     font-size: 0.9rem;
     font-weight: bold;
@@ -1748,7 +1798,6 @@ button.active_topic {
     z-index: 10;
     line-height: 1;
     border-radius: 50%;
-    animation: blink-badge 1.5s step-end infinite;
 }
 
 .menu-item-badge.badge-dot {
@@ -1798,7 +1847,7 @@ button.active_topic {
     padding: 12px;
     color: white;
     font-family: "Rodin", monospace;
-    z-index: 10000;
+    z-index: 9000;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7), 0 0 10px var(--glow-primary);
 }
 

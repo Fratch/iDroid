@@ -1760,21 +1760,57 @@ button.active_topic {
 
 .menu-item-icon-wrap {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin-right: 10px;
+    width: 60px;
+    flex-shrink: 0;
 }
 
+/* Icona principale — in primo piano */
 .menu-item-icon {
     font-size: 4em;
-    min-width: 50px;
-    text-align: center;
     color: var(--border);
+    position: relative;
+    z-index: 2;
+    transition: font-size 0.15s, color 0.15s, text-shadow 0.15s;
+    display: block;
+    line-height: 1;
+}
+
+/* Icona fantasma — sfalsata di 3px, opacità ridotta, layer sotto */
+.menu-item-icon-ghost {
+    font-size: 4em;
+    color: var(--border);
+    opacity: 0.22;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    z-index: 1;
+    pointer-events: none;
+    transition: font-size 0.15s, color 0.15s;
+    display: block;
+    line-height: 1;
+}
+
+.menu-item:hover .menu-item-icon,
+.menu-item:hover .menu-item-icon-ghost {
+    font-size: 5em;
+    color: var(--text-primary);
 }
 
 .menu-item:hover .menu-item-icon {
-    font-size: 5em;
-    color: var(--text-primary);
     text-shadow: var(--glow-primary);
+}
+
+.menu-item.active .menu-item-icon {
+    color: var(--accent);
+    text-shadow: var(--glow-accent);
+}
+
+.menu-item.active .menu-item-icon-ghost {
+    color: var(--accent);
 }
 
 .menu-item-badge {

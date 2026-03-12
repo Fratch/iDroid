@@ -737,541 +737,59 @@
           </div>
           <!-- /panel-mission -->
 
-          <!-- ═══════════════════════════════════════
-               PANEL 2 — MAP
-          ═══════════════════════════════════════ -->
-          <div class="tab-panel" id="panel-map">
-            <div class="map-layout">
-              <nav class="map-sidebar">
-                <div class="map-sidebar-header">REGIONS</div>
-                <ul class="map-region-list">
-                  <li class="map-region active" data-region="afghanistan">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div class="map-region-info">
-                      <span class="map-region-name">AFGHANISTAN</span
-                      ><span class="map-region-sub">DA SMASEI LAMAN</span>
-                    </div>
-                    <span class="map-region-badge">12</span>
-                  </li>
-                  <li class="map-region" data-region="africa">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div class="map-region-info">
-                      <span class="map-region-name">CENTRAL AFRICA</span
-                      ><span class="map-region-sub">BWALA YA MASA</span>
-                    </div>
-                    <span class="map-region-badge">9</span>
-                  </li>
-                  <li class="map-region" data-region="soviet">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div class="map-region-info">
-                      <span class="map-region-name">SOVIET UNION</span
-                      ><span class="map-region-sub">RESTRICTED ACCESS</span>
-                    </div>
-                  </li>
-                </ul>
-                <div class="map-legend">
-                  <div class="legend-title">LEGEND</div>
-                  <div class="legend-item">
-                    <span class="legend-dot dot-outpost"></span>OUTPOST
-                  </div>
-                  <div class="legend-item">
-                    <span class="legend-dot dot-base"></span>MAIN BASE
-                  </div>
-                  <div class="legend-item">
-                    <span class="legend-dot dot-objective"></span>OBJECTIVE
-                  </div>
-                  <div class="legend-item">
-                    <span class="legend-dot dot-danger"></span>DANGER ZONE
-                  </div>
-                </div>
-                <div class="map-infil-box">
-                  <div class="map-infil-title">INFILTRATION</div>
-                  <div class="map-infil-val">EAST — LZ BRAVO</div>
-                  <div class="map-infil-title" style="margin-top: 8px">
-                    EXTRACTION
-                  </div>
-                  <div class="map-infil-val">NORTH — LZ ALPHA</div>
-                  <div class="map-infil-title" style="margin-top: 8px">
-                    WEATHER
-                  </div>
-                  <div class="map-infil-val">
-                    <i class="fas fa-cloud-moon"></i> NIGHT / OVERCAST
-                  </div>
-                </div>
-              </nav>
+<!-- ═══════════════════════════════════════
+     PANEL 2 — MAP (MapLibre GL JS)
+═══════════════════════════════════════ -->
+<div class="tab-panel" id="panel-map">
+  <div style="position:relative; width:100%; height:100%; overflow:hidden;">
+    
+    <!-- Titolo overlay -->
+    <div id="mapTitleOverlay" style="
+      position:absolute; top:12px; left:16px; z-index:1000;
+      font-family:'Rodin',monospace; font-size:0.7rem;
+      color:#7496a1; letter-spacing:0.15em; pointer-events:none;
+      text-shadow: 0 0 8px rgba(73,109,123,0.6);
+    ">ACQUIRING GPS SIGNAL...</div>
 
-              <div class="map-main">
-                <div class="map-title-overlay">
-                  AFGHANISTAN — DA SMASEI LAMAN
-                </div>
-                <div class="map-zoom-controls">
-                  <button class="map-zoom-btn" id="map-zoom-in">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                  <button class="map-zoom-btn" id="map-zoom-out">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button class="map-zoom-btn" id="map-reset">
-                    <i class="fas fa-compress-alt"></i>
-                  </button>
-                </div>
-                <div class="map-viewport" id="mapViewport">
-                  <svg
-                    class="tactical-map"
-                    id="tacticalMap"
-                    viewBox="0 0 800 560"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect width="800" height="560" fill="#0f2a1a" />
-                    <ellipse
-                      cx="400"
-                      cy="280"
-                      rx="340"
-                      ry="220"
-                      fill="#112b1d"
-                      opacity="0.8"
-                    />
-                    <polygon
-                      points="120,80 300,40 480,60 600,120 680,200 700,320 620,420 480,480 280,500 150,440 80,340 60,200"
-                      fill="#142e1f"
-                      opacity="0.6"
-                    />
-                    <polyline
-                      points="50,400 120,320 200,350 280,280 360,300 440,240 520,260 600,200 700,240"
-                      stroke="#1a3d2a"
-                      stroke-width="3"
-                      fill="none"
-                      opacity="0.8"
-                    />
-                    <polyline
-                      points="80,200 160,150 240,170 320,120 420,140 500,100 580,130 660,90"
-                      stroke="#1a3d2a"
-                      stroke-width="2"
-                      fill="none"
-                      opacity="0.6"
-                    />
-                    <path
-                      d="M 100,500 Q 250,420 400,380 Q 550,340 700,300"
-                      stroke="#496d7b"
-                      stroke-width="2"
-                      fill="none"
-                      stroke-dasharray="8,4"
-                      opacity="0.7"
-                    />
-                    <path
-                      d="M 400,50 L 400,380"
-                      stroke="#496d7b"
-                      stroke-width="1.5"
-                      fill="none"
-                      stroke-dasharray="6,4"
-                      opacity="0.5"
-                    />
-                    <path
-                      d="M 200,200 Q 300,280 400,280"
-                      stroke="#496d7b"
-                      stroke-width="1.5"
-                      fill="none"
-                      stroke-dasharray="4,4"
-                      opacity="0.4"
-                    />
-                    <path
-                      d="M 50,300 Q 150,280 250,320 Q 350,360 450,340 Q 550,320 650,350 L 750,360"
-                      stroke="#1a6ea0"
-                      stroke-width="3"
-                      fill="none"
-                      opacity="0.6"
-                    />
-                    <line
-                      x1="200"
-                      y1="0"
-                      x2="200"
-                      y2="560"
-                      stroke="#496d7b"
-                      stroke-width="0.5"
-                      opacity="0.2"
-                    />
-                    <line
-                      x1="400"
-                      y1="0"
-                      x2="400"
-                      y2="560"
-                      stroke="#496d7b"
-                      stroke-width="0.5"
-                      opacity="0.2"
-                    />
-                    <line
-                      x1="600"
-                      y1="0"
-                      x2="600"
-                      y2="560"
-                      stroke="#496d7b"
-                      stroke-width="0.5"
-                      opacity="0.2"
-                    />
-                    <line
-                      x1="0"
-                      y1="140"
-                      x2="800"
-                      y2="140"
-                      stroke="#496d7b"
-                      stroke-width="0.5"
-                      opacity="0.2"
-                    />
-                    <line
-                      x1="0"
-                      y1="280"
-                      x2="800"
-                      y2="280"
-                      stroke="#496d7b"
-                      stroke-width="0.5"
-                      opacity="0.2"
-                    />
-                    <line
-                      x1="0"
-                      y1="420"
-                      x2="800"
-                      y2="420"
-                      stroke="#496d7b"
-                      stroke-width="0.5"
-                      opacity="0.2"
-                    />
-                    <g
-                      class="map-marker"
-                      data-label="OUTPOST SHAGO"
-                      transform="translate(180,180)"
-                    >
-                      <circle
-                        r="6"
-                        fill="#496d7b"
-                        stroke="#7496a1"
-                        stroke-width="1.5"
-                      />
-                      <circle
-                        r="10"
-                        fill="none"
-                        stroke="#496d7b"
-                        stroke-width="1"
-                        opacity="0.5"
-                      />
-                      <text
-                        x="12"
-                        y="4"
-                        fill="#7496a1"
-                        font-size="9"
-                        font-family="monospace"
-                      >
-                        OUTPOST SHAGO
-                      </text>
-                    </g>
-                    <g
-                      class="map-marker"
-                      data-label="OUTPOST WAKH SIND"
-                      transform="translate(550,160)"
-                    >
-                      <circle
-                        r="6"
-                        fill="#496d7b"
-                        stroke="#7496a1"
-                        stroke-width="1.5"
-                      />
-                      <circle
-                        r="10"
-                        fill="none"
-                        stroke="#496d7b"
-                        stroke-width="1"
-                        opacity="0.5"
-                      />
-                      <text
-                        x="12"
-                        y="4"
-                        fill="#7496a1"
-                        font-size="9"
-                        font-family="monospace"
-                      >
-                        OUTPOST WAKH SIND
-                      </text>
-                    </g>
-                    <g
-                      class="map-marker"
-                      data-label="WAKH SIND BARRACKS"
-                      transform="translate(620,300)"
-                    >
-                      <circle
-                        r="6"
-                        fill="#496d7b"
-                        stroke="#7496a1"
-                        stroke-width="1.5"
-                      />
-                      <circle
-                        r="10"
-                        fill="none"
-                        stroke="#496d7b"
-                        stroke-width="1"
-                        opacity="0.5"
-                      />
-                      <text
-                        x="12"
-                        y="4"
-                        fill="#7496a1"
-                        font-size="9"
-                        font-family="monospace"
-                      >
-                        WAKH SIND BARRACKS
-                      </text>
-                    </g>
-                    <g
-                      class="map-marker map-base"
-                      data-label="DA SMASEI LAMAN"
-                      transform="translate(380,250)"
-                    >
-                      <rect
-                        x="-8"
-                        y="-8"
-                        width="16"
-                        height="16"
-                        fill="#274e5f"
-                        stroke="#a5bcc2"
-                        stroke-width="2"
-                      />
-                      <rect x="-4" y="-4" width="8" height="8" fill="#a5bcc2" />
-                      <circle
-                        r="20"
-                        fill="none"
-                        stroke="#a5bcc2"
-                        stroke-width="1"
-                        opacity="0.3"
-                        class="pulse-ring"
-                      />
-                      <text
-                        x="16"
-                        y="4"
-                        fill="#a5bcc2"
-                        font-size="10"
-                        font-family="monospace"
-                        font-weight="bold"
-                      >
-                        DA SMASEI LAMAN
-                      </text>
-                    </g>
-                    <g
-                      class="map-marker map-objective"
-                      data-label="OBJ: RESCUE INTEL AGENT"
-                      transform="translate(280,340)"
-                    >
-                      <polygon
-                        points="0,-10 8,5 -8,5"
-                        fill="#eeed53"
-                        stroke="#eeed53"
-                        stroke-width="1"
-                      />
-                      <text
-                        x="12"
-                        y="4"
-                        fill="#eeed53"
-                        font-size="9"
-                        font-family="monospace"
-                      >
-                        OBJ: RESCUE INTEL AGENT
-                      </text>
-                    </g>
-                    <g
-                      class="map-marker map-objective"
-                      data-label="OBJ: DESTROY COMMS"
-                      transform="translate(500,380)"
-                    >
-                      <polygon
-                        points="0,-10 8,5 -8,5"
-                        fill="#eeed53"
-                        stroke="#eeed53"
-                        stroke-width="1"
-                        opacity="0.7"
-                      />
-                      <text
-                        x="12"
-                        y="4"
-                        fill="#eeed53"
-                        font-size="9"
-                        font-family="monospace"
-                        opacity="0.7"
-                      >
-                        OBJ: DESTROY COMMS
-                      </text>
-                    </g>
-                    <circle
-                      cx="200"
-                      cy="420"
-                      r="40"
-                      fill="none"
-                      stroke="#c0392b"
-                      stroke-width="1.5"
-                      stroke-dasharray="4,4"
-                      opacity="0.7"
-                    />
-                    <text
-                      x="200"
-                      y="475"
-                      fill="#c0392b"
-                      font-size="9"
-                      font-family="monospace"
-                      text-anchor="middle"
-                      opacity="0.8"
-                    >
-                      DANGER ZONE
-                    </text>
-                    <g class="map-player" transform="translate(400,380)">
-                      <circle r="5" fill="#eeed53" />
-                      <circle
-                        r="12"
-                        fill="none"
-                        stroke="#eeed53"
-                        stroke-width="1.5"
-                        class="pulse-ring"
-                      />
-                      <circle
-                        r="20"
-                        fill="none"
-                        stroke="#eeed53"
-                        stroke-width="0.8"
-                        opacity="0.4"
-                        class="pulse-ring-2"
-                      />
-                      <text
-                        x="0"
-                        y="-18"
-                        fill="#eeed53"
-                        font-size="9"
-                        font-family="monospace"
-                        text-anchor="middle"
-                      >
-                        SNAKE
-                      </text>
-                    </g>
-                    <g transform="translate(740,50)">
-                      <circle
-                        r="22"
-                        fill="#0f2a1a"
-                        stroke="#496d7b"
-                        stroke-width="1.5"
-                      />
-                      <text
-                        x="0"
-                        y="-12"
-                        fill="#a5bcc2"
-                        font-size="9"
-                        text-anchor="middle"
-                        font-family="monospace"
-                      >
-                        N
-                      </text>
-                      <text
-                        x="0"
-                        y="16"
-                        fill="#7496a1"
-                        font-size="7"
-                        text-anchor="middle"
-                        font-family="monospace"
-                      >
-                        S
-                      </text>
-                      <text
-                        x="-14"
-                        y="4"
-                        fill="#7496a1"
-                        font-size="7"
-                        text-anchor="middle"
-                        font-family="monospace"
-                      >
-                        W
-                      </text>
-                      <text
-                        x="14"
-                        y="4"
-                        fill="#7496a1"
-                        font-size="7"
-                        text-anchor="middle"
-                        font-family="monospace"
-                      >
-                        E
-                      </text>
-                      <line
-                        x1="0"
-                        y1="-8"
-                        x2="0"
-                        y2="8"
-                        stroke="#a5bcc2"
-                        stroke-width="1.5"
-                      />
-                      <line
-                        x1="-8"
-                        y1="0"
-                        x2="8"
-                        y2="0"
-                        stroke="#7496a1"
-                        stroke-width="1"
-                      />
-                    </g>
-                  </svg>
-                </div>
-              </div>
+    <!-- Coordinate overlay -->
+    <div id="mapCoordsOverlay" style="
+      position:absolute; top:12px; right:16px; z-index:1000;
+      font-family:'Marsmonster',monospace; font-size:0.65rem;
+      color:#496d7b; letter-spacing:0.1em; pointer-events:none;
+    ">--°N --°E</div>
 
-              <div class="map-detail">
-                <div class="map-detail-section">
-                  <div class="map-detail-title">SELECTED MARKER</div>
-                  <div class="map-detail-name" id="mapSelectedName">
-                    DA SMASEI LAMAN
-                  </div>
-                  <div class="map-detail-type">
-                    MAIN BASE / ENEMY CONTROLLED
-                  </div>
-                </div>
-                <div class="map-detail-section">
-                  <div class="map-detail-title">ENEMY PRESENCE</div>
-                  <div class="map-enemy-row">
-                    <span>GUARDS</span><span class="marsmonster">24</span>
-                  </div>
-                  <div class="map-enemy-row">
-                    <span>SNIPERS</span><span class="marsmonster">3</span>
-                  </div>
-                  <div class="map-enemy-row">
-                    <span>ARMOR</span><span class="marsmonster">2</span>
-                  </div>
-                  <div class="map-enemy-row">
-                    <span>ALERT LV</span
-                    ><span class="map-alert-lv marsmonster">NORMAL</span>
-                  </div>
-                </div>
-                <div class="map-detail-section">
-                  <div class="map-detail-title">ENVIRONMENT</div>
-                  <div class="map-env-row">
-                    <i class="fas fa-clock"></i
-                    ><span class="marsmonster">03:42</span
-                    ><span>LOCAL TIME</span>
-                  </div>
-                  <div class="map-env-row">
-                    <i class="fas fa-thermometer-half"></i
-                    ><span class="marsmonster">14°C</span
-                    ><span>TEMPERATURE</span>
-                  </div>
-                  <div class="map-env-row">
-                    <i class="fas fa-eye"></i
-                    ><span class="marsmonster">LOW</span><span>VISIBILITY</span>
-                  </div>
-                </div>
-                <div class="map-detail-section">
-                  <div class="map-detail-title">QUICK ACTIONS</div>
-                  <button class="map-action-btn">
-                    <i class="fas fa-helicopter"></i> REQUEST EXTRACT
-                  </button>
-                  <button class="map-action-btn">
-                    <i class="fas fa-parachute-box"></i> SUPPLY DROP
-                  </button>
-                  <button class="map-action-btn">
-                    <i class="fas fa-binoculars"></i> RECON REQUEST
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+    <!-- Mappa -->
+    <div id="idroid-map" style="width:100%; height:100%;"></div>
+
+    <!-- Vignette bordi -->
+    <div style="
+      position:absolute; inset:0; pointer-events:none; z-index:999;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(12,29,38,0.85) 100%);
+    "></div>
+
+    <!-- HUD angolo bottom-left: accuracy -->
+    <div id="mapAccuracy" style="
+      position:absolute; bottom:32px; left:16px; z-index:1000;
+      font-family:'Rodin',monospace; font-size:0.58rem;
+      color:#496d7b; letter-spacing:0.1em; pointer-events:none;
+    ">ACC: --m</div>
+
+    <!-- Crosshair centrale fisso -->
+    <div style="
+      position:absolute; top:50%; left:50%; z-index:1000; pointer-events:none;
+      transform:translate(-50%,-50%);
+    ">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="16" y1="0"  x2="16" y2="12" stroke="#eeed53" stroke-width="1" opacity="0.8"/>
+        <line x1="16" y1="20" x2="16" y2="32" stroke="#eeed53" stroke-width="1" opacity="0.8"/>
+        <line x1="0"  y1="16" x2="12" y2="16" stroke="#eeed53" stroke-width="1" opacity="0.8"/>
+        <line x1="20" y1="16" x2="32" y2="16" stroke="#eeed53" stroke-width="1" opacity="0.8"/>
+        <circle cx="16" cy="16" r="3" stroke="#eeed53" stroke-width="1.5" opacity="0.9"/>
+      </svg>
+    </div>
+
+  </div>
+</div>
           <!-- /panel-map -->
 
           <!-- ═══════════════════════════════════════
@@ -1279,10 +797,13 @@
           ═══════════════════════════════════════ -->
 <div class="tab-panel" id="panel-missions">
   <ul>
+                <!-- SUPPLY DROP -->
+
     <li class="menu-item">
       <div class="menu-item-icon-wrap">
-        <i class="fas fa-parachute-box menu-item-icon"></i>
-        <span class="menu-item-badge">3</span>
+          <i class="fas fa-parachute-box menu-item-icon-ghost"></i>
+          <i class="fas fa-parachute-box menu-item-icon"></i>
+          <span class="menu-item-badge">3</span>
       </div>
       <div>
         <p class="menu-item-title">SUPPLY DROP</p>
@@ -1290,9 +811,10 @@
       </div>
     </li>
     <li class="menu-item">
-      <div class="menu-item-icon-wrap">
-        <i class="fas fa-parachute-box menu-item-icon"></i>
-        <span class="menu-item-badge">1</span>
+            <div class="menu-item-icon-wrap">
+          <i class="fas fa-dog menu-item-icon-ghost"></i>
+          <i class="fas fa-dog menu-item-icon"></i>
+          <span class="menu-item-badge">1</span>
       </div>
       <div>
         <p class="menu-item-title">BUDDY SUPPORT</p>
@@ -1301,7 +823,7 @@
     </li>
     <li class="menu-item">
       <div class="menu-item-icon-wrap">
-        <i class="fas fa-parachute-box menu-item-icon"></i>
+        <i class="fas fa-helicopter menu-item-icon"></i>
         <!-- Nessun badge = nessuno span -->
       </div>
       <div>
@@ -1396,18 +918,142 @@
     <script src="js/idroid.js"></script>
     <script src="js/tapes_script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
-<!--     <script>
-  // Tilt globale su tutto l'idroid
-  $('.idroid').tilt({
-    maxTilt: 4,
-    perspective: 1200,
-    scale: 1.01,
-    speed: 1000,
-    glare: true,
-    maxGlare: 0.08,
-    easing: "cubic-bezier(.03,.98,.52,.99)"
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+  /* ── Filtro colore iDROID sui tile OSM ── */
+  #idroid-map .leaflet-tile {
+    filter:
+      /* grayscale(1) */
+      hue-rotate(155deg)
+      saturate(0.55)
+      brightness(0.38)
+      contrast(1.2);
+  }
+/* ── Rimuovi UI Leaflet di default ── */
+  #idroid-map .leaflet-control-zoom {
+    display: none;
+  }
+  #idroid-map .leaflet-control-attribution {
+    background: rgba(10,25,33,0.75) !important;
+    color: #496d7b !important;
+    font-size: 0.48rem !important;
+    font-family: monospace !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  #idroid-map .leaflet-control-attribution a {
+    color: #7496a1 !important;
+  }
+
+  /* ── Marker posizione utente ── */
+  .idroid-marker-pulse {
+    width: 14px; height: 14px;
+    background: #eeed53;
+    border: 2px solid rgba(238,237,83,0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(238,237,83,0.6);
+    animation: idroid-gps-pulse 2s ease-out infinite;
+    position: relative;
+  }
+  @keyframes idroid-gps-pulse {
+    0%   { box-shadow: 0 0 0 0   rgba(238,237,83,0.6); }
+    70%  { box-shadow: 0 0 0 16px rgba(238,237,83,0);   }
+    100% { box-shadow: 0 0 0 0   rgba(238,237,83,0);    }
+  }
+</style>
+
+<script>
+(function () {
+  let leafletMap = null;
+  let userMarker  = null;
+
+  function initLeafletMap() {
+    if (leafletMap) { leafletMap.invalidateSize(); return; }
+
+    /* ── Init mappa centrata sul mondo in attesa del GPS ── */
+    leafletMap = L.map('idroid-map', {
+      zoomControl:        false,
+      attributionControl: true,
+      center: [20, 10],
+      zoom: 3
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+    }).addTo(leafletMap);
+
+    /* ── Marker custom pulsante ── */
+    const markerIcon = L.divIcon({
+      className: '',
+      html: `<div class="idroid-marker-pulse"></div>`,
+      iconSize:   [14, 14],
+      iconAnchor: [7, 7]
+    });
+
+    /* ── Geolocalizzazione ── */
+    if (!navigator.geolocation) {
+      document.getElementById('mapTitleOverlay').textContent = 'GPS NOT AVAILABLE';
+      return;
+    }
+
+    const titleEl    = document.getElementById('mapTitleOverlay');
+    const coordsEl   = document.getElementById('mapCoordsOverlay');
+    const accuracyEl = document.getElementById('mapAccuracy');
+
+    function onPosition(pos) {
+      const { latitude: lat, longitude: lng, accuracy } = pos.coords;
+
+      titleEl.textContent  = 'OPERATIVE POSITION — CONFIRMED';
+      titleEl.style.color  = '#7496a1';
+
+      coordsEl.textContent = `${lat.toFixed(5)}°N  ${lng.toFixed(5)}°E`;
+      accuracyEl.textContent = `ACC: ${Math.round(accuracy)}m`;
+
+      if (!userMarker) {
+        userMarker = L.marker([lat, lng], { icon: markerIcon }).addTo(leafletMap);
+        leafletMap.setView([lat, lng], 15);
+      } else {
+        userMarker.setLatLng([lat, lng]);
+        leafletMap.panTo([lat, lng]);
+      }
+    }
+
+    function onError(err) {
+      const msgs = {
+        1: 'GPS ACCESS DENIED',
+        2: 'GPS SIGNAL LOST',
+        3: 'GPS TIMEOUT'
+      };
+      titleEl.textContent = msgs[err.code] || 'GPS ERROR';
+      titleEl.style.color = '#e74c3c';
+    }
+
+    // Watch continuo (aggiorna se l'utente si sposta)
+    navigator.geolocation.watchPosition(onPosition, onError, {
+      enableHighAccuracy: true,
+      maximumAge: 5000,
+      timeout: 15000
+    });
+  }
+
+  /* ── Attiva quando tab MAP diventa visibile ── */
+  document.querySelectorAll('input[name="tab"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (radio.id === 'tab2' && radio.checked) {
+        setTimeout(initLeafletMap, 80);
+      }
+    });
   });
-</script> -->
+
+  /* ── Se il tab MAP è già attivo all'avvio ── */
+  if (document.getElementById('tab2')?.checked) {
+    setTimeout(initLeafletMap, 80);
+  }
+})();
+</script>
     <!-- Script per il funzionamento delle tab -->
     <script>
       (function () {
@@ -1528,5 +1174,95 @@
         });
       })();
     </script>
+    <style>
+  /* ══════════════════════════════════════════
+     FILTRO COLORE iDROID — SVG feColorMatrix
+     Rimappa i canali RGB del tile OSM verso
+     la palette teal/verde scuro
+  ══════════════════════════════════════════ */
+
+  /* Definizione filtro SVG inline — non fa richieste esterne */
+  #idroid-map-filters {
+    position: absolute;
+    width: 0; height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  #idroid-map .leaflet-tile-pane {
+    /* Applica il filtro SVG ai tile */
+    filter: url(#idroid-color-matrix);
+  }
+
+  /* ── UI Leaflet ── */
+  #idroid-map .leaflet-control-zoom { display: none; }
+  #idroid-map .leaflet-control-attribution {
+    background: rgba(10,25,33,0.75) !important;
+    color: #496d7b !important;
+    font-size: 0.48rem !important;
+    font-family: monospace !important;
+    border-radius: 0 !important;
+  }
+  #idroid-map .leaflet-control-attribution a { color: #7496a1 !important; }
+
+  /* ── Marker GPS pulsante ── */
+  .idroid-marker-pulse {
+    width: 12px; height: 12px;
+    background: #eeed53;
+    border: 2px solid rgba(238,237,83,0.4);
+    border-radius: 50%;
+    animation: idroid-gps-pulse 2s ease-out infinite;
+  }
+  @keyframes idroid-gps-pulse {
+    0%   { box-shadow: 0 0 0 0    rgba(238,237,83,0.7); }
+    70%  { box-shadow: 0 0 0 14px rgba(238,237,83,0);   }
+    100% { box-shadow: 0 0 0 0    rgba(238,237,83,0);   }
+  }
+</style>
+
+<!-- Definizione filtro SVG — va nel body, fuori dalla mappa -->
+<svg id="idroid-map-filters" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="idroid-color-matrix" color-interpolation-filters="sRGB">
+
+      <!-- STEP 1: desatura completamente -->
+      <feColorMatrix type="saturate" values="0" result="gray"/>
+
+      <!-- STEP 2: rimappa verso la palette iDROID
+           La matrice 5x4 trasforma [R,G,B,A] → [R',G',B',A']
+           
+           Target dark teal: #122933 = rgb(18,41,51)   → zone scure
+           Target mid:       #274e5f = rgb(39,78,95)   → zone medie
+           Target light:     #7496a1 = rgb(116,150,161) → zone chiare
+
+           La logica: il grigio ha R=G=B=L (luminosità)
+           Proiettiamo L → (R'=L*0.25, G'=L*0.55, B'=L*0.65)
+           e aggiungiamo un offset base corrispondente al colore più scuro
+           
+           offset base = #122933 / 255 = (0.07, 0.16, 0.20)
+      -->
+      <feColorMatrix
+        in="gray"
+        type="matrix"
+        values="
+          0.18  0     0     0     0.05
+          0     0.35  0     0     0.12
+          0     0     0.42  0     0.16
+          0     0     0     1     0
+        "
+        result="tinted"
+      />
+
+      <!-- STEP 3: aumenta leggermente il contrasto
+           con una curva gamma (componentTransfer) -->
+      <feComponentTransfer in="tinted">
+        <feFuncR type="gamma" amplitude="1" exponent="0.85" offset="0"/>
+        <feFuncG type="gamma" amplitude="1" exponent="0.82" offset="0"/>
+        <feFuncB type="gamma" amplitude="1" exponent="0.80" offset="0"/>
+      </feComponentTransfer>
+
+    </filter>
+  </defs>
+</svg>
   </body>
 </html>

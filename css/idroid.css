@@ -160,6 +160,32 @@ body,
     z-index: 0;
 }
 
+/* ══════════════════════════════════════════════════════════
+   STATIC TV CANVAS SCAN BAR
+   Sostituisce #white_rectangle con un canvas animato
+══════════════════════════════════════════════════════════ */
+#staticScanCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    pointer-events: none;
+    z-index: 99999;
+    mix-blend-mode: screen;
+    opacity: 0.6;
+    animation: scanBarSlide 7s linear infinite;
+}
+
+@keyframes scanBarSlide {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
 #white_rectangle {
     position: fixed;
     top: 0;
@@ -2069,5 +2095,56 @@ button.active_topic {
     #dialogueBox h2.current_text {
         background-color: var(--bg-secondary);
         margin: 0 50px;
+    }
+}
+
+/* ── Filtro colore iDROID sui tile OSM ── */
+#idroid-map .leaflet-tile {
+    filter:
+        /* grayscale(1) */
+        hue-rotate(155deg) saturate(0.55) brightness(0.38) contrast(1.2);
+}
+
+/* ── Rimuovi UI Leaflet di default ── */
+#idroid-map .leaflet-control-zoom {
+    display: none;
+}
+
+#idroid-map .leaflet-control-attribution {
+    background: rgba(10, 25, 33, 0.75) !important;
+    color: #496d7b !important;
+    font-size: 0.48rem !important;
+    font-family: monospace !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+#idroid-map .leaflet-control-attribution a {
+    color: #7496a1 !important;
+}
+
+/* ── Marker posizione utente ── */
+.idroid-marker-pulse {
+    width: 14px;
+    height: 14px;
+    background: #eeed53;
+    border: 2px solid rgba(238, 237, 83, 0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(238, 237, 83, 0.6);
+    animation: idroid-gps-pulse 2s ease-out infinite;
+    position: relative;
+}
+
+@keyframes idroid-gps-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(238, 237, 83, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 16px rgba(238, 237, 83, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(238, 237, 83, 0);
     }
 }

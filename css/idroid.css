@@ -1805,14 +1805,27 @@ button.active_topic {
     line-height: 1;
 }
 
-/* Icona fantasma — sfalsata di 3px, opacità ridotta, layer sotto */
+.menu-item-icon-img {
+    width: 1em;
+    height: 1em;
+    font-size: 4em;
+    /* eredita la dimensione dal parent */
+    object-fit: contain;
+    /* per il colore SVG monocromatico usa filter */
+    filter: invert(60%) sepia(20%) saturate(400%) hue-rotate(160deg) brightness(90%);
+}
+
+.menu-item:hover .menu-item-icon-img {
+    filter: invert(85%) sepia(20%) saturate(300%) hue-rotate(160deg) brightness(110%);
+}
+
 .menu-item-icon-ghost {
     font-size: 4em;
     color: var(--border);
     opacity: 0.22;
     position: absolute;
-    left: 3px;
-    top: 3px;
+    left: 2px;
+    top: 4px;
     z-index: 1;
     pointer-events: none;
     transition: font-size 0.15s, color 0.15s;
@@ -1821,13 +1834,16 @@ button.active_topic {
 }
 
 .menu-item:hover .menu-item-icon,
+.menu-item:hover .menu-item-icon-img,
 .menu-item:hover .menu-item-icon-ghost {
     font-size: 5em;
     color: var(--text-primary);
+    padding-right: 15px;
 }
 
-.menu-item:hover .menu-item-icon {
-    text-shadow: var(--glow-primary);
+.menu-item:hover .menu-item-icon-ghost {
+    left: 1px !important;
+    top: 7px !important;
 }
 
 .menu-item.active .menu-item-icon {

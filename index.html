@@ -1,30 +1,69 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>iDROID UI</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <title>iDROID UI</title>
+
+    <!-- Vendor CSS -->
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
       integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <!-- App CSS -->
     <link rel="stylesheet" href="css/idroid.css" />
   </head>
 
   <body>
+    <!-- ═══════════════════════════════════════════════════
+       VERSION BADGE
+  ════════════════════════════════════════════════════ -->
     <div id="idroid_ver">
       <h2>iDROID VER 3.02</h2>
     </div>
-    
-    <!-- <div id="white_rectangle"></div> -->
 
+    <!-- ═══════════════════════════════════════════════════
+       SVG MAP COLOR FILTER (hidden)
+  ════════════════════════════════════════════════════ -->
+    <svg id="idroid-map-filters" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="idroid-color-matrix" color-interpolation-filters="sRGB">
+          <feColorMatrix type="saturate" values="0" result="gray" />
+          <feColorMatrix
+            in="gray"
+            type="matrix"
+            values="0.18 0    0    0 0.05
+                  0    0.35 0    0 0.12
+                  0    0    0.42 0 0.16
+                  0    0    0    1 0"
+            result="tinted"
+          />
+          <feComponentTransfer in="tinted">
+            <feFuncR type="gamma" amplitude="1" exponent="0.85" offset="0" />
+            <feFuncG type="gamma" amplitude="1" exponent="0.82" offset="0" />
+            <feFuncB type="gamma" amplitude="1" exponent="0.80" offset="0" />
+          </feComponentTransfer>
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- ═══════════════════════════════════════════════════
+       MAIN SHELL
+  ════════════════════════════════════════════════════ -->
     <div class="idroid">
+      <!-- Background dot grid -->
       <div id="dotgrid"></div>
 
-      <!-- TOP BAR con TABS -->
+      <!-- ─────────────────────────────────────────────
+         TABS NAVIGATION
+    ──────────────────────────────────────────────── -->
       <div class="tabs-container">
         <div class="tabs-wrapper">
           <input type="radio" name="tab" id="tab1" checked />
@@ -37,36 +76,46 @@
           <label for="tab3" class="tab">MISSIONS</label>
         </div>
 
+        <!-- ═══════════════════════════════════════════
+           TAB PANELS
+      ════════════════════════════════════════════ -->
         <div class="tab-panels">
-          <!-- PANEL 1 — MOTHER BASE -->
+          <!-- ─────────────────────────────────────────
+             PANEL 1 — MOTHER BASE
+        ──────────────────────────────────────────── -->
           <div class="tab-panel" id="panel-mission">
+            <!-- Sidebar navigation -->
             <nav class="mb-sidebar">
               <div class="mb-sidebar-header">
                 <span class="mb-sidebar-label">SECTION</span>
               </div>
+
               <ul class="mb-nav">
                 <li class="mb-nav-item active" data-mb-section="tapes">
-                  <i class="fas fa-scroll mb-nav-icon"></i
-                  ><span>CASSETTE TAPES</span>
+                  <i class="fas fa-scroll mb-nav-icon"></i>
+                  <span>CASSETTE TAPES</span>
                   <span class="mb-nav-count">48</span>
                 </li>
                 <li class="mb-nav-item" data-mb-section="staff">
-                  <i class="fas fa-users mb-nav-icon"></i><span>STAFF</span>
+                  <i class="fas fa-users mb-nav-icon"></i>
+                  <span>STAFF</span>
                   <span class="mb-nav-count">312</span>
                 </li>
                 <li class="mb-nav-item" data-mb-section="resources">
-                  <i class="fas fa-boxes mb-nav-icon"></i><span>RESOURCES</span>
+                  <i class="fas fa-boxes mb-nav-icon"></i>
+                  <span>RESOURCES</span>
                 </li>
                 <li class="mb-nav-item" data-mb-section="development">
-                  <i class="fas fa-flask mb-nav-icon"></i
-                  ><span>DEVELOPMENT</span>
+                  <i class="fas fa-flask mb-nav-icon"></i>
+                  <span>DEVELOPMENT</span>
                   <span class="mb-nav-badge">!</span>
                 </li>
                 <li class="mb-nav-item" data-mb-section="fobs">
-                  <i class="fas fa-satellite-dish mb-nav-icon"></i
-                  ><span>F.O.B.</span>
+                  <i class="fas fa-satellite-dish mb-nav-icon"></i>
+                  <span>F.O.B.</span>
                 </li>
               </ul>
+
               <div class="mb-sidebar-stats">
                 <div class="mb-stat-row">
                   <span class="mb-stat-label">HEROISM</span>
@@ -98,10 +147,13 @@
                 </div>
               </div>
             </nav>
+            <!-- /mb-sidebar -->
 
+            <!-- Content area -->
             <div class="mb-content">
-              <!-- TAPES -->
+              <!-- ── TAPES ─────────────────────────── -->
               <div class="mb-section active" id="mb-tapes">
+                <!-- Column 1: tape list + controls -->
                 <div id="column_1" class="column">
                   <div class="top_column">
                     <div role="tablist" id="main_tablist">
@@ -132,13 +184,17 @@
                         <i class="fas fa-check"></i>
                       </button>
                     </div>
+
                     <div role="tabpanel" id="main_tabpanel">
                       <h1 id="tab_heading">Info</h1>
                       <p>Listen to tape recordings of relevant intel</p>
                     </div>
+
                     <h3 class="default_heading">CASSETTE TAPES</h3>
                   </div>
+
                   <div id="column_1_tapes" class="column_tapes"></div>
+
                   <div class="btn_settings">
                     <button
                       id="activeToStop"
@@ -164,6 +220,9 @@
                     </button>
                   </div>
                 </div>
+                <!-- /column_1 -->
+
+                <!-- Column 2: player -->
                 <div id="column_2" class="column">
                   <div class="top_column">
                     <div id="media_box">
@@ -173,6 +232,7 @@
                           <i class="fas fa-caret-left"></i> To Control Panel
                         </h3>
                       </div>
+
                       <div id="tapes_playing">
                         <div id="current_tape">
                           <h2 id="current_tape_heading">
@@ -197,6 +257,7 @@
                           </p>
                         </div>
                       </div>
+
                       <div id="media_controls">
                         <button id="back_btn" class="media_control_btn">
                           <i class="fas fa-backward"></i>
@@ -238,12 +299,16 @@
                       </div>
                     </div>
                   </div>
+
                   <div id="column_2_tapes" class="column_tapes"></div>
                 </div>
+                <!-- /column_2 -->
+
                 <section class="content"><div class="grid"></div></section>
               </div>
+              <!-- /mb-tapes -->
 
-              <!-- STAFF -->
+              <!-- ── STAFF ──────────────────────────── -->
               <div class="mb-section" id="mb-staff">
                 <div class="mb-panel-header">
                   <h2 class="mb-panel-title">STAFF MANAGEMENT</h2>
@@ -254,7 +319,9 @@
                     <button class="mb-filter-btn">UNIT</button>
                   </div>
                 </div>
+
                 <div class="staff-layout">
+                  <!-- Staff list -->
                   <div class="staff-list">
                     <div class="staff-list-header">
                       <span>NAME</span><span>UNIT</span><span>RANK</span
@@ -265,78 +332,81 @@
                         ><i class="fas fa-user staff-icon"></i> KAZUHIRA
                         MILLER</span
                       >
-                      <span class="staff-unit">COMMAND</span
-                      ><span class="staff-rank marsmonster">S+</span>
-                      <span class="staff-skill">MANAGEMENT</span
-                      ><span class="staff-status status-ok">ACTIVE</span>
+                      <span class="staff-unit">COMMAND</span>
+                      <span class="staff-rank marsmonster">S+</span>
+                      <span class="staff-skill">MANAGEMENT</span>
+                      <span class="staff-status status-ok">ACTIVE</span>
                     </div>
                     <div class="staff-row" data-staff="2">
                       <span class="staff-name"
                         ><i class="fas fa-user staff-icon"></i> HUEY
                         EMMERICH</span
                       >
-                      <span class="staff-unit">R&amp;D</span
-                      ><span class="staff-rank marsmonster">A</span>
-                      <span class="staff-skill">ENGINEERING</span
-                      ><span class="staff-status status-ok">ACTIVE</span>
+                      <span class="staff-unit">R&amp;D</span>
+                      <span class="staff-rank marsmonster">A</span>
+                      <span class="staff-skill">ENGINEERING</span>
+                      <span class="staff-status status-ok">ACTIVE</span>
                     </div>
                     <div class="staff-row" data-staff="3">
                       <span class="staff-name"
                         ><i class="fas fa-user staff-icon"></i> CODE
                         TALKER</span
                       >
-                      <span class="staff-unit">INTEL</span
-                      ><span class="staff-rank marsmonster">S</span>
-                      <span class="staff-skill">LINGUISTICS</span
-                      ><span class="staff-status status-ok">ACTIVE</span>
+                      <span class="staff-unit">INTEL</span>
+                      <span class="staff-rank marsmonster">S</span>
+                      <span class="staff-skill">LINGUISTICS</span>
+                      <span class="staff-status status-ok">ACTIVE</span>
                     </div>
                     <div class="staff-row" data-staff="4">
                       <span class="staff-name"
                         ><i class="fas fa-user staff-icon"></i> QUIET</span
                       >
-                      <span class="staff-unit">COMBAT</span
-                      ><span class="staff-rank marsmonster">S+</span>
-                      <span class="staff-skill">SNIPING</span
-                      ><span class="staff-status status-ok">ACTIVE</span>
+                      <span class="staff-unit">COMBAT</span>
+                      <span class="staff-rank marsmonster">S+</span>
+                      <span class="staff-skill">SNIPING</span>
+                      <span class="staff-status status-ok">ACTIVE</span>
                     </div>
                     <div class="staff-row" data-staff="5">
                       <span class="staff-name"
                         ><i class="fas fa-user staff-icon"></i> OCELOT</span
                       >
-                      <span class="staff-unit">COMMAND</span
-                      ><span class="staff-rank marsmonster">S+</span>
-                      <span class="staff-skill">INTERROGATION</span
-                      ><span class="staff-status status-warn">AWAY</span>
+                      <span class="staff-unit">COMMAND</span>
+                      <span class="staff-rank marsmonster">S+</span>
+                      <span class="staff-skill">INTERROGATION</span>
+                      <span class="staff-status status-warn">AWAY</span>
                     </div>
                     <div class="staff-row" data-staff="6">
                       <span class="staff-name"
                         ><i class="fas fa-user staff-icon"></i> D-HORSE</span
                       >
-                      <span class="staff-unit">SUPPORT</span
-                      ><span class="staff-rank marsmonster">B</span>
-                      <span class="staff-skill">TRANSPORT</span
-                      ><span class="staff-status status-ok">ACTIVE</span>
+                      <span class="staff-unit">SUPPORT</span>
+                      <span class="staff-rank marsmonster">B</span>
+                      <span class="staff-skill">TRANSPORT</span>
+                      <span class="staff-status status-ok">ACTIVE</span>
                     </div>
                     <div class="staff-row" data-staff="7">
                       <span class="staff-name"
                         ><i class="fas fa-user staff-icon"></i> MBEKE, R.</span
                       >
-                      <span class="staff-unit">MEDICAL</span
-                      ><span class="staff-rank marsmonster">A</span>
-                      <span class="staff-skill">SURGERY</span
-                      ><span class="staff-status status-err">INJURED</span>
+                      <span class="staff-unit">MEDICAL</span>
+                      <span class="staff-rank marsmonster">A</span>
+                      <span class="staff-skill">SURGERY</span>
+                      <span class="staff-status status-err">INJURED</span>
                     </div>
                     <div class="staff-row" data-staff="8">
                       <span class="staff-name"
                         ><i class="fas fa-user staff-icon"></i> VASQUEZ,
                         C.</span
                       >
-                      <span class="staff-unit">COMBAT</span
-                      ><span class="staff-rank marsmonster">B+</span>
-                      <span class="staff-skill">CQC</span
-                      ><span class="staff-status status-ok">ACTIVE</span>
+                      <span class="staff-unit">COMBAT</span>
+                      <span class="staff-rank marsmonster">B+</span>
+                      <span class="staff-skill">CQC</span>
+                      <span class="staff-status status-ok">ACTIVE</span>
                     </div>
                   </div>
+                  <!-- /staff-list -->
+
+                  <!-- Staff detail panel -->
                   <div class="staff-detail">
                     <div class="staff-detail-header">
                       <div class="staff-portrait">
@@ -348,6 +418,7 @@
                         <div class="staff-detail-unit">COMMAND UNIT</div>
                       </div>
                     </div>
+
                     <div class="staff-detail-stats">
                       <div class="detail-stat">
                         <span class="ds-label">COMBAT</span>
@@ -388,30 +459,35 @@
                         <span class="ds-val marsmonster accent-val">99</span>
                       </div>
                     </div>
+
                     <div class="staff-detail-footer">
                       <div class="sdf-row">
-                        <span class="sdf-label">LANGUAGE</span
-                        ><span class="sdf-val">ENGLISH / JAPANESE</span>
+                        <span class="sdf-label">LANGUAGE</span>
+                        <span class="sdf-val">ENGLISH / JAPANESE</span>
                       </div>
                       <div class="sdf-row">
-                        <span class="sdf-label">ORIGIN</span
-                        ><span class="sdf-val">USA</span>
+                        <span class="sdf-label">ORIGIN</span>
+                        <span class="sdf-val">USA</span>
                       </div>
                       <div class="sdf-row">
-                        <span class="sdf-label">JOINED</span
-                        ><span class="sdf-val marsmonster">1984.03.11</span>
+                        <span class="sdf-label">JOINED</span>
+                        <span class="sdf-val marsmonster">1984.03.11</span>
                       </div>
                     </div>
                   </div>
+                  <!-- /staff-detail -->
                 </div>
               </div>
+              <!-- /mb-staff -->
 
-              <!-- RESOURCES -->
+              <!-- ── RESOURCES ──────────────────────── -->
               <div class="mb-section" id="mb-resources">
                 <div class="mb-panel-header">
                   <h2 class="mb-panel-title">RESOURCES</h2>
                 </div>
+
                 <div class="resources-grid">
+                  <!-- Materials -->
                   <div class="res-category">
                     <h4 class="res-cat-title">
                       <i class="fas fa-cube"></i> MATERIALS
@@ -464,6 +540,8 @@
                       <span class="res-val marsmonster">7,310</span>
                     </div>
                   </div>
+
+                  <!-- Power & Supply -->
                   <div class="res-category">
                     <h4 class="res-cat-title">
                       <i class="fas fa-bolt"></i> POWER &amp; SUPPLY
@@ -495,6 +573,8 @@
                       <span class="res-val marsmonster">5,500</span>
                     </div>
                   </div>
+
+                  <!-- GMP -->
                   <div class="res-category res-gmp">
                     <h4 class="res-cat-title">
                       <i class="fas fa-dollar-sign"></i> GMP BALANCE
@@ -522,8 +602,9 @@
                   </div>
                 </div>
               </div>
+              <!-- /mb-resources -->
 
-              <!-- DEVELOPMENT -->
+              <!-- ── DEVELOPMENT ────────────────────── -->
               <div class="mb-section" id="mb-development">
                 <div class="mb-panel-header">
                   <h2 class="mb-panel-title">
@@ -536,26 +617,28 @@
                     <button class="mb-filter-btn">FULTON</button>
                   </div>
                 </div>
+
                 <div class="dev-layout">
                   <div class="dev-list">
                     <div class="dev-item dev-complete">
                       <div class="dev-icon"><i class="fas fa-gun"></i></div>
                       <div class="dev-info">
-                        <span class="dev-name">AM MRS-4 ASSAULT RIFLE</span
-                        ><span class="dev-cat">WEAPONS / RIFLES</span>
+                        <span class="dev-name">AM MRS-4 ASSAULT RIFLE</span>
+                        <span class="dev-cat">WEAPONS / RIFLES</span>
                       </div>
                       <div class="dev-status-block">
-                        <span class="dev-status complete">COMPLETE</span
-                        ><span class="dev-cost marsmonster">48,000 GMP</span>
+                        <span class="dev-status complete">COMPLETE</span>
+                        <span class="dev-cost marsmonster">48,000 GMP</span>
                       </div>
                     </div>
+
                     <div class="dev-item dev-progress">
                       <div class="dev-icon">
                         <i class="fas fa-hard-hat"></i>
                       </div>
                       <div class="dev-info">
-                        <span class="dev-name">SNEAKING SUIT MK.II</span
-                        ><span class="dev-cat">EQUIPMENT / SUITS</span>
+                        <span class="dev-name">SNEAKING SUIT MK.II</span>
+                        <span class="dev-cat">EQUIPMENT / SUITS</span>
                       </div>
                       <div class="dev-status-block">
                         <div class="dev-prog-bar">
@@ -564,39 +647,42 @@
                         <span class="dev-status in-prog">67% — 14H LEFT</span>
                       </div>
                     </div>
+
                     <div class="dev-item dev-new">
                       <div class="dev-icon">
                         <i class="fas fa-parachute-box"></i>
                       </div>
                       <div class="dev-info">
-                        <span class="dev-name">FULTON UPGRADE LV.3</span
-                        ><span class="dev-cat">EQUIPMENT / FULTON</span>
+                        <span class="dev-name">FULTON UPGRADE LV.3</span>
+                        <span class="dev-cat">EQUIPMENT / FULTON</span>
                       </div>
                       <div class="dev-status-block">
-                        <span class="dev-status new">NEW</span
-                        ><span class="dev-cost marsmonster">92,000 GMP</span>
+                        <span class="dev-status new">NEW</span>
+                        <span class="dev-cost marsmonster">92,000 GMP</span>
                       </div>
                     </div>
+
                     <div class="dev-item dev-new">
                       <div class="dev-icon">
                         <i class="fas fa-crosshairs"></i>
                       </div>
                       <div class="dev-info">
-                        <span class="dev-name">SILENCER LV.5</span
-                        ><span class="dev-cat">WEAPONS / ATTACHMENTS</span>
+                        <span class="dev-name">SILENCER LV.5</span>
+                        <span class="dev-cat">WEAPONS / ATTACHMENTS</span>
                       </div>
                       <div class="dev-status-block">
-                        <span class="dev-status new">NEW</span
-                        ><span class="dev-cost marsmonster">31,000 GMP</span>
+                        <span class="dev-status new">NEW</span>
+                        <span class="dev-cost marsmonster">31,000 GMP</span>
                       </div>
                     </div>
+
                     <div class="dev-item dev-progress">
                       <div class="dev-icon">
                         <i class="fas fa-binoculars"></i>
                       </div>
                       <div class="dev-info">
-                        <span class="dev-name">NIGHT VISION GOGGLES LV.2</span
-                        ><span class="dev-cat">EQUIPMENT / OPTICS</span>
+                        <span class="dev-name">NIGHT VISION GOGGLES LV.2</span>
+                        <span class="dev-cat">EQUIPMENT / OPTICS</span>
                       </div>
                       <div class="dev-status-block">
                         <div class="dev-prog-bar">
@@ -605,52 +691,55 @@
                         <span class="dev-status in-prog">31% — 2D 6H LEFT</span>
                       </div>
                     </div>
+
                     <div class="dev-item dev-new">
                       <div class="dev-icon"><i class="fas fa-syringe"></i></div>
                       <div class="dev-info">
-                        <span class="dev-name">ANESTHESIA CIGAR</span
-                        ><span class="dev-cat">EQUIPMENT / TOOLS</span>
+                        <span class="dev-name">ANESTHESIA CIGAR</span>
+                        <span class="dev-cat">EQUIPMENT / TOOLS</span>
                       </div>
                       <div class="dev-status-block">
-                        <span class="dev-status new">NEW</span
-                        ><span class="dev-cost marsmonster">18,500 GMP</span>
+                        <span class="dev-status new">NEW</span>
+                        <span class="dev-cost marsmonster">18,500 GMP</span>
                       </div>
                     </div>
                   </div>
+                  <!-- /dev-list -->
+
                   <div class="dev-detail-panel">
                     <h4 class="dev-detail-title">R&amp;D PLATFORM LEVEL</h4>
                     <div class="platform-levels">
                       <div class="plat-row">
-                        <span class="plat-label">COMBAT UNIT</span
-                        ><span class="plat-lv marsmonster">LV 42</span>
+                        <span class="plat-label">COMBAT UNIT</span>
+                        <span class="plat-lv marsmonster">LV 42</span>
                         <div class="plat-bar">
                           <div class="plat-fill" style="width: 78%"></div>
                         </div>
                       </div>
                       <div class="plat-row">
-                        <span class="plat-label">R&amp;D UNIT</span
-                        ><span class="plat-lv marsmonster">LV 38</span>
+                        <span class="plat-label">R&amp;D UNIT</span>
+                        <span class="plat-lv marsmonster">LV 38</span>
                         <div class="plat-bar">
                           <div class="plat-fill" style="width: 63%"></div>
                         </div>
                       </div>
                       <div class="plat-row">
-                        <span class="plat-label">SUPPORT UNIT</span
-                        ><span class="plat-lv marsmonster">LV 29</span>
+                        <span class="plat-label">SUPPORT UNIT</span>
+                        <span class="plat-lv marsmonster">LV 29</span>
                         <div class="plat-bar">
                           <div class="plat-fill" style="width: 48%"></div>
                         </div>
                       </div>
                       <div class="plat-row">
-                        <span class="plat-label">INTEL UNIT</span
-                        ><span class="plat-lv marsmonster">LV 35</span>
+                        <span class="plat-label">INTEL UNIT</span>
+                        <span class="plat-lv marsmonster">LV 35</span>
                         <div class="plat-bar">
                           <div class="plat-fill" style="width: 58%"></div>
                         </div>
                       </div>
                       <div class="plat-row">
-                        <span class="plat-label">MEDICAL UNIT</span
-                        ><span class="plat-lv marsmonster">LV 21</span>
+                        <span class="plat-label">MEDICAL UNIT</span>
+                        <span class="plat-lv marsmonster">LV 21</span>
                         <div class="plat-bar">
                           <div class="plat-fill" style="width: 35%"></div>
                         </div>
@@ -659,17 +748,19 @@
                   </div>
                 </div>
               </div>
+              <!-- /mb-development -->
 
-              <!-- FOB -->
+              <!-- ── FOB ────────────────────────────── -->
               <div class="mb-section" id="mb-fobs">
                 <div class="mb-panel-header">
                   <h2 class="mb-panel-title">FORWARD OPERATING BASES</h2>
                 </div>
+
                 <div class="fob-layout">
                   <div class="fob-card fob-main">
                     <div class="fob-card-header">
-                      <span class="fob-type">MAIN BASE</span
-                      ><span class="fob-status fob-secure">SECURE</span>
+                      <span class="fob-type">MAIN BASE</span>
+                      <span class="fob-status fob-secure">SECURE</span>
                     </div>
                     <div class="fob-name">DIAMOND DOGS HQ</div>
                     <div class="fob-stats">
@@ -680,19 +771,20 @@
                         </div>
                       </div>
                       <div class="fob-stat">
-                        <span class="fob-stat-label">PLATFORMS</span
-                        ><span class="fob-num marsmonster">6 / 8</span>
+                        <span class="fob-stat-label">PLATFORMS</span>
+                        <span class="fob-num marsmonster">6 / 8</span>
                       </div>
                       <div class="fob-stat">
-                        <span class="fob-stat-label">STAFF ASSIGNED</span
-                        ><span class="fob-num marsmonster">312</span>
+                        <span class="fob-stat-label">STAFF ASSIGNED</span>
+                        <span class="fob-num marsmonster">312</span>
                       </div>
                     </div>
                   </div>
+
                   <div class="fob-card">
                     <div class="fob-card-header">
-                      <span class="fob-type">F.O.B. #1</span
-                      ><span class="fob-status fob-secure">SECURE</span>
+                      <span class="fob-type">F.O.B. #1</span>
+                      <span class="fob-status fob-secure">SECURE</span>
                     </div>
                     <div class="fob-name">STEEL PHANTOM</div>
                     <div class="fob-stats">
@@ -703,19 +795,20 @@
                         </div>
                       </div>
                       <div class="fob-stat">
-                        <span class="fob-stat-label">PLATFORMS</span
-                        ><span class="fob-num marsmonster">3 / 8</span>
+                        <span class="fob-stat-label">PLATFORMS</span>
+                        <span class="fob-num marsmonster">3 / 8</span>
                       </div>
                       <div class="fob-stat">
-                        <span class="fob-stat-label">STAFF ASSIGNED</span
-                        ><span class="fob-num marsmonster">128</span>
+                        <span class="fob-stat-label">STAFF ASSIGNED</span>
+                        <span class="fob-num marsmonster">128</span>
                       </div>
                     </div>
                   </div>
+
                   <div class="fob-card fob-alert">
                     <div class="fob-card-header">
-                      <span class="fob-type">F.O.B. #2</span
-                      ><span class="fob-status fob-danger">UNDER ATTACK</span>
+                      <span class="fob-type">F.O.B. #2</span>
+                      <span class="fob-status fob-danger">UNDER ATTACK</span>
                     </div>
                     <div class="fob-name">IRON RAMPART</div>
                     <div class="fob-stats">
@@ -729,196 +822,284 @@
                         </div>
                       </div>
                       <div class="fob-stat">
-                        <span class="fob-stat-label">PLATFORMS</span
-                        ><span class="fob-num marsmonster">2 / 8</span>
+                        <span class="fob-stat-label">PLATFORMS</span>
+                        <span class="fob-num marsmonster">2 / 8</span>
                       </div>
                       <div class="fob-stat">
-                        <span class="fob-stat-label">STAFF ASSIGNED</span
-                        ><span class="fob-num marsmonster">64</span>
+                        <span class="fob-stat-label">STAFF ASSIGNED</span>
+                        <span class="fob-num marsmonster">64</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <!-- /mb-fobs -->
             </div>
+            <!-- /mb-content -->
           </div>
           <!-- /panel-mission -->
 
-<!-- ═══════════════════════════════════════
-     PANEL 2 — MAP (MapLibre GL JS)
-═══════════════════════════════════════ -->
-<div class="tab-panel" id="panel-map">
-  <div style="position:relative; width:100%; height:100%; overflow:hidden;">
-    
-    <!-- Titolo overlay -->
-    <div id="mapTitleOverlay" style="
-      position:absolute; top:12px; left:16px; z-index:1000;
-      font-family:'Rodin',monospace; font-size:0.7rem;
-      color:#7496a1; letter-spacing:0.15em; pointer-events:none;
-      text-shadow: 0 0 8px rgba(73,109,123,0.6);
-    ">ACQUIRING GPS SIGNAL...</div>
+          <!-- ─────────────────────────────────────────
+             PANEL 2 — MAP (Leaflet)
+        ──────────────────────────────────────────── -->
+          <div class="tab-panel" id="panel-map">
+            <div
+              style="
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+              "
+            >
+              <div
+                id="mapTitleOverlay"
+                style="
+                  position: absolute;
+                  top: 12px;
+                  left: 16px;
+                  z-index: 1000;
+                  font-family: &quot;Rodin&quot;, monospace;
+                  font-size: 0.7rem;
+                  color: #7496a1;
+                  letter-spacing: 0.15em;
+                  pointer-events: none;
+                  text-shadow: 0 0 8px rgba(73, 109, 123, 0.6);
+                "
+              >
+                ACQUIRING GPS SIGNAL...
+              </div>
 
-    <!-- Coordinate overlay -->
-    <div id="mapCoordsOverlay" style="
-      position:absolute; top:12px; right:16px; z-index:1000;
-      font-family:'Marsmonster',monospace; font-size:0.65rem;
-      color:#496d7b; letter-spacing:0.1em; pointer-events:none;
-    ">--°N --°E</div>
+              <div
+                id="mapCoordsOverlay"
+                style="
+                  position: absolute;
+                  top: 12px;
+                  right: 16px;
+                  z-index: 1000;
+                  font-family: &quot;Marsmonster&quot;, monospace;
+                  font-size: 0.65rem;
+                  color: #496d7b;
+                  letter-spacing: 0.1em;
+                  pointer-events: none;
+                "
+              >
+                --°N --°E
+              </div>
 
-    <!-- Mappa -->
-    <div id="idroid-map" style="width:100%; height:100%;"></div>
+              <div id="idroid-map" style="width: 100%; height: 100%"></div>
 
-    <!-- Vignette bordi -->
-    <div style="
-      position:absolute; inset:0; pointer-events:none; z-index:999;
-      background: radial-gradient(ellipse at center, transparent 55%, rgba(12,29,38,0.85) 100%);
-    "></div>
+              <!-- Edge vignette -->
+              <div
+                style="
+                  position: absolute;
+                  inset: 0;
+                  pointer-events: none;
+                  z-index: 999;
+                  background: radial-gradient(
+                    ellipse at center,
+                    transparent 55%,
+                    rgba(12, 29, 38, 0.85) 100%
+                  );
+                "
+              ></div>
 
-    <!-- HUD angolo bottom-left: accuracy -->
-    <div id="mapAccuracy" style="
-      position:absolute; bottom:32px; left:16px; z-index:1000;
-      font-family:'Rodin',monospace; font-size:0.58rem;
-      color:#496d7b; letter-spacing:0.1em; pointer-events:none;
-    ">ACC: --m</div>
+              <div
+                id="mapAccuracy"
+                style="
+                  position: absolute;
+                  bottom: 32px;
+                  left: 16px;
+                  z-index: 1000;
+                  font-family: &quot;Rodin&quot;, monospace;
+                  font-size: 0.58rem;
+                  color: #496d7b;
+                  letter-spacing: 0.1em;
+                  pointer-events: none;
+                "
+              >
+                ACC: --m
+              </div>
 
-    <!-- Crosshair centrale fisso -->
-    <div style="
-      position:absolute; top:50%; left:50%; z-index:1000; pointer-events:none;
-      transform:translate(-50%,-50%);
-    ">
-<svg
-   width="20mm"
-   height="20mm"
-   viewBox="0 0 20 20"
-   version="1.1"
-   xmlns="http://www.w3.org/2000/svg">
-
-  <!-- Angolo in alto a sinistra -->
-  <polyline
-    points="0,6 0,0 6,0"
-    fill="none"
-    stroke="#ffffff"
-    stroke-width="1.2"
-    stroke-linejoin="miter" />
-
-  <!-- Angolo in alto a destra -->
-  <polyline
-    points="14,0 20,0 20,6"
-    fill="none"
-    stroke="#ffffff"
-    stroke-width="1.2"
-    stroke-linejoin="miter" />
-
-  <!-- Angolo in basso a destra -->
-  <polyline
-    points="20,14 20,20 14,20"
-    fill="none"
-    stroke="#ffffff"
-    stroke-width="1.2"
-    stroke-linejoin="miter" />
-
-  <!-- Angolo in basso a sinistra -->
-  <polyline
-    points="6,20 0,20 0,14"
-    fill="none"
-    stroke="#ffffff"
-    stroke-width="1.2"
-    stroke-linejoin="miter" />
-
-</svg>
-
-
-    </div>
-
-  </div>
-</div>
+              <!-- Crosshair -->
+              <div
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  z-index: 1000;
+                  pointer-events: none;
+                  transform: translate(-50%, -50%);
+                "
+              >
+                <svg
+                  width="20mm"
+                  height="20mm"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polyline
+                    points="0,6 0,0 6,0"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="1.2"
+                    stroke-linejoin="miter"
+                  />
+                  <polyline
+                    points="14,0 20,0 20,6"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="1.2"
+                    stroke-linejoin="miter"
+                  />
+                  <polyline
+                    points="20,14 20,20 14,20"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="1.2"
+                    stroke-linejoin="miter"
+                  />
+                  <polyline
+                    points="6,20 0,20 0,14"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="1.2"
+                    stroke-linejoin="miter"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
           <!-- /panel-map -->
 
-          <!-- ═══════════════════════════════════════
-               PANEL 3 — MISSIONS
-          ═══════════════════════════════════════ -->
-<div class="tab-panel" id="panel-missions">
-  <ul>
-                <!-- SUPPLY DROP -->
+          <!-- ─────────────────────────────────────────
+             PANEL 3 — MISSIONS
+        ──────────────────────────────────────────── -->
+          <div class="tab-panel" id="panel-missions">
+            <ul>
+              <li class="menu-item">
+                <div class="menu-item-icon-wrap">
+                  <img
+                    class="menu-item-icon-ghost menu-item-icon-img"
+                    src="./assets/icons/supply-drop-icon.svg"
+                    alt=""
+                  />
+                  <img
+                    class="menu-item-icon menu-item-icon-img"
+                    src="./assets/icons/supply-drop-icon.svg"
+                    alt=""
+                  />
+                  <span class="menu-item-badge">3</span>
+                </div>
+                <div class="menu-item-title-wrap">
+                  <p class="menu-item-title">SUPPLY DROP</p>
+                  <p class="menu-item-subtitle">
+                    Request resupply of weapons, ammo, etc.
+                  </p>
+                </div>
+              </li>
 
-    <li class="menu-item">
-      <div class="menu-item-icon-wrap">
-          <img class="menu-item-icon-ghost menu-item-icon-img" src="./assets/icons/supply-drop-icon.svg" alt="" />
-          <img class="menu-item-icon menu-item-icon-img" src="./assets/icons/supply-drop-icon.svg" alt="" />
-          <span class="menu-item-badge">3</span>
-      </div>
-      <div class="menu-item-title-wrap">
-        <p class="menu-item-title">SUPPLY DROP</p>
-        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
-      </div>
-    </li>
-    <li class="menu-item">
-      <div class="menu-item-icon-wrap">
-          <img class="menu-item-icon-ghost menu-item-icon-img" src="./assets/icons/buddy-support-icon.svg" alt="" />
-          <img class="menu-item-icon menu-item-icon-img" src="./assets/icons/buddy-support-icon.svg" alt="" />
-          <span class="menu-item-badge">1</span>
-      </div>
-      <div>
-        <p class="menu-item-title">BUDDY SUPPORT</p>
-        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
-      </div>
-    </li>
-    <li class="menu-item">
-      <div class="menu-item-icon-wrap">
-          <img class="menu-item-icon-ghost menu-item-icon-img" src="./assets/icons/helicopter.svg" alt="" />
-          <img class="menu-item-icon menu-item-icon-img" src="./assets/icons/helicopter.svg" alt="" />
-      </div>
-      <div>
-        <p class="menu-item-title">HELICOPTER</p>
-        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
-      </div>
-    </li>
-    <li class="menu-item">
-      <div class="menu-item-icon-wrap">
-        <i class="fas fa-parachute-box menu-item-icon"></i>
-        <span class="menu-item-badge">12</span>
-      </div>
-      <div>
-        <p class="menu-item-title">MISSION LIST</p>
-        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
-      </div>
-    </li>
-    <li class="menu-item">
-      <div class="menu-item-icon-wrap">
-        <i class="fas fa-parachute-box menu-item-icon"></i>
-        <span class="menu-item-badge">5</span>
-      </div>
-      <div>
-        <p class="menu-item-title">SIDE OPS LIST</p>
-        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
-      </div>
-    </li>
-    <li class="menu-item">
-      <div class="menu-item-icon-wrap">
-        <i class="fas fa-parachute-box menu-item-icon"></i>
-        <!-- badge dot senza numero per "nuovo contenuto" -->
-        <span class="menu-item-badge badge-dot"></span>
-      </div>
-      <div>
-        <p class="menu-item-title">CASSETTE TAPES</p>
-        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
-      </div>
-    </li>
-    <li class="menu-item">
-      <div class="menu-item-icon-wrap">
-        <i class="fas fa-parachute-box menu-item-icon"></i>
-      </div>
-      <div>
-        <p class="menu-item-title">LOGS</p>
-        <p class="menu-item-subtitle">Request resupply of weapons, ammo, etc.</p>
-      </div>
-    </li>
-  </ul>
-</div>
+              <li class="menu-item">
+                <div class="menu-item-icon-wrap">
+                  <img
+                    class="menu-item-icon-ghost menu-item-icon-img"
+                    src="./assets/icons/buddy-support-icon.svg"
+                    alt=""
+                  />
+                  <img
+                    class="menu-item-icon menu-item-icon-img"
+                    src="./assets/icons/buddy-support-icon.svg"
+                    alt=""
+                  />
+                  <span class="menu-item-badge">1</span>
+                </div>
+                <div>
+                  <p class="menu-item-title">BUDDY SUPPORT</p>
+                  <p class="menu-item-subtitle">
+                    Request resupply of weapons, ammo, etc.
+                  </p>
+                </div>
+              </li>
+
+              <li class="menu-item">
+                <div class="menu-item-icon-wrap">
+                  <img
+                    class="menu-item-icon-ghost menu-item-icon-img"
+                    src="./assets/icons/helicopter.svg"
+                    alt=""
+                  />
+                  <img
+                    class="menu-item-icon menu-item-icon-img"
+                    src="./assets/icons/helicopter.svg"
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <p class="menu-item-title">HELICOPTER</p>
+                  <p class="menu-item-subtitle">Request helicopter support.</p>
+                </div>
+              </li>
+
+              <li class="menu-item">
+                <div class="menu-item-icon-wrap">
+                  <i class="fas fa-parachute-box menu-item-icon"></i>
+                  <span class="menu-item-badge">12</span>
+                </div>
+                <div>
+                  <p class="menu-item-title">MISSION LIST</p>
+                  <p class="menu-item-subtitle">
+                    Browse and select available missions.
+                  </p>
+                </div>
+              </li>
+
+              <li class="menu-item">
+                <div class="menu-item-icon-wrap">
+                  <i class="fas fa-parachute-box menu-item-icon"></i>
+                  <span class="menu-item-badge">5</span>
+                </div>
+                <div>
+                  <p class="menu-item-title">SIDE OPS LIST</p>
+                  <p class="menu-item-subtitle">
+                    Optional side operation objectives.
+                  </p>
+                </div>
+              </li>
+
+              <li class="menu-item">
+                <div class="menu-item-icon-wrap">
+                  <i class="fas fa-parachute-box menu-item-icon"></i>
+                  <span class="menu-item-badge badge-dot"></span>
+                </div>
+                <div>
+                  <p class="menu-item-title">CASSETTE TAPES</p>
+                  <p class="menu-item-subtitle">
+                    Audio recordings and intel logs.
+                  </p>
+                </div>
+              </li>
+
+              <li class="menu-item">
+                <div class="menu-item-icon-wrap">
+                  <i class="fas fa-parachute-box menu-item-icon"></i>
+                </div>
+                <div>
+                  <p class="menu-item-title">LOGS</p>
+                  <p class="menu-item-subtitle">
+                    Mission and activity history.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- /panel-missions -->
+        </div>
+        <!-- /tab-panels -->
       </div>
       <!-- /tabs-container -->
 
-      <!-- HUD BOTTOM -->
+      <!-- ═══════════════════════════════════════════════════
+         HUD BOTTOM — STATS
+    ════════════════════════════════════════════════════ -->
       <div id="dialogueBox">
         <div id="box_settings">
           <div class="stats_settings">
@@ -955,110 +1136,120 @@
           </div>
         </div>
       </div>
+      <!-- /dialogueBox -->
     </div>
+    <!-- /idroid -->
 
-    <!-- Scripts -->
+    <!-- ═══════════════════════════════════════════════════
+       VENDOR JS
+  ════════════════════════════════════════════════════ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- ═══════════════════════════════════════════════════
+       APP JS
+  ════════════════════════════════════════════════════ -->
     <script src="js/static_scan.js"></script>
     <script src="js/idroid.js"></script>
     <script src="js/tapes_script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
-(function () {
-  let leafletMap = null;
-  let userMarker  = null;
-
-  function initLeafletMap() {
-    if (leafletMap) { leafletMap.invalidateSize(); return; }
-
-    /* ── Init mappa centrata sul mondo in attesa del GPS ── */
-    leafletMap = L.map('idroid-map', {
-      zoomControl:        false,
-      attributionControl: true,
-      center: [20, 10],
-      zoom: 3
-    });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap'
-    }).addTo(leafletMap);
-
-    /* ── Marker custom pulsante ── */
-    const markerIcon = L.divIcon({
-      className: '',
-      html: `<div class="idroid-marker-pulse"></div>`,
-      iconSize:   [14, 14],
-      iconAnchor: [7, 7]
-    });
-
-    /* ── Geolocalizzazione ── */
-    if (!navigator.geolocation) {
-      document.getElementById('mapTitleOverlay').textContent = 'GPS NOT AVAILABLE';
-      return;
-    }
-
-    const titleEl    = document.getElementById('mapTitleOverlay');
-    const coordsEl   = document.getElementById('mapCoordsOverlay');
-    const accuracyEl = document.getElementById('mapAccuracy');
-
-    function onPosition(pos) {
-      const { latitude: lat, longitude: lng, accuracy } = pos.coords;
-
-      titleEl.textContent  = '';
-      titleEl.style.color  = '#7496a1';
-
-      coordsEl.textContent = `${lat.toFixed(5)}°N  ${lng.toFixed(5)}°E`;
-      accuracyEl.textContent = `ACC: ${Math.round(accuracy)}m`;
-
-      if (!userMarker) {
-        userMarker = L.marker([lat, lng], { icon: markerIcon }).addTo(leafletMap);
-        leafletMap.setView([lat, lng], 15);
-      } else {
-        userMarker.setLatLng([lat, lng]);
-        leafletMap.panTo([lat, lng]);
-      }
-    }
-
-    function onError(err) {
-      const msgs = {
-        1: 'GPS ACCESS DENIED',
-        2: 'GPS SIGNAL LOST',
-        3: 'GPS TIMEOUT'
-      };
-      titleEl.textContent = msgs[err.code] || 'GPS ERROR';
-      titleEl.style.color = '#e74c3c';
-    }
-
-    // Watch continuo (aggiorna se l'utente si sposta)
-    navigator.geolocation.watchPosition(onPosition, onError, {
-      enableHighAccuracy: true,
-      maximumAge: 5000,
-      timeout: 15000
-    });
-  }
-
-  /* ── Attiva quando tab MAP diventa visibile ── */
-  document.querySelectorAll('input[name="tab"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      if (radio.id === 'tab2' && radio.checked) {
-        setTimeout(initLeafletMap, 80);
-      }
-    });
-  });
-
-  /* ── Se il tab MAP è già attivo all'avvio ── */
-  if (document.getElementById('tab2')?.checked) {
-    setTimeout(initLeafletMap, 80);
-  }
-})();
-</script>
-    <!-- Script per il funzionamento delle tab -->
+    <!-- ─────────────────────────────────────────────────
+       LEAFLET MAP INIT
+  ──────────────────────────────────────────────────── -->
     <script>
       (function () {
-        /* MAIN TABS */
+        let leafletMap = null;
+        let userMarker = null;
+
+        function initLeafletMap() {
+          if (leafletMap) {
+            leafletMap.invalidateSize();
+            return;
+          }
+
+          leafletMap = L.map("idroid-map", {
+            zoomControl: false,
+            attributionControl: true,
+            center: [20, 10],
+            zoom: 3,
+          });
+
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+            attribution: "© OpenStreetMap",
+          }).addTo(leafletMap);
+
+          const markerIcon = L.divIcon({
+            className: "",
+            html: '<div class="idroid-marker-pulse"></div>',
+            iconSize: [14, 14],
+            iconAnchor: [7, 7],
+          });
+
+          if (!navigator.geolocation) {
+            document.getElementById("mapTitleOverlay").textContent =
+              "GPS NOT AVAILABLE";
+            return;
+          }
+
+          const titleEl = document.getElementById("mapTitleOverlay");
+          const coordsEl = document.getElementById("mapCoordsOverlay");
+          const accuracyEl = document.getElementById("mapAccuracy");
+
+          function onPosition(pos) {
+            const { latitude: lat, longitude: lng, accuracy } = pos.coords;
+            titleEl.textContent = "";
+            titleEl.style.color = "#7496a1";
+            coordsEl.textContent = `${lat.toFixed(5)}°N  ${lng.toFixed(5)}°E`;
+            accuracyEl.textContent = `ACC: ${Math.round(accuracy)}m`;
+
+            if (!userMarker) {
+              userMarker = L.marker([lat, lng], { icon: markerIcon }).addTo(
+                leafletMap,
+              );
+              leafletMap.setView([lat, lng], 15);
+            } else {
+              userMarker.setLatLng([lat, lng]);
+              leafletMap.panTo([lat, lng]);
+            }
+          }
+
+          function onError(err) {
+            const msgs = {
+              1: "GPS ACCESS DENIED",
+              2: "GPS SIGNAL LOST",
+              3: "GPS TIMEOUT",
+            };
+            titleEl.textContent = msgs[err.code] || "GPS ERROR";
+            titleEl.style.color = "#e74c3c";
+          }
+
+          navigator.geolocation.watchPosition(onPosition, onError, {
+            enableHighAccuracy: true,
+            maximumAge: 5000,
+            timeout: 15000,
+          });
+        }
+
+        document.querySelectorAll('input[name="tab"]').forEach((radio) => {
+          radio.addEventListener("change", () => {
+            if (radio.id === "tab2" && radio.checked)
+              setTimeout(initLeafletMap, 80);
+          });
+        });
+
+        if (document.getElementById("tab2")?.checked)
+          setTimeout(initLeafletMap, 80);
+      })();
+    </script>
+
+    <!-- ─────────────────────────────────────────────────
+       UI INTERACTIONS (tabs, sidebar, filters, map)
+  ──────────────────────────────────────────────────── -->
+    <script>
+      (function () {
+        /* ── Main tabs ── */
         const radios = document.querySelectorAll('input[name="tab"]');
         const panels = {
           tab1: document.getElementById("panel-mission"),
@@ -1072,11 +1263,10 @@
           if (panels[id]) panels[id].style.display = "flex";
         }
 
-        // Imposta display iniziale
         switchTab();
         radios.forEach((r) => r.addEventListener("change", switchTab));
 
-        /* MOTHER BASE SIDEBAR */
+        /* ── Mother Base sidebar ── */
         document.querySelectorAll(".mb-nav-item").forEach((item) => {
           item.addEventListener("click", () => {
             document
@@ -1091,7 +1281,7 @@
           });
         });
 
-        /* STAFF LIST */
+        /* ── Staff list selection ── */
         document.querySelectorAll(".staff-row").forEach((row) => {
           row.addEventListener("click", () => {
             document
@@ -1101,7 +1291,7 @@
           });
         });
 
-        /* FILTER BUTTONS (generic) */
+        /* ── Filter buttons (generic) ── */
         document.querySelectorAll(".mb-filter-btn").forEach((btn) => {
           btn.addEventListener("click", function () {
             this.closest(".mb-panel-controls")
@@ -1111,7 +1301,7 @@
           });
         });
 
-        /* MAP ZOOM */
+        /* ── Map zoom (legacy SVG map support) ── */
         let mapScale = 1;
         const mapEl = document.getElementById("tacticalMap");
         if (mapEl) {
@@ -1140,6 +1330,7 @@
             });
           });
         }
+
         document.querySelectorAll(".map-region").forEach((r) => {
           r.addEventListener("click", () => {
             document
@@ -1149,7 +1340,7 @@
           });
         });
 
-        /* MISSION FILTERS */
+        /* ── Mission filters ── */
         document.querySelectorAll(".mf-btn").forEach((btn) => {
           btn.addEventListener("click", function () {
             document
@@ -1165,6 +1356,7 @@
             });
           });
         });
+
         document.querySelectorAll(".mission-row").forEach((row) => {
           row.addEventListener("click", () => {
             document
@@ -1175,100 +1367,56 @@
         });
       })();
     </script>
+
+    <!-- ─────────────────────────────────────────────────
+       MAP TILE COLOR FILTER (CSS overrides)
+  ──────────────────────────────────────────────────── -->
     <style>
-  /* ══════════════════════════════════════════
-     FILTRO COLORE iDROID — SVG feColorMatrix
-     Rimappa i canali RGB del tile OSM verso
-     la palette teal/verde scuro
-  ══════════════════════════════════════════ */
-
-  /* Definizione filtro SVG inline — non fa richieste esterne */
-  #idroid-map-filters {
-    position: absolute;
-    width: 0; height: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  #idroid-map .leaflet-tile-pane {
-    /* Applica il filtro SVG ai tile */
-    filter: url(#idroid-color-matrix);
-  }
-
-  /* ── UI Leaflet ── */
-  #idroid-map .leaflet-control-zoom { display: none; }
-  #idroid-map .leaflet-control-attribution {
-    background: rgba(10,25,33,0.75) !important;
-    color: #496d7b !important;
-    font-size: 0.48rem !important;
-    font-family: monospace !important;
-    border-radius: 0 !important;
-  }
-  #idroid-map .leaflet-control-attribution a { color: #7496a1 !important; }
-
-  .leaflet-container {
-  background: none !important;
-}
-
-  /* ── Marker GPS pulsante ── */
-  .idroid-marker-pulse {
-    width: 12px; height: 12px;
-    background: #eeed53;
-    border: 2px solid rgba(238,237,83,0.4);
-    border-radius: 50%;
-    animation: idroid-gps-pulse 2s ease-out infinite;
-  }
-  @keyframes idroid-gps-pulse {
-    0%   { box-shadow: 0 0 0 0    rgba(238,237,83,0.7); }
-    70%  { box-shadow: 0 0 0 14px rgba(238,237,83,0);   }
-    100% { box-shadow: 0 0 0 0    rgba(238,237,83,0);   }
-  }
-</style>
-
-<!-- Definizione filtro SVG -->
-<svg id="idroid-map-filters" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="idroid-color-matrix" color-interpolation-filters="sRGB">
-
-      <!-- STEP 1: desatura completamente -->
-      <feColorMatrix type="saturate" values="0" result="gray"/>
-
-      <!-- STEP 2: rimappa verso la palette iDROID
-           La matrice 5x4 trasforma [R,G,B,A] → [R',G',B',A']
-           
-           Target dark teal: #122933 = rgb(18,41,51)   → zone scure
-           Target mid:       #274e5f = rgb(39,78,95)   → zone medie
-           Target light:     #7496a1 = rgb(116,150,161) → zone chiare
-
-           La logica: il grigio ha R=G=B=L (luminosità)
-           Proiettiamo L → (R'=L*0.25, G'=L*0.55, B'=L*0.65)
-           e aggiungiamo un offset base corrispondente al colore più scuro
-           
-           offset base = #122933 / 255 = (0.07, 0.16, 0.20)
-      -->
-      <feColorMatrix
-        in="gray"
-        type="matrix"
-        values="
-          0.18  0     0     0     0.05
-          0     0.35  0     0     0.12
-          0     0     0.42  0     0.16
-          0     0     0     1     0
-        "
-        result="tinted"
-      />
-
-      <!-- STEP 3: aumenta leggermente il contrasto
-           con una curva gamma (componentTransfer) -->
-      <feComponentTransfer in="tinted">
-        <feFuncR type="gamma" amplitude="1" exponent="0.85" offset="0"/>
-        <feFuncG type="gamma" amplitude="1" exponent="0.82" offset="0"/>
-        <feFuncB type="gamma" amplitude="1" exponent="0.80" offset="0"/>
-      </feComponentTransfer>
-
-    </filter>
-  </defs>
-</svg>
-
+      #idroid-map-filters {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      #idroid-map .leaflet-tile-pane {
+        filter: url(#idroid-color-matrix);
+      }
+      #idroid-map .leaflet-control-zoom {
+        display: none;
+      }
+      #idroid-map .leaflet-control-attribution {
+        background: rgba(10, 25, 33, 0.75) !important;
+        color: #496d7b !important;
+        font-size: 0.48rem !important;
+        font-family: monospace !important;
+        border-radius: 0 !important;
+      }
+      #idroid-map .leaflet-control-attribution a {
+        color: #7496a1 !important;
+      }
+      .leaflet-container {
+        background: none !important;
+      }
+      .idroid-marker-pulse {
+        width: 12px;
+        height: 12px;
+        background: #eeed53;
+        border: 2px solid rgba(238, 237, 83, 0.4);
+        border-radius: 50%;
+        animation: idroid-gps-pulse 2s ease-out infinite;
+      }
+      @keyframes idroid-gps-pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(238, 237, 83, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 14px rgba(238, 237, 83, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(238, 237, 83, 0);
+        }
+      }
+    </style>
   </body>
 </html>

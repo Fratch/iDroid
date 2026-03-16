@@ -91,12 +91,7 @@
               </div>
 
               <ul class="mb-nav">
-                <li class="mb-nav-item active" data-mb-section="tapes">
-                  <i class="fas fa-scroll mb-nav-icon"></i>
-                  <span>CASSETTE TAPES</span>
-                  <span class="mb-nav-count">48</span>
-                </li>
-                <li class="mb-nav-item" data-mb-section="staff">
+                <li class="mb-nav-item action" data-mb-section="staff">
                   <i class="fas fa-users mb-nav-icon"></i>
                   <span>STAFF</span>
                   <span class="mb-nav-count">312</span>
@@ -151,165 +146,9 @@
 
             <!-- Content area -->
             <div class="mb-content">
-              <!-- ── TAPES ─────────────────────────── -->
-              <div class="mb-section active" id="mb-tapes">
-                <!-- Column 1: tape list + controls -->
-                <div id="column_1" class="column">
-                  <div class="top_column">
-                    <div role="tablist" id="main_tablist">
-                      <button
-                        role="tab"
-                        aria-selected="true"
-                        class="tape_tab"
-                        aria-label="tapes"
-                      >
-                        <i class="fas fa-scroll"></i>
-                      </button>
-                      <button
-                        role="tab"
-                        class="tape_tab"
-                        aria-label="music"
-                        tabindex="-1"
-                        aria-hidden="true"
-                      >
-                        <i class="fas fa-music"></i>
-                      </button>
-                      <button
-                        role="tab"
-                        class="tape_tab"
-                        aria-label="tasks"
-                        tabindex="-1"
-                        aria-hidden="true"
-                      >
-                        <i class="fas fa-check"></i>
-                      </button>
-                    </div>
-
-                    <div role="tabpanel" id="main_tabpanel">
-                      <h1 id="tab_heading">Info</h1>
-                      <p>Listen to tape recordings of relevant intel</p>
-                    </div>
-
-                    <h3 class="default_heading">CASSETTE TAPES</h3>
-                  </div>
-
-                  <div id="column_1_tapes" class="column_tapes"></div>
-
-                  <div class="btn_settings">
-                    <button
-                      id="activeToStop"
-                      class="control_btn disabled_control"
-                      tabindex="-1"
-                      aria-hidden="true"
-                    >
-                      <span class="keyboard_key disabled_control"
-                        >[ SPACE ]</span
-                      >
-                      Stop
-                    </button>
-                    <button
-                      id="activeToContinue"
-                      class="control_btn disabled_control"
-                      tabindex="-1"
-                      aria-hidden="true"
-                    >
-                      <span class="keyboard_key disabled_control"
-                        >[ ENTER ]</span
-                      >
-                      Continue
-                    </button>
-                  </div>
-                </div>
-                <!-- /column_1 -->
-
-                <!-- Column 2: player -->
-                <div id="column_2" class="column">
-                  <div class="top_column">
-                    <div id="media_box">
-                      <div id="media_box_headings">
-                        <h2>SELECTED CASSETTE TAPE</h2>
-                        <h3>
-                          <i class="fas fa-caret-left"></i> To Control Panel
-                        </h3>
-                      </div>
-
-                      <div id="tapes_playing">
-                        <div id="current_tape">
-                          <h2 id="current_tape_heading">
-                            CURRENT TAPE PLAYING
-                          </h2>
-                        </div>
-                        <div id="current_sub_tape">
-                          <h2 id="current_sub_tape_heading">TAPE PLAYING</h2>
-                        </div>
-                        <div id="progress_container">
-                          <i id="progress_audio" class="fas fa-volume-off"></i>
-                          <div id="progress_bar_container">
-                            <div id="progress">
-                              <div id="progress_current"></div>
-                            </div>
-                          </div>
-                          <p id="current_progress">
-                            <span id="current_now">0</span>/<span
-                              id="current_length"
-                              >0</span
-                            >
-                          </p>
-                        </div>
-                      </div>
-
-                      <div id="media_controls">
-                        <button id="back_btn" class="media_control_btn">
-                          <i class="fas fa-backward"></i>
-                        </button>
-                        <button
-                          class="media_control_btn disabled"
-                          tabindex="-1"
-                          aria-hidden="true"
-                        >
-                          <i class="fas fa-pause"></i>
-                        </button>
-                        <button id="stop_btn" class="media_control_btn">
-                          <i class="fas fa-stop"></i>
-                        </button>
-                        <button
-                          class="media_control_btn disabled"
-                          tabindex="-1"
-                          aria-hidden="true"
-                        >
-                          <i class="fas fa-forward"></i>
-                        </button>
-                        <button
-                          class="media_control_btn disabled"
-                          tabindex="-1"
-                          aria-hidden="true"
-                        >
-                          <i class="fas fa-retweet"></i>
-                        </button>
-                        <button class="media_control_btn">
-                          <i class="far fa-closed-captioning"></i>
-                        </button>
-                        <button
-                          class="media_control_btn disabled"
-                          tabindex="-1"
-                          aria-hidden="true"
-                        >
-                          <i class="fas fa-volume-down"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div id="column_2_tapes" class="column_tapes"></div>
-                </div>
-                <!-- /column_2 -->
-
-                <section class="content"><div class="grid"></div></section>
-              </div>
-              <!-- /mb-tapes -->
 
               <!-- ── STAFF ──────────────────────────── -->
-              <div class="mb-section" id="mb-staff">
+              <div class="mb-section action" id="mb-staff">
                 <div class="mb-panel-header">
                   <h2 class="mb-panel-title">STAFF MANAGEMENT</h2>
                   <div class="mb-panel-controls">
@@ -972,140 +811,405 @@
           <!-- /panel-map -->
 
           <!-- ─────────────────────────────────────────
-             PANEL 3 — MISSIONS
-        ──────────────────────────────────────────── -->
+   PANEL 3 — MISSIONS
+──────────────────────────────────────────── -->
           <div class="tab-panel" id="panel-missions">
-            <ul>
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <img
-                    class="menu-item-icon-ghost menu-item-icon-img"
-                    src="./assets/icons/supply-drop-icon.svg"
-                    alt=""
-                  />
-                  <img
-                    class="menu-item-icon menu-item-icon-img"
-                    src="./assets/icons/supply-drop-icon.svg"
-                    alt=""
-                  />
-                  <span class="menu-item-badge">3</span>
-                </div>
-                <div class="menu-item-title-wrap">
-                  <p class="menu-item-title">SUPPLY DROP</p>
-                  <p class="menu-item-subtitle">
-                    Request resupply of weapons, ammo, etc.
-                  </p>
-                </div>
-              </li>
+            <!-- ── Layer A: lista menu principale ── -->
+            <div id="missions-menu">
+              <ul>
+                <li class="menu-item" data-panel="supply-drop">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/supply-drop-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/supply-drop-icon.svg"
+                      alt=""
+                    />
+                    <span class="menu-item-badge">3</span>
+                  </div>
+                  <div class="menu-item-title-wrap">
+                    <p class="menu-item-title">SUPPLY DROP</p>
+                    <p class="menu-item-subtitle">
+                      Request resupply of weapons, ammo, etc.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <img
-                    class="menu-item-icon-ghost menu-item-icon-img"
-                    src="./assets/icons/buddy-support-icon.svg"
-                    alt=""
-                  />
-                  <img
-                    class="menu-item-icon menu-item-icon-img"
-                    src="./assets/icons/buddy-support-icon.svg"
-                    alt=""
-                  />
-                  <span class="menu-item-badge">1</span>
-                </div>
-                <div>
-                  <p class="menu-item-title">BUDDY SUPPORT</p>
-                  <p class="menu-item-subtitle">
-                    Request resupply of weapons, ammo, etc.
-                  </p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="buddy-support">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/buddy-support-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/buddy-support-icon.svg"
+                      alt=""
+                    />
+                    <span class="menu-item-badge">1</span>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">BUDDY SUPPORT</p>
+                    <p class="menu-item-subtitle">
+                      Request resupply of weapons, ammo, etc.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <img
-                    class="menu-item-icon-ghost menu-item-icon-img"
-                    src="./assets/icons/helicopter-icon.svg"
-                    alt=""
-                  />
-                  <img
-                    class="menu-item-icon menu-item-icon-img"
-                    src="./assets/icons/helicopter-icon.svg"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <p class="menu-item-title">HELICOPTER</p>
-                  <p class="menu-item-subtitle">Request helicopter support.</p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="helicopter">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/helicopter-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/helicopter-icon.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <p class="menu-item-title">HELICOPTER</p>
+                    <p class="menu-item-subtitle">
+                      Request helicopter support.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <img
-                    class="menu-item-icon-ghost menu-item-icon-img"
-                    src="./assets/icons/mission-list-icon.svg"
-                    alt=""
-                  />
-                  <img
-                    class="menu-item-icon menu-item-icon-img"
-                    src="./assets/icons/mission-list-icon.svg"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <p class="menu-item-title">MISSION LIST</p>
-                  <p class="menu-item-subtitle">
-                    Browse and select available missions.
-                  </p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="mission-list">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/mission-list-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/mission-list-icon.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <p class="menu-item-title">MISSION LIST</p>
+                    <p class="menu-item-subtitle">
+                      Browse and select available missions.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <img
-                    class="menu-item-icon-ghost menu-item-icon-img"
-                    src="./assets/icons/side-ops-icon.svg"
-                    alt=""
-                  />
-                  <img
-                    class="menu-item-icon menu-item-icon-img"
-                    src="./assets/icons/side-ops-icon.svg"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <p class="menu-item-title">SIDE OPS LIST</p>
-                  <p class="menu-item-subtitle">
-                    Optional side operation objectives.
-                  </p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="side-ops">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/side-ops-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/side-ops-icon.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <p class="menu-item-title">SIDE OPS LIST</p>
+                    <p class="menu-item-subtitle">
+                      Optional side operation objectives.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <i class="fas fa-parachute-box menu-item-icon"></i>
-                  <span class="menu-item-badge badge-dot"></span>
-                </div>
-                <div>
-                  <p class="menu-item-title">CASSETTE TAPES</p>
-                  <p class="menu-item-subtitle">
-                    Audio recordings and intel logs.
-                  </p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="tapes">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/cassette-tapes-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/cassette-tapes-icon.svg"
+                      alt=""
+                    />
+                    <span class="menu-item-badge">1</span>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">CASSETTE TAPES</p>
+                    <p class="menu-item-subtitle">
+                      Audio recordings and intel logs.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <i class="fas fa-parachute-box menu-item-icon"></i>
+                <li class="menu-item" data-panel="logs">
+                  <div class="menu-item-icon-wrap">
+                    <i class="fas fa-list menu-item-icon"></i>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">LOGS</p>
+                    <p class="menu-item-subtitle">
+                      Mission and activity history.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- /#missions-menu -->
+
+            <!-- ── Layer B: sottopannelli ── -->
+            <div id="missions-subpanels">
+              <!-- ── TAPES ── -->
+              <div class="missions-subpanel" data-subpanel="tapes">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">CASSETTE TAPES</span>
                 </div>
-                <div>
-                  <p class="menu-item-title">LOGS</p>
-                  <p class="menu-item-subtitle">
-                    Mission and activity history.
-                  </p>
+                <div class="subpanel-body">
+                  <!-- Contenuto tapes -->
+                  <div id="column_1" class="column">
+                    <div class="top_column">
+                      <div role="tablist" id="main_tablist">
+                        <button
+                          role="tab"
+                          aria-selected="true"
+                          class="tape_tab"
+                          aria-label="tapes"
+                        >
+                          <i class="fas fa-scroll"></i>
+                        </button>
+                        <button
+                          role="tab"
+                          class="tape_tab"
+                          aria-label="music"
+                          tabindex="-1"
+                          aria-hidden="true"
+                        >
+                          <i class="fas fa-music"></i>
+                        </button>
+                        <button
+                          role="tab"
+                          class="tape_tab"
+                          aria-label="tasks"
+                          tabindex="-1"
+                          aria-hidden="true"
+                        >
+                          <i class="fas fa-check"></i>
+                        </button>
+                      </div>
+                      <div role="tabpanel" id="main_tabpanel">
+                        <h1 id="tab_heading">Info</h1>
+                        <p>Listen to tape recordings of relevant intel</p>
+                      </div>
+                      <h3 class="default_heading">CASSETTE TAPES</h3>
+                    </div>
+                    <div id="column_1_tapes" class="column_tapes"></div>
+                    <div class="btn_settings">
+                      <button
+                        id="activeToStop"
+                        class="control_btn disabled_control"
+                        tabindex="-1"
+                        aria-hidden="true"
+                      >
+                        <span class="keyboard_key disabled_control"
+                          >[ SPACE ]</span
+                        >
+                        Stop
+                      </button>
+                      <button
+                        id="activeToContinue"
+                        class="control_btn disabled_control"
+                        tabindex="-1"
+                        aria-hidden="true"
+                      >
+                        <span class="keyboard_key disabled_control"
+                          >[ ENTER ]</span
+                        >
+                        Continue
+                      </button>
+                    </div>
+                  </div>
+
+                  <div id="column_2" class="column">
+                    <div class="top_column">
+                      <div id="media_box">
+                        <div id="media_box_headings">
+                          <h2>SELECTED CASSETTE TAPE</h2>
+                          <h3>
+                            <i class="fas fa-caret-left"></i> To Control Panel
+                          </h3>
+                        </div>
+                        <div id="tapes_playing">
+                          <div id="current_tape">
+                            <h2 id="current_tape_heading">
+                              CURRENT TAPE PLAYING
+                            </h2>
+                          </div>
+                          <div id="current_sub_tape">
+                            <h2 id="current_sub_tape_heading">TAPE PLAYING</h2>
+                          </div>
+                          <div id="progress_container">
+                            <i
+                              id="progress_audio"
+                              class="fas fa-volume-off"
+                            ></i>
+                            <div id="progress_bar_container">
+                              <div id="progress">
+                                <div id="progress_current"></div>
+                              </div>
+                            </div>
+                            <p id="current_progress">
+                              <span id="current_now">0</span>/<span
+                                id="current_length"
+                                >0</span
+                              >
+                            </p>
+                          </div>
+                        </div>
+                        <div id="media_controls">
+                          <button id="back_btn" class="media_control_btn">
+                            <i class="fas fa-backward"></i>
+                          </button>
+                          <button
+                            class="media_control_btn disabled"
+                            tabindex="-1"
+                            aria-hidden="true"
+                          >
+                            <i class="fas fa-pause"></i>
+                          </button>
+                          <button id="stop_btn" class="media_control_btn">
+                            <i class="fas fa-stop"></i>
+                          </button>
+                          <button
+                            class="media_control_btn disabled"
+                            tabindex="-1"
+                            aria-hidden="true"
+                          >
+                            <i class="fas fa-forward"></i>
+                          </button>
+                          <button
+                            class="media_control_btn disabled"
+                            tabindex="-1"
+                            aria-hidden="true"
+                          >
+                            <i class="fas fa-retweet"></i>
+                          </button>
+                          <button class="media_control_btn">
+                            <i class="far fa-closed-captioning"></i>
+                          </button>
+                          <button
+                            class="media_control_btn disabled"
+                            tabindex="-1"
+                            aria-hidden="true"
+                          >
+                            <i class="fas fa-volume-down"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="column_2_tapes" class="column_tapes"></div>
+                  </div>
                 </div>
-              </li>
-            </ul>
+              </div>
+              <!-- /.missions-subpanel[tapes] -->
+
+              <!-- ── SUPPLY DROP (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="supply-drop">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">SUPPLY DROP</span>
+                </div>
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-box-open"></i>
+                  <p>SUPPLY DROP INTERFACE</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+
+              <!-- ── BUDDY SUPPORT (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="buddy-support">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">BUDDY SUPPORT</span>
+                </div>
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-dog"></i>
+                  <p>BUDDY SUPPORT INTERFACE</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+
+              <!-- ── HELICOPTER (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="helicopter">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">HELICOPTER</span>
+                </div>
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-helicopter"></i>
+                  <p>HELICOPTER SUPPORT INTERFACE</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+
+              <!-- ── MISSION LIST (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="mission-list">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">MISSION LIST</span>
+                </div>
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-crosshairs"></i>
+                  <p>MISSION LIST INTERFACE</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+
+              <!-- ── SIDE OPS (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="side-ops">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">SIDE OPS LIST</span>
+                </div>
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <p>SIDE OPS INTERFACE</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+
+              <!-- ── LOGS (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="logs">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">LOGS</span>
+                </div>
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-list-alt"></i>
+                  <p>MISSION LOGS</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+            </div>
+            <!-- /#missions-subpanels -->
           </div>
           <!-- /panel-missions -->
         </div>

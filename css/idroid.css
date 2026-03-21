@@ -42,9 +42,10 @@
 
 html,
 body {
-  height: 95%;
-  background-color: var(--bg-secondary);
+  height: 100%;
   margin: 0;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
 }
 
 body {
@@ -62,11 +63,9 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 55%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
+  background: radial-gradient(ellipse at center,
+      transparent 55%,
+      rgba(0, 0, 0, 0.55) 100%);
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -102,13 +101,11 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 9998;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 2px,
-    rgba(0, 0, 0, 0.07) 2px,
-    rgba(0, 0, 0, 0.07) 3px
-  );
+  background: repeating-linear-gradient(to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.07) 2px,
+      rgba(0, 0, 0, 0.07) 3px);
   animation: scanline-drift 12s linear infinite;
 }
 
@@ -138,7 +135,7 @@ body::after {
 html,
 body,
 #container {
-  height: 95%;
+  height: 100%;
   background-color: var(--bg-secondary);
 }
 
@@ -157,11 +154,9 @@ body,
   position: absolute;
   top: 0;
   left: 0;
-  background-image: radial-gradient(
-    circle,
-    rgba(101, 199, 238, 0.7) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle,
+      rgba(101, 199, 238, 0.7) 1px,
+      transparent 1px);
   background-size: 15px 15px;
   box-shadow: inset 0px 0px 40px 40px var(--bg-secondary);
   opacity: 0.5;
@@ -175,11 +170,9 @@ body,
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(
-    circle,
-    rgba(101, 199, 238, 0.7) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle,
+      rgba(101, 199, 238, 0.7) 1px,
+      transparent 1px);
   background-size: 15px 15px;
   filter: blur(1px);
   z-index: 0;
@@ -237,10 +230,8 @@ body,
   width: 100%;
   height: 100%;
   background:
-    repeating-radial-gradient(#002f5570 0 0.0002%, #0093a770 0 0.0002%) 50%
-      0/250px 2500px,
-    repeating-conic-gradient(#002f5570 0 0.0001%, #0093a770 0 0.0002%) 60%
-      60%/250px 2500px;
+    repeating-radial-gradient(#002f5570 0 0.0002%, #0093a770 0 0.0002%) 50% 0/250px 2500px,
+    repeating-conic-gradient(#002f5570 0 0.0001%, #0093a770 0 0.0002%) 60% 60%/250px 2500px;
   background-blend-mode: difference;
   animation: b 0.2s infinite alternate;
   z-index: 9999;
@@ -316,9 +307,9 @@ body,
   margin-right: 0;
 }
 
-#tab1:checked + label,
-#tab2:checked + label,
-#tab3:checked + label {
+#tab1:checked+label,
+#tab2:checked+label,
+#tab3:checked+label {
   top: 0;
   background: linear-gradient(to bottom, var(--border), transparent);
   border-bottom: 2px solid var(--glow-primary);
@@ -351,8 +342,8 @@ body,
     --glow-blue: 0 0 5px rgba(74, 144, 217, 0.55), 0 0 12px rgba(74, 144, 217, 0.18); */
 
 /* Tab adiacente DESTRA alla tab attiva */
-#tab1:checked ~ label[for="tab2"],
-#tab2:checked ~ label[for="tab3"] {
+#tab1:checked~label[for="tab2"],
+#tab2:checked~label[for="tab3"] {
   border-left-color: transparent;
 }
 
@@ -410,142 +401,56 @@ label[for="tab2"]:has(~ #tab3:checked) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   MOTHER BASE — SIDEBAR
+   MOTHER BASE — DRILL-DOWN (stessa struttura di Missions)
 ══════════════════════════════════════════════════════════ */
-.mb-sidebar {
-  width: 200px;
-  min-width: 200px;
-  background: rgba(10, 34, 48, 0.45);
-  backdrop-filter: blur(2px);
-  border-right: 1px solid var(--border);
+#panel-mission {
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+#mb-menu {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: 8px 0;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  pointer-events: auto;
+}
+
+#panel-mission.is-drilling #mb-menu {
+  opacity: 0.1;
+  transform: translateY(30px);
+  pointer-events: none;
+}
+
+#mb-subpanels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.mb-subpanel {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  padding: 0;
-  z-index: 2;
-}
-
-.mb-sidebar-header {
-  padding: 12px 16px 8px;
-  border-bottom: 1px solid var(--border);
-}
-
-.mb-sidebar-label {
-  font-size: 0.65rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.15em;
-}
-
-.mb-nav {
-  list-style: none;
-  margin: 0;
-  padding: 6px 0;
-  flex: 1;
-}
-
-.mb-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  cursor: pointer;
-  color: var(--text-secondary);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  opacity: 0.6;
+  opacity: 0;
+  transform: translateY(40px);
   transition:
-    opacity 0.15s,
-    background 0.15s,
-    color 0.15s;
-  position: relative;
-  border-left: 2px solid transparent;
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  pointer-events: none;
 }
 
-.mb-nav-item:hover {
+.mb-subpanel.is-active {
   opacity: 1;
-  background: rgba(73, 109, 123, 0.1);
-  color: var(--text-primary);
-}
-
-.mb-nav-item:hover span {
-  text-shadow: var(--glow-primary);
-}
-
-.mb-nav-item.active {
-  opacity: 1;
-  color: var(--text-primary);
-  background: rgba(73, 109, 123, 0.15);
-  border-left: 2px solid var(--accent);
-}
-
-.mb-nav-item.active span {
-  text-shadow: 0 0 6px rgba(238, 237, 83, 0.3);
-}
-
-.mb-nav-icon {
-  width: 14px;
-  text-align: center;
-  font-size: 0.8rem;
-}
-
-.mb-nav-item span:nth-child(2) {
-  flex: 1;
-}
-
-.mb-nav-count {
-  font-family: "Marsmonster", monospace;
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  background: rgba(39, 78, 95, 0.6);
-  padding: 1px 5px;
-}
-
-.mb-nav-badge {
-  font-size: 0.65rem;
-  color: #000;
-  background: var(--accent);
-  padding: 1px 5px;
-  font-weight: bold;
-  animation: blink-badge 1.5s step-end infinite;
-  text-shadow: var(--glow-accent);
-}
-
-.mb-sidebar-stats {
-  border-top: 1px solid var(--border);
-  padding: 12px 16px;
-}
-
-.mb-stat-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 7px;
-}
-
-.mb-stat-label {
-  font-size: 0.6rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.1em;
-  width: 52px;
-  flex-shrink: 0;
-}
-
-.mb-stat-val {
-  font-size: 0.75rem;
-  color: var(--accent);
-  text-shadow: var(--glow-accent);
-}
-
-.mb-stat-bar {
-  flex: 1;
-  height: 3px;
-  background: var(--ui-panel);
-}
-
-.mb-stat-fill {
-  height: 100%;
-  background: var(--border);
-  transition: width 0.3s ease;
-  box-shadow: 0 0 5px rgba(73, 109, 123, 0.5);
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -1555,7 +1460,7 @@ button.active_topic {
   color: var(--text-primary);
 }
 
-.map-region > i {
+.map-region>i {
   margin-top: 2px;
 }
 
@@ -1866,13 +1771,11 @@ button.active_topic {
   /* eredita la dimensione dal parent */
   object-fit: contain;
   /* per il colore SVG monocromatico usa filter */
-  filter: invert(60%) sepia(20%) saturate(400%) hue-rotate(160deg)
-    brightness(90%);
+  filter: invert(60%) sepia(20%) saturate(400%) hue-rotate(160deg) brightness(90%);
 }
 
 .menu-item:hover .menu-item-icon-img {
-  filter: invert(85%) sepia(20%) saturate(300%) hue-rotate(160deg)
-    brightness(110%);
+  filter: invert(85%) sepia(20%) saturate(300%) hue-rotate(160deg) brightness(110%);
 }
 
 .menu-item-icon-ghost {
@@ -1888,7 +1791,8 @@ button.active_topic {
     font-size 0.15s,
     color 0.15s,
     left 0.15s,
-    top 0.15s; /* aggiunto left e top */
+    top 0.15s;
+  /* aggiunto left e top */
   display: block;
   line-height: 1;
 }
@@ -1904,19 +1808,16 @@ button.active_topic {
 }
 
 .menu-item:hover .menu-item-icon-ghost {
-  font-size: 5em; /* scala insieme */
+  font-size: 5em;
+  /* scala insieme */
   color: var(--text-primary);
-  left: -10px !important; /* mantieni offset fisso */
+  left: -10px !important;
+  /* mantieni offset fisso */
   top: 4px !important;
 }
 
 .menu-item.active .menu-item-icon {
-  color: var(--accent);
-  text-shadow: var(--glow-accent);
-}
-
-.menu-item.active .menu-item-icon-ghost {
-  color: var(--accent);
+  text-shadow: var(--glow-primary);
 }
 
 .menu-item-badge {
@@ -2069,6 +1970,7 @@ button.active_topic {
    KEYFRAMES
 ══════════════════════════════════════════════════════════ */
 @keyframes blink-badge {
+
   0%,
   100% {
     opacity: 1;
@@ -2080,6 +1982,7 @@ button.active_topic {
 }
 
 @keyframes fob-pulse {
+
   0%,
   100% {
     box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
@@ -2181,8 +2084,8 @@ button.active_topic {
 /* ── Filtro colore iDROID sui tile OSM ── */
 #idroid-map .leaflet-tile {
   filter:
-        /* grayscale(1) */ hue-rotate(155deg) saturate(0.55)
-    brightness(0.38) contrast(1.2);
+    /* grayscale(1) */
+    hue-rotate(155deg) saturate(0.55) brightness(0.38) contrast(1.2);
 }
 
 /* ── Rimuovi UI Leaflet di default ── */
@@ -2227,4 +2130,313 @@ button.active_topic {
   100% {
     box-shadow: 0 0 0 0 rgba(238, 237, 83, 0);
   }
+}
+
+/* ══════════════════════════════════════════════════════════
+   MISSIONS PANEL — DRILL-DOWN NAVIGATION
+══════════════════════════════════════════════════════════ */
+
+#panel-missions {
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+/* ── Layer A: menu lista ── */
+#missions-menu {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: 8px 0;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  pointer-events: auto;
+}
+
+/* Menu esce verso il basso quando si fa drill-down */
+#panel-missions.is-drilling #missions-menu {
+  opacity: 0.1;
+  transform: translateY(30px);
+  pointer-events: none;
+}
+
+/* ── Layer B: wrapper sottopannelli ── */
+#missions-subpanels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Singolo sottopannello — nascosto di default */
+.missions-subpanel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  pointer-events: none;
+}
+
+/* Sottopannello attivo */
+.missions-subpanel.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ── Header del sottopannello (back + titolo) ── */
+.subpanel-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  background: rgba(18, 41, 51, 0.6);
+}
+
+.subpanel-back-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: "Rodin", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.subpanel-back-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+  background: rgba(73, 109, 123, 0.15);
+  text-shadow: var(--glow-primary);
+}
+
+.subpanel-title {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  letter-spacing: 0.12em;
+  text-shadow: var(--glow-primary);
+}
+
+/* ── Body del sottopannello ── */
+.subpanel-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  /* tapes usa row (due colonne) */
+}
+
+/* Placeholder per sottopannelli non ancora implementati */
+.subpanel-placeholder {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0.3;
+}
+
+.subpanel-placeholder i {
+  font-size: 3rem;
+  color: var(--border);
+}
+
+.subpanel-placeholder p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+.subpanel-placeholder span {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+}
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER LEFT — back button
+══════════════════════════════════════════════════════════ */
+#footer-left {
+  position: fixed;
+  bottom: 20px;
+  left: 50px;
+  z-index: 9000;
+
+  /* nascosto di default */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+body.is-drilling-missions #footer-left {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Il back btn riusa .inner-rectangle — solo override cursore e hover */
+#footer-back-btn {
+  cursor: pointer;
+  min-width: 120px;
+  height: 30px;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    box-shadow 0.15s;
+}
+
+#footer-back-btn:hover {
+  background-color: rgba(73, 109, 123, 0.6);
+  color: var(--text-primary);
+  box-shadow:
+    var(--glow-border),
+    0 0 12px rgba(73, 109, 123, 0.3);
+}
+
+#footer-back-btn:hover p,
+#footer-back-btn:hover i {
+  text-shadow: var(--glow-primary);
+}
+
+/* Rimuovi la vecchia regola .footer-back-btn standalone */
+.footer-back-btn {}
+
+/* Visibile solo quando il panel missions è in drilling */
+#panel-missions.is-drilling~#footer-left .footer-back-btn,
+body.is-drilling-missions #footer-left .footer-back-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════════════════════════
+   BREADCRUMB sotto idroid_ver
+══════════════════════════════════════════════════════════ */
+.idroid-breadcrumb {
+  font-size: 1.2rem;
+  /* uguale a h2 in #idroid_ver */
+  font-family: "Marsmonster", monospace;
+  letter-spacing: 0.08em;
+  margin: 0;
+  color: var(--accent);
+  text-shadow: var(--glow-accent);
+
+  /* nascosto di default */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    opacity 0.2s ease,
+    max-height 0.25s ease;
+}
+
+.idroid-breadcrumb.is-visible {
+  opacity: 1;
+  max-height: 2rem;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BADGE — scala con hover su menu-item
+══════════════════════════════════════════════════════════ */
+.menu-item-badge {
+  transition:
+    font-size 0.15s ease,
+    min-width 0.15s ease,
+    height 0.15s ease,
+    top 0.15s ease,
+    left 0.15s ease;
+}
+
+.menu-item:hover .menu-item-badge {
+  font-size: 1.2rem;
+  min-width: 28px;
+  height: 28px;
+  top: -10px;
+  left: -10px;
+}
+
+#idroid-map-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#idroid-map .leaflet-tile-pane {
+  filter: url(#idroid-color-matrix);
+}
+
+#idroid-map .leaflet-control-zoom {
+  display: none;
+}
+
+#idroid-map .leaflet-control-attribution {
+  background: rgba(10, 25, 33, 0.75) !important;
+  color: #496d7b !important;
+  font-size: 0.48rem !important;
+  font-family: monospace !important;
+  border-radius: 0 !important;
+}
+
+#idroid-map .leaflet-control-attribution a {
+  color: #7496a1 !important;
+}
+
+.leaflet-container {
+  background: none !important;
+}
+
+.idroid-marker-pulse {
+  width: 12px;
+  height: 12px;
+  background: #eeed53;
+  border: 2px solid rgba(238, 237, 83, 0.4);
+  border-radius: 50%;
+  animation: idroid-gps-pulse 2s ease-out infinite;
+}
+
+@keyframes idroid-gps-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(238, 237, 83, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 14px rgba(238, 237, 83, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(238, 237, 83, 0);
+  }
+}
+
+#staticBgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9997;
+  /* sotto scanlines (9998) e noise overlay (9999) */
+  mix-blend-mode: screen;
+  opacity: 0.018;
 }

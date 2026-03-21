@@ -23,10 +23,11 @@
 
   <body>
     <!-- ═══════════════════════════════════════════════════
-       VERSION BADGE
-  ════════════════════════════════════════════════════ -->
+   VERSION BADGE + BREADCRUMB
+════════════════════════════════════════════════════ -->
     <div id="idroid_ver">
       <h2>iDROID VER 3.02</h2>
+      <h3 id="idroid-breadcrumb" class="idroid-breadcrumb"></h3>
     </div>
 
     <!-- ═══════════════════════════════════════════════════
@@ -81,761 +82,638 @@
       ════════════════════════════════════════════ -->
         <div class="tab-panels">
           <!-- ─────────────────────────────────────────
-             PANEL 1 — MOTHER BASE
-        ──────────────────────────────────────────── -->
+   PANEL 1 — MOTHER BASE
+──────────────────────────────────────────── -->
           <div class="tab-panel" id="panel-mission">
-            <!-- Sidebar navigation -->
-            <nav class="mb-sidebar">
-              <div class="mb-sidebar-header">
-                <span class="mb-sidebar-label">SECTION</span>
-              </div>
+            <!-- ── Layer A: menu principale ── -->
+            <div id="mb-menu">
+              <ul>
+                <li class="menu-item" data-panel="mb-staff">
+                  <div class="menu-item-icon-wrap">
+                    <i
+                      class="menu-item-icon-ghost menu-item-icon fas fa-users"
+                    ></i>
+                    <i class="menu-item-icon fas fa-users"></i>
+                    <span class="menu-item-badge">312</span>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">STAFF</p>
+                    <p class="menu-item-subtitle">
+                      Manage personnel and unit assignments.
+                    </p>
+                  </div>
+                </li>
 
-              <ul class="mb-nav">
-                <li class="mb-nav-item active" data-mb-section="tapes">
-                  <i class="fas fa-scroll mb-nav-icon"></i>
-                  <span>CASSETTE TAPES</span>
-                  <span class="mb-nav-count">48</span>
+                <li class="menu-item" data-panel="mb-resources">
+                  <div class="menu-item-icon-wrap">
+                    <i
+                      class="menu-item-icon-ghost menu-item-icon fas fa-boxes"
+                    ></i>
+                    <i class="menu-item-icon fas fa-boxes"></i>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">RESOURCES</p>
+                    <p class="menu-item-subtitle">
+                      Materials, power supply and GMP balance.
+                    </p>
+                  </div>
                 </li>
-                <li class="mb-nav-item" data-mb-section="staff">
-                  <i class="fas fa-users mb-nav-icon"></i>
-                  <span>STAFF</span>
-                  <span class="mb-nav-count">312</span>
+
+                <li class="menu-item" data-panel="mb-development">
+                  <div class="menu-item-icon-wrap">
+                    <i
+                      class="menu-item-icon-ghost menu-item-icon fas fa-flask"
+                    ></i>
+                    <i class="menu-item-icon fas fa-flask"></i>
+                    <span class="menu-item-badge">3</span>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">DEVELOPMENT</p>
+                    <p class="menu-item-subtitle">
+                      R&amp;D queue and platform upgrades.
+                    </p>
+                  </div>
                 </li>
-                <li class="mb-nav-item" data-mb-section="resources">
-                  <i class="fas fa-boxes mb-nav-icon"></i>
-                  <span>RESOURCES</span>
-                </li>
-                <li class="mb-nav-item" data-mb-section="development">
-                  <i class="fas fa-flask mb-nav-icon"></i>
-                  <span>DEVELOPMENT</span>
-                  <span class="mb-nav-badge">!</span>
-                </li>
-                <li class="mb-nav-item" data-mb-section="fobs">
-                  <i class="fas fa-satellite-dish mb-nav-icon"></i>
-                  <span>F.O.B.</span>
+
+                <li class="menu-item" data-panel="mb-fobs">
+                  <div class="menu-item-icon-wrap">
+                    <i
+                      class="menu-item-icon-ghost menu-item-icon fas fa-satellite-dish"
+                    ></i>
+                    <i class="menu-item-icon fas fa-satellite-dish"></i>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">F.O.B.</p>
+                    <p class="menu-item-subtitle">
+                      Forward operating base status and security.
+                    </p>
+                  </div>
                 </li>
               </ul>
+            </div>
+            <!-- /#mb-menu -->
 
-              <div class="mb-sidebar-stats">
-                <div class="mb-stat-row">
-                  <span class="mb-stat-label">HEROISM</span>
-                  <span class="mb-stat-val marsmonster">87,420</span>
-                </div>
-                <div class="mb-stat-row">
-                  <span class="mb-stat-label">COMBAT</span>
-                  <div class="mb-stat-bar">
-                    <div class="mb-stat-fill" style="width: 74%"></div>
-                  </div>
-                </div>
-                <div class="mb-stat-row">
-                  <span class="mb-stat-label">R&amp;D</span>
-                  <div class="mb-stat-bar">
-                    <div class="mb-stat-fill" style="width: 61%"></div>
-                  </div>
-                </div>
-                <div class="mb-stat-row">
-                  <span class="mb-stat-label">INTEL</span>
-                  <div class="mb-stat-bar">
-                    <div class="mb-stat-fill" style="width: 88%"></div>
-                  </div>
-                </div>
-                <div class="mb-stat-row">
-                  <span class="mb-stat-label">MEDICAL</span>
-                  <div class="mb-stat-bar">
-                    <div class="mb-stat-fill" style="width: 53%"></div>
-                  </div>
-                </div>
-              </div>
-            </nav>
-            <!-- /mb-sidebar -->
-
-            <!-- Content area -->
-            <div class="mb-content">
-              <!-- ── TAPES ─────────────────────────── -->
-              <div class="mb-section active" id="mb-tapes">
-                <!-- Column 1: tape list + controls -->
-                <div id="column_1" class="column">
-                  <div class="top_column">
-                    <div role="tablist" id="main_tablist">
-                      <button
-                        role="tab"
-                        aria-selected="true"
-                        class="tape_tab"
-                        aria-label="tapes"
-                      >
-                        <i class="fas fa-scroll"></i>
-                      </button>
-                      <button
-                        role="tab"
-                        class="tape_tab"
-                        aria-label="music"
-                        tabindex="-1"
-                        aria-hidden="true"
-                      >
-                        <i class="fas fa-music"></i>
-                      </button>
-                      <button
-                        role="tab"
-                        class="tape_tab"
-                        aria-label="tasks"
-                        tabindex="-1"
-                        aria-hidden="true"
-                      >
-                        <i class="fas fa-check"></i>
-                      </button>
-                    </div>
-
-                    <div role="tabpanel" id="main_tabpanel">
-                      <h1 id="tab_heading">Info</h1>
-                      <p>Listen to tape recordings of relevant intel</p>
-                    </div>
-
-                    <h3 class="default_heading">CASSETTE TAPES</h3>
-                  </div>
-
-                  <div id="column_1_tapes" class="column_tapes"></div>
-
-                  <div class="btn_settings">
-                    <button
-                      id="activeToStop"
-                      class="control_btn disabled_control"
-                      tabindex="-1"
-                      aria-hidden="true"
-                    >
-                      <span class="keyboard_key disabled_control"
-                        >[ SPACE ]</span
-                      >
-                      Stop
-                    </button>
-                    <button
-                      id="activeToContinue"
-                      class="control_btn disabled_control"
-                      tabindex="-1"
-                      aria-hidden="true"
-                    >
-                      <span class="keyboard_key disabled_control"
-                        >[ ENTER ]</span
-                      >
-                      Continue
-                    </button>
-                  </div>
-                </div>
-                <!-- /column_1 -->
-
-                <!-- Column 2: player -->
-                <div id="column_2" class="column">
-                  <div class="top_column">
-                    <div id="media_box">
-                      <div id="media_box_headings">
-                        <h2>SELECTED CASSETTE TAPE</h2>
-                        <h3>
-                          <i class="fas fa-caret-left"></i> To Control Panel
-                        </h3>
-                      </div>
-
-                      <div id="tapes_playing">
-                        <div id="current_tape">
-                          <h2 id="current_tape_heading">
-                            CURRENT TAPE PLAYING
-                          </h2>
-                        </div>
-                        <div id="current_sub_tape">
-                          <h2 id="current_sub_tape_heading">TAPE PLAYING</h2>
-                        </div>
-                        <div id="progress_container">
-                          <i id="progress_audio" class="fas fa-volume-off"></i>
-                          <div id="progress_bar_container">
-                            <div id="progress">
-                              <div id="progress_current"></div>
-                            </div>
-                          </div>
-                          <p id="current_progress">
-                            <span id="current_now">0</span>/<span
-                              id="current_length"
-                              >0</span
-                            >
-                          </p>
-                        </div>
-                      </div>
-
-                      <div id="media_controls">
-                        <button id="back_btn" class="media_control_btn">
-                          <i class="fas fa-backward"></i>
-                        </button>
-                        <button
-                          class="media_control_btn disabled"
-                          tabindex="-1"
-                          aria-hidden="true"
-                        >
-                          <i class="fas fa-pause"></i>
-                        </button>
-                        <button id="stop_btn" class="media_control_btn">
-                          <i class="fas fa-stop"></i>
-                        </button>
-                        <button
-                          class="media_control_btn disabled"
-                          tabindex="-1"
-                          aria-hidden="true"
-                        >
-                          <i class="fas fa-forward"></i>
-                        </button>
-                        <button
-                          class="media_control_btn disabled"
-                          tabindex="-1"
-                          aria-hidden="true"
-                        >
-                          <i class="fas fa-retweet"></i>
-                        </button>
-                        <button class="media_control_btn">
-                          <i class="far fa-closed-captioning"></i>
-                        </button>
-                        <button
-                          class="media_control_btn disabled"
-                          tabindex="-1"
-                          aria-hidden="true"
-                        >
-                          <i class="fas fa-volume-down"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div id="column_2_tapes" class="column_tapes"></div>
-                </div>
-                <!-- /column_2 -->
-
-                <section class="content"><div class="grid"></div></section>
-              </div>
-              <!-- /mb-tapes -->
-
-              <!-- ── STAFF ──────────────────────────── -->
-              <div class="mb-section" id="mb-staff">
-                <div class="mb-panel-header">
-                  <h2 class="mb-panel-title">STAFF MANAGEMENT</h2>
-                  <div class="mb-panel-controls">
+            <!-- ── Layer B: sottopannelli ── -->
+            <div id="mb-subpanels">
+              <!-- ── STAFF ── -->
+              <div class="mb-subpanel" data-subpanel="mb-staff">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn mb-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">STAFF MANAGEMENT</span>
+                  <div class="mb-panel-controls" style="margin-left: auto">
                     <span class="mb-filter-label">SORT BY</span>
                     <button class="mb-filter-btn active">RANK</button>
                     <button class="mb-filter-btn">SKILL</button>
                     <button class="mb-filter-btn">UNIT</button>
                   </div>
                 </div>
-
-                <div class="staff-layout">
-                  <!-- Staff list -->
-                  <div class="staff-list">
-                    <div class="staff-list-header">
-                      <span>NAME</span><span>UNIT</span><span>RANK</span
-                      ><span>SKILL</span><span>STATUS</span>
+                <div
+                  class="subpanel-body"
+                  style="
+                    flex-direction: column;
+                    overflow-y: auto;
+                    padding: 0 24px 24px;
+                  "
+                >
+                  <div class="staff-layout">
+                    <div class="staff-list">
+                      <div class="staff-list-header">
+                        <span>NAME</span><span>UNIT</span><span>RANK</span>
+                        <span>SKILL</span><span>STATUS</span>
+                      </div>
+                      <div class="staff-row active" data-staff="1">
+                        <span class="staff-name"
+                          ><i class="fas fa-user staff-icon"></i> KAZUHIRA
+                          MILLER</span
+                        >
+                        <span class="staff-unit">COMMAND</span>
+                        <span class="staff-rank marsmonster">S+</span>
+                        <span class="staff-skill">MANAGEMENT</span>
+                        <span class="staff-status status-ok">ACTIVE</span>
+                      </div>
+                      <div class="staff-row" data-staff="2">
+                        <span class="staff-name"
+                          ><i class="fas fa-user staff-icon"></i> HUEY
+                          EMMERICH</span
+                        >
+                        <span class="staff-unit">R&amp;D</span>
+                        <span class="staff-rank marsmonster">A</span>
+                        <span class="staff-skill">ENGINEERING</span>
+                        <span class="staff-status status-ok">ACTIVE</span>
+                      </div>
+                      <div class="staff-row" data-staff="3">
+                        <span class="staff-name"
+                          ><i class="fas fa-user staff-icon"></i> CODE
+                          TALKER</span
+                        >
+                        <span class="staff-unit">INTEL</span>
+                        <span class="staff-rank marsmonster">S</span>
+                        <span class="staff-skill">LINGUISTICS</span>
+                        <span class="staff-status status-ok">ACTIVE</span>
+                      </div>
+                      <div class="staff-row" data-staff="4">
+                        <span class="staff-name"
+                          ><i class="fas fa-user staff-icon"></i> QUIET</span
+                        >
+                        <span class="staff-unit">COMBAT</span>
+                        <span class="staff-rank marsmonster">S+</span>
+                        <span class="staff-skill">SNIPING</span>
+                        <span class="staff-status status-ok">ACTIVE</span>
+                      </div>
+                      <div class="staff-row" data-staff="5">
+                        <span class="staff-name"
+                          ><i class="fas fa-user staff-icon"></i> OCELOT</span
+                        >
+                        <span class="staff-unit">COMMAND</span>
+                        <span class="staff-rank marsmonster">S+</span>
+                        <span class="staff-skill">INTERROGATION</span>
+                        <span class="staff-status status-warn">AWAY</span>
+                      </div>
+                      <div class="staff-row" data-staff="6">
+                        <span class="staff-name"
+                          ><i class="fas fa-user staff-icon"></i> D-HORSE</span
+                        >
+                        <span class="staff-unit">SUPPORT</span>
+                        <span class="staff-rank marsmonster">B</span>
+                        <span class="staff-skill">TRANSPORT</span>
+                        <span class="staff-status status-ok">ACTIVE</span>
+                      </div>
+                      <div class="staff-row" data-staff="7">
+                        <span class="staff-name"
+                          ><i class="fas fa-user staff-icon"></i> MBEKE,
+                          R.</span
+                        >
+                        <span class="staff-unit">MEDICAL</span>
+                        <span class="staff-rank marsmonster">A</span>
+                        <span class="staff-skill">SURGERY</span>
+                        <span class="staff-status status-err">INJURED</span>
+                      </div>
+                      <div class="staff-row" data-staff="8">
+                        <span class="staff-name"
+                          ><i class="fas fa-user staff-icon"></i> VASQUEZ,
+                          C.</span
+                        >
+                        <span class="staff-unit">COMBAT</span>
+                        <span class="staff-rank marsmonster">B+</span>
+                        <span class="staff-skill">CQC</span>
+                        <span class="staff-status status-ok">ACTIVE</span>
+                      </div>
                     </div>
-                    <div class="staff-row active" data-staff="1">
-                      <span class="staff-name"
-                        ><i class="fas fa-user staff-icon"></i> KAZUHIRA
-                        MILLER</span
-                      >
-                      <span class="staff-unit">COMMAND</span>
-                      <span class="staff-rank marsmonster">S+</span>
-                      <span class="staff-skill">MANAGEMENT</span>
-                      <span class="staff-status status-ok">ACTIVE</span>
-                    </div>
-                    <div class="staff-row" data-staff="2">
-                      <span class="staff-name"
-                        ><i class="fas fa-user staff-icon"></i> HUEY
-                        EMMERICH</span
-                      >
-                      <span class="staff-unit">R&amp;D</span>
-                      <span class="staff-rank marsmonster">A</span>
-                      <span class="staff-skill">ENGINEERING</span>
-                      <span class="staff-status status-ok">ACTIVE</span>
-                    </div>
-                    <div class="staff-row" data-staff="3">
-                      <span class="staff-name"
-                        ><i class="fas fa-user staff-icon"></i> CODE
-                        TALKER</span
-                      >
-                      <span class="staff-unit">INTEL</span>
-                      <span class="staff-rank marsmonster">S</span>
-                      <span class="staff-skill">LINGUISTICS</span>
-                      <span class="staff-status status-ok">ACTIVE</span>
-                    </div>
-                    <div class="staff-row" data-staff="4">
-                      <span class="staff-name"
-                        ><i class="fas fa-user staff-icon"></i> QUIET</span
-                      >
-                      <span class="staff-unit">COMBAT</span>
-                      <span class="staff-rank marsmonster">S+</span>
-                      <span class="staff-skill">SNIPING</span>
-                      <span class="staff-status status-ok">ACTIVE</span>
-                    </div>
-                    <div class="staff-row" data-staff="5">
-                      <span class="staff-name"
-                        ><i class="fas fa-user staff-icon"></i> OCELOT</span
-                      >
-                      <span class="staff-unit">COMMAND</span>
-                      <span class="staff-rank marsmonster">S+</span>
-                      <span class="staff-skill">INTERROGATION</span>
-                      <span class="staff-status status-warn">AWAY</span>
-                    </div>
-                    <div class="staff-row" data-staff="6">
-                      <span class="staff-name"
-                        ><i class="fas fa-user staff-icon"></i> D-HORSE</span
-                      >
-                      <span class="staff-unit">SUPPORT</span>
-                      <span class="staff-rank marsmonster">B</span>
-                      <span class="staff-skill">TRANSPORT</span>
-                      <span class="staff-status status-ok">ACTIVE</span>
-                    </div>
-                    <div class="staff-row" data-staff="7">
-                      <span class="staff-name"
-                        ><i class="fas fa-user staff-icon"></i> MBEKE, R.</span
-                      >
-                      <span class="staff-unit">MEDICAL</span>
-                      <span class="staff-rank marsmonster">A</span>
-                      <span class="staff-skill">SURGERY</span>
-                      <span class="staff-status status-err">INJURED</span>
-                    </div>
-                    <div class="staff-row" data-staff="8">
-                      <span class="staff-name"
-                        ><i class="fas fa-user staff-icon"></i> VASQUEZ,
-                        C.</span
-                      >
-                      <span class="staff-unit">COMBAT</span>
-                      <span class="staff-rank marsmonster">B+</span>
-                      <span class="staff-skill">CQC</span>
-                      <span class="staff-status status-ok">ACTIVE</span>
+                    <!-- Staff detail panel -->
+                    <div class="staff-detail">
+                      <div class="staff-detail-header">
+                        <div class="staff-portrait">
+                          <i class="fas fa-user-secret"></i>
+                        </div>
+                        <div class="staff-detail-info">
+                          <h3 class="staff-detail-name">KAZUHIRA MILLER</h3>
+                          <div class="staff-detail-rank marsmonster">S+</div>
+                          <div class="staff-detail-unit">COMMAND UNIT</div>
+                        </div>
+                      </div>
+                      <div class="staff-detail-stats">
+                        <div class="detail-stat">
+                          <span class="ds-label">COMBAT</span>
+                          <div class="ds-bar">
+                            <div class="ds-fill" style="width: 72%"></div>
+                          </div>
+                          <span class="ds-val marsmonster">72</span>
+                        </div>
+                        <div class="detail-stat">
+                          <span class="ds-label">R&amp;D</span>
+                          <div class="ds-bar">
+                            <div class="ds-fill" style="width: 45%"></div>
+                          </div>
+                          <span class="ds-val marsmonster">45</span>
+                        </div>
+                        <div class="detail-stat">
+                          <span class="ds-label">INTEL</span>
+                          <div class="ds-bar">
+                            <div class="ds-fill" style="width: 91%"></div>
+                          </div>
+                          <span class="ds-val marsmonster">91</span>
+                        </div>
+                        <div class="detail-stat">
+                          <span class="ds-label">MEDICAL</span>
+                          <div class="ds-bar">
+                            <div class="ds-fill" style="width: 60%"></div>
+                          </div>
+                          <span class="ds-val marsmonster">60</span>
+                        </div>
+                        <div class="detail-stat">
+                          <span class="ds-label">MANAGEMENT</span>
+                          <div class="ds-bar">
+                            <div
+                              class="ds-fill accent-fill"
+                              style="width: 99%"
+                            ></div>
+                          </div>
+                          <span class="ds-val marsmonster accent-val">99</span>
+                        </div>
+                      </div>
+                      <div class="staff-detail-footer">
+                        <div class="sdf-row">
+                          <span class="sdf-label">LANGUAGE</span>
+                          <span class="sdf-val">ENGLISH / JAPANESE</span>
+                        </div>
+                        <div class="sdf-row">
+                          <span class="sdf-label">ORIGIN</span>
+                          <span class="sdf-val">USA</span>
+                        </div>
+                        <div class="sdf-row">
+                          <span class="sdf-label">JOINED</span>
+                          <span class="sdf-val marsmonster">1984.03.11</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <!-- /staff-list -->
+                </div>
+              </div>
+              <!-- /.mb-subpanel[mb-staff] -->
 
-                  <!-- Staff detail panel -->
-                  <div class="staff-detail">
-                    <div class="staff-detail-header">
-                      <div class="staff-portrait">
-                        <i class="fas fa-user-secret"></i>
-                      </div>
-                      <div class="staff-detail-info">
-                        <h3 class="staff-detail-name">KAZUHIRA MILLER</h3>
-                        <div class="staff-detail-rank marsmonster">S+</div>
-                        <div class="staff-detail-unit">COMMAND UNIT</div>
-                      </div>
-                    </div>
-
-                    <div class="staff-detail-stats">
-                      <div class="detail-stat">
-                        <span class="ds-label">COMBAT</span>
-                        <div class="ds-bar">
-                          <div class="ds-fill" style="width: 72%"></div>
+              <!-- ── RESOURCES ── -->
+              <div class="mb-subpanel" data-subpanel="mb-resources">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn mb-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">RESOURCES</span>
+                </div>
+                <div
+                  class="subpanel-body"
+                  style="
+                    flex-direction: column;
+                    overflow-y: auto;
+                    padding: 0 24px 24px;
+                  "
+                >
+                  <div class="resources-grid">
+                    <div class="res-category">
+                      <h4 class="res-cat-title">
+                        <i class="fas fa-cube"></i> MATERIALS
+                      </h4>
+                      <div class="res-item">
+                        <span class="res-name">COMMON METAL</span>
+                        <div class="res-bar-wrap">
+                          <div class="res-bar-fill" style="width: 85%"></div>
                         </div>
-                        <span class="ds-val marsmonster">72</span>
+                        <span class="res-val marsmonster">8,540</span>
                       </div>
-                      <div class="detail-stat">
-                        <span class="ds-label">R&amp;D</span>
-                        <div class="ds-bar">
-                          <div class="ds-fill" style="width: 45%"></div>
+                      <div class="res-item">
+                        <span class="res-name">MINOR METAL</span>
+                        <div class="res-bar-wrap">
+                          <div class="res-bar-fill" style="width: 42%"></div>
                         </div>
-                        <span class="ds-val marsmonster">45</span>
+                        <span class="res-val marsmonster">4,210</span>
                       </div>
-                      <div class="detail-stat">
-                        <span class="ds-label">INTEL</span>
-                        <div class="ds-bar">
-                          <div class="ds-fill" style="width: 91%"></div>
+                      <div class="res-item">
+                        <span class="res-name">PRECIOUS METAL</span>
+                        <div class="res-bar-wrap">
+                          <div class="res-bar-fill" style="width: 18%"></div>
                         </div>
-                        <span class="ds-val marsmonster">91</span>
+                        <span class="res-val marsmonster">1,830</span>
                       </div>
-                      <div class="detail-stat">
-                        <span class="ds-label">MEDICAL</span>
-                        <div class="ds-bar">
-                          <div class="ds-fill" style="width: 60%"></div>
+                      <div class="res-item">
+                        <span class="res-name">BIOLOGICAL MATERIAL</span>
+                        <div class="res-bar-wrap">
+                          <div class="res-bar-fill" style="width: 61%"></div>
                         </div>
-                        <span class="ds-val marsmonster">60</span>
+                        <span class="res-val marsmonster">6,120</span>
                       </div>
-                      <div class="detail-stat">
-                        <span class="ds-label">MANAGEMENT</span>
-                        <div class="ds-bar">
+                      <div class="res-item">
+                        <span class="res-name">FUEL RESOURCES</span>
+                        <div class="res-bar-wrap">
                           <div
-                            class="ds-fill accent-fill"
-                            style="width: 99%"
+                            class="res-bar-fill res-warn"
+                            style="width: 12%"
                           ></div>
                         </div>
-                        <span class="ds-val marsmonster accent-val">99</span>
+                        <span class="res-val marsmonster res-warn-text"
+                          >1,200</span
+                        >
+                      </div>
+                      <div class="res-item">
+                        <span class="res-name">PLANTS</span>
+                        <div class="res-bar-wrap">
+                          <div class="res-bar-fill" style="width: 73%"></div>
+                        </div>
+                        <span class="res-val marsmonster">7,310</span>
                       </div>
                     </div>
-
-                    <div class="staff-detail-footer">
-                      <div class="sdf-row">
-                        <span class="sdf-label">LANGUAGE</span>
-                        <span class="sdf-val">ENGLISH / JAPANESE</span>
+                    <div class="res-category">
+                      <h4 class="res-cat-title">
+                        <i class="fas fa-bolt"></i> POWER &amp; SUPPLY
+                      </h4>
+                      <div class="res-item">
+                        <span class="res-name">POWER SUPPLY</span>
+                        <div class="res-bar-wrap">
+                          <div class="res-bar-fill" style="width: 92%"></div>
+                        </div>
+                        <span class="res-val marsmonster">9,200</span>
                       </div>
-                      <div class="sdf-row">
-                        <span class="sdf-label">ORIGIN</span>
-                        <span class="sdf-val">USA</span>
+                      <div class="res-item">
+                        <span class="res-name">MEDICAL SUPPLIES</span>
+                        <div class="res-bar-wrap">
+                          <div
+                            class="res-bar-fill res-warn"
+                            style="width: 23%"
+                          ></div>
+                        </div>
+                        <span class="res-val marsmonster res-warn-text"
+                          >2,300</span
+                        >
                       </div>
-                      <div class="sdf-row">
-                        <span class="sdf-label">JOINED</span>
-                        <span class="sdf-val marsmonster">1984.03.11</span>
+                      <div class="res-item">
+                        <span class="res-name">FOOD SUPPLY</span>
+                        <div class="res-bar-wrap">
+                          <div class="res-bar-fill" style="width: 55%"></div>
+                        </div>
+                        <span class="res-val marsmonster">5,500</span>
                       </div>
                     </div>
-                  </div>
-                  <!-- /staff-detail -->
-                </div>
-              </div>
-              <!-- /mb-staff -->
-
-              <!-- ── RESOURCES ──────────────────────── -->
-              <div class="mb-section" id="mb-resources">
-                <div class="mb-panel-header">
-                  <h2 class="mb-panel-title">RESOURCES</h2>
-                </div>
-
-                <div class="resources-grid">
-                  <!-- Materials -->
-                  <div class="res-category">
-                    <h4 class="res-cat-title">
-                      <i class="fas fa-cube"></i> MATERIALS
-                    </h4>
-                    <div class="res-item">
-                      <span class="res-name">COMMON METAL</span>
-                      <div class="res-bar-wrap">
-                        <div class="res-bar-fill" style="width: 85%"></div>
-                      </div>
-                      <span class="res-val marsmonster">8,540</span>
-                    </div>
-                    <div class="res-item">
-                      <span class="res-name">MINOR METAL</span>
-                      <div class="res-bar-wrap">
-                        <div class="res-bar-fill" style="width: 42%"></div>
-                      </div>
-                      <span class="res-val marsmonster">4,210</span>
-                    </div>
-                    <div class="res-item">
-                      <span class="res-name">PRECIOUS METAL</span>
-                      <div class="res-bar-wrap">
-                        <div class="res-bar-fill" style="width: 18%"></div>
-                      </div>
-                      <span class="res-val marsmonster">1,830</span>
-                    </div>
-                    <div class="res-item">
-                      <span class="res-name">BIOLOGICAL MATERIAL</span>
-                      <div class="res-bar-wrap">
-                        <div class="res-bar-fill" style="width: 61%"></div>
-                      </div>
-                      <span class="res-val marsmonster">6,120</span>
-                    </div>
-                    <div class="res-item">
-                      <span class="res-name">FUEL RESOURCES</span>
-                      <div class="res-bar-wrap">
-                        <div
-                          class="res-bar-fill res-warn"
-                          style="width: 12%"
-                        ></div>
-                      </div>
-                      <span class="res-val marsmonster res-warn-text"
-                        >1,200</span
-                      >
-                    </div>
-                    <div class="res-item">
-                      <span class="res-name">PLANTS</span>
-                      <div class="res-bar-wrap">
-                        <div class="res-bar-fill" style="width: 73%"></div>
-                      </div>
-                      <span class="res-val marsmonster">7,310</span>
-                    </div>
-                  </div>
-
-                  <!-- Power & Supply -->
-                  <div class="res-category">
-                    <h4 class="res-cat-title">
-                      <i class="fas fa-bolt"></i> POWER &amp; SUPPLY
-                    </h4>
-                    <div class="res-item">
-                      <span class="res-name">POWER SUPPLY</span>
-                      <div class="res-bar-wrap">
-                        <div class="res-bar-fill" style="width: 92%"></div>
-                      </div>
-                      <span class="res-val marsmonster">9,200</span>
-                    </div>
-                    <div class="res-item">
-                      <span class="res-name">MEDICAL SUPPLIES</span>
-                      <div class="res-bar-wrap">
-                        <div
-                          class="res-bar-fill res-warn"
-                          style="width: 23%"
-                        ></div>
-                      </div>
-                      <span class="res-val marsmonster res-warn-text"
-                        >2,300</span
-                      >
-                    </div>
-                    <div class="res-item">
-                      <span class="res-name">FOOD SUPPLY</span>
-                      <div class="res-bar-wrap">
-                        <div class="res-bar-fill" style="width: 55%"></div>
-                      </div>
-                      <span class="res-val marsmonster">5,500</span>
-                    </div>
-                  </div>
-
-                  <!-- GMP -->
-                  <div class="res-category res-gmp">
-                    <h4 class="res-cat-title">
-                      <i class="fas fa-dollar-sign"></i> GMP BALANCE
-                    </h4>
-                    <div class="gmp-display marsmonster">999,999,999</div>
-                    <div class="gmp-sub">GROSS MILITARY PRODUCT</div>
-                    <div class="gmp-breakdown">
-                      <div class="gmp-row">
-                        <span>BASE INCOME</span
-                        ><span class="marsmonster">+124,800</span>
-                      </div>
-                      <div class="gmp-row">
-                        <span>MISSION REWARD</span
-                        ><span class="marsmonster">+48,000</span>
-                      </div>
-                      <div class="gmp-row gmp-expense">
-                        <span>STAFF COST</span
-                        ><span class="marsmonster">-62,400</span>
-                      </div>
-                      <div class="gmp-row gmp-expense">
-                        <span>PLATFORM MAINT.</span
-                        ><span class="marsmonster">-18,200</span>
+                    <div class="res-category res-gmp">
+                      <h4 class="res-cat-title">
+                        <i class="fas fa-dollar-sign"></i> GMP BALANCE
+                      </h4>
+                      <div class="gmp-display marsmonster">999,999,999</div>
+                      <div class="gmp-sub">GROSS MILITARY PRODUCT</div>
+                      <div class="gmp-breakdown">
+                        <div class="gmp-row">
+                          <span>BASE INCOME</span
+                          ><span class="marsmonster">+124,800</span>
+                        </div>
+                        <div class="gmp-row">
+                          <span>MISSION REWARD</span
+                          ><span class="marsmonster">+48,000</span>
+                        </div>
+                        <div class="gmp-row gmp-expense">
+                          <span>STAFF COST</span
+                          ><span class="marsmonster">-62,400</span>
+                        </div>
+                        <div class="gmp-row gmp-expense">
+                          <span>PLATFORM MAINT.</span
+                          ><span class="marsmonster">-18,200</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- /mb-resources -->
+              <!-- /.mb-subpanel[mb-resources] -->
 
-              <!-- ── DEVELOPMENT ────────────────────── -->
-              <div class="mb-section" id="mb-development">
-                <div class="mb-panel-header">
-                  <h2 class="mb-panel-title">
-                    DEVELOPMENT <span class="new-badge">3 NEW</span>
-                  </h2>
-                  <div class="mb-panel-controls">
+              <!-- ── DEVELOPMENT ── -->
+              <div class="mb-subpanel" data-subpanel="mb-development">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn mb-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title"
+                    >DEVELOPMENT <span class="new-badge">3 NEW</span></span
+                  >
+                  <div class="mb-panel-controls" style="margin-left: auto">
                     <button class="mb-filter-btn active">ALL</button>
                     <button class="mb-filter-btn">WEAPONS</button>
                     <button class="mb-filter-btn">EQUIPMENT</button>
                     <button class="mb-filter-btn">FULTON</button>
                   </div>
                 </div>
-
-                <div class="dev-layout">
-                  <div class="dev-list">
-                    <div class="dev-item dev-complete">
-                      <div class="dev-icon"><i class="fas fa-gun"></i></div>
-                      <div class="dev-info">
-                        <span class="dev-name">AM MRS-4 ASSAULT RIFLE</span>
-                        <span class="dev-cat">WEAPONS / RIFLES</span>
-                      </div>
-                      <div class="dev-status-block">
-                        <span class="dev-status complete">COMPLETE</span>
-                        <span class="dev-cost marsmonster">48,000 GMP</span>
-                      </div>
-                    </div>
-
-                    <div class="dev-item dev-progress">
-                      <div class="dev-icon">
-                        <i class="fas fa-hard-hat"></i>
-                      </div>
-                      <div class="dev-info">
-                        <span class="dev-name">SNEAKING SUIT MK.II</span>
-                        <span class="dev-cat">EQUIPMENT / SUITS</span>
-                      </div>
-                      <div class="dev-status-block">
-                        <div class="dev-prog-bar">
-                          <div class="dev-prog-fill" style="width: 67%"></div>
+                <div
+                  class="subpanel-body"
+                  style="
+                    flex-direction: column;
+                    overflow-y: auto;
+                    padding: 0 24px 24px;
+                  "
+                >
+                  <div class="dev-layout">
+                    <div class="dev-list">
+                      <div class="dev-item dev-complete">
+                        <div class="dev-icon"><i class="fas fa-gun"></i></div>
+                        <div class="dev-info">
+                          <span class="dev-name">AM MRS-4 ASSAULT RIFLE</span>
+                          <span class="dev-cat">WEAPONS / RIFLES</span>
                         </div>
-                        <span class="dev-status in-prog">67% — 14H LEFT</span>
-                      </div>
-                    </div>
-
-                    <div class="dev-item dev-new">
-                      <div class="dev-icon">
-                        <i class="fas fa-parachute-box"></i>
-                      </div>
-                      <div class="dev-info">
-                        <span class="dev-name">FULTON UPGRADE LV.3</span>
-                        <span class="dev-cat">EQUIPMENT / FULTON</span>
-                      </div>
-                      <div class="dev-status-block">
-                        <span class="dev-status new">NEW</span>
-                        <span class="dev-cost marsmonster">92,000 GMP</span>
-                      </div>
-                    </div>
-
-                    <div class="dev-item dev-new">
-                      <div class="dev-icon">
-                        <i class="fas fa-crosshairs"></i>
-                      </div>
-                      <div class="dev-info">
-                        <span class="dev-name">SILENCER LV.5</span>
-                        <span class="dev-cat">WEAPONS / ATTACHMENTS</span>
-                      </div>
-                      <div class="dev-status-block">
-                        <span class="dev-status new">NEW</span>
-                        <span class="dev-cost marsmonster">31,000 GMP</span>
-                      </div>
-                    </div>
-
-                    <div class="dev-item dev-progress">
-                      <div class="dev-icon">
-                        <i class="fas fa-binoculars"></i>
-                      </div>
-                      <div class="dev-info">
-                        <span class="dev-name">NIGHT VISION GOGGLES LV.2</span>
-                        <span class="dev-cat">EQUIPMENT / OPTICS</span>
-                      </div>
-                      <div class="dev-status-block">
-                        <div class="dev-prog-bar">
-                          <div class="dev-prog-fill" style="width: 31%"></div>
+                        <div class="dev-status-block">
+                          <span class="dev-status complete">COMPLETE</span>
+                          <span class="dev-cost marsmonster">48,000 GMP</span>
                         </div>
-                        <span class="dev-status in-prog">31% — 2D 6H LEFT</span>
+                      </div>
+                      <div class="dev-item dev-progress">
+                        <div class="dev-icon">
+                          <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="dev-info">
+                          <span class="dev-name">SNEAKING SUIT MK.II</span>
+                          <span class="dev-cat">EQUIPMENT / SUITS</span>
+                        </div>
+                        <div class="dev-status-block">
+                          <div class="dev-prog-bar">
+                            <div class="dev-prog-fill" style="width: 67%"></div>
+                          </div>
+                          <span class="dev-status in-prog">67% — 14H LEFT</span>
+                        </div>
+                      </div>
+                      <div class="dev-item dev-new">
+                        <div class="dev-icon">
+                          <i class="fas fa-parachute-box"></i>
+                        </div>
+                        <div class="dev-info">
+                          <span class="dev-name">FULTON UPGRADE LV.3</span>
+                          <span class="dev-cat">EQUIPMENT / FULTON</span>
+                        </div>
+                        <div class="dev-status-block">
+                          <span class="dev-status new">NEW</span>
+                          <span class="dev-cost marsmonster">92,000 GMP</span>
+                        </div>
+                      </div>
+                      <div class="dev-item dev-new">
+                        <div class="dev-icon">
+                          <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <div class="dev-info">
+                          <span class="dev-name">SILENCER LV.5</span>
+                          <span class="dev-cat">WEAPONS / ATTACHMENTS</span>
+                        </div>
+                        <div class="dev-status-block">
+                          <span class="dev-status new">NEW</span>
+                          <span class="dev-cost marsmonster">31,000 GMP</span>
+                        </div>
+                      </div>
+                      <div class="dev-item dev-progress">
+                        <div class="dev-icon">
+                          <i class="fas fa-binoculars"></i>
+                        </div>
+                        <div class="dev-info">
+                          <span class="dev-name"
+                            >NIGHT VISION GOGGLES LV.2</span
+                          >
+                          <span class="dev-cat">EQUIPMENT / OPTICS</span>
+                        </div>
+                        <div class="dev-status-block">
+                          <div class="dev-prog-bar">
+                            <div class="dev-prog-fill" style="width: 31%"></div>
+                          </div>
+                          <span class="dev-status in-prog"
+                            >31% — 2D 6H LEFT</span
+                          >
+                        </div>
+                      </div>
+                      <div class="dev-item dev-new">
+                        <div class="dev-icon">
+                          <i class="fas fa-syringe"></i>
+                        </div>
+                        <div class="dev-info">
+                          <span class="dev-name">ANESTHESIA CIGAR</span>
+                          <span class="dev-cat">EQUIPMENT / TOOLS</span>
+                        </div>
+                        <div class="dev-status-block">
+                          <span class="dev-status new">NEW</span>
+                          <span class="dev-cost marsmonster">18,500 GMP</span>
+                        </div>
                       </div>
                     </div>
-
-                    <div class="dev-item dev-new">
-                      <div class="dev-icon"><i class="fas fa-syringe"></i></div>
-                      <div class="dev-info">
-                        <span class="dev-name">ANESTHESIA CIGAR</span>
-                        <span class="dev-cat">EQUIPMENT / TOOLS</span>
-                      </div>
-                      <div class="dev-status-block">
-                        <span class="dev-status new">NEW</span>
-                        <span class="dev-cost marsmonster">18,500 GMP</span>
+                    <div class="dev-detail-panel">
+                      <h4 class="dev-detail-title">R&amp;D PLATFORM LEVEL</h4>
+                      <div class="platform-levels">
+                        <div class="plat-row">
+                          <span class="plat-label">COMBAT UNIT</span>
+                          <span class="plat-lv marsmonster">LV 42</span>
+                          <div class="plat-bar">
+                            <div class="plat-fill" style="width: 78%"></div>
+                          </div>
+                        </div>
+                        <div class="plat-row">
+                          <span class="plat-label">R&amp;D UNIT</span>
+                          <span class="plat-lv marsmonster">LV 38</span>
+                          <div class="plat-bar">
+                            <div class="plat-fill" style="width: 63%"></div>
+                          </div>
+                        </div>
+                        <div class="plat-row">
+                          <span class="plat-label">SUPPORT UNIT</span>
+                          <span class="plat-lv marsmonster">LV 29</span>
+                          <div class="plat-bar">
+                            <div class="plat-fill" style="width: 48%"></div>
+                          </div>
+                        </div>
+                        <div class="plat-row">
+                          <span class="plat-label">INTEL UNIT</span>
+                          <span class="plat-lv marsmonster">LV 35</span>
+                          <div class="plat-bar">
+                            <div class="plat-fill" style="width: 58%"></div>
+                          </div>
+                        </div>
+                        <div class="plat-row">
+                          <span class="plat-label">MEDICAL UNIT</span>
+                          <span class="plat-lv marsmonster">LV 21</span>
+                          <div class="plat-bar">
+                            <div class="plat-fill" style="width: 35%"></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <!-- /dev-list -->
+                </div>
+              </div>
+              <!-- /.mb-subpanel[mb-development] -->
 
-                  <div class="dev-detail-panel">
-                    <h4 class="dev-detail-title">R&amp;D PLATFORM LEVEL</h4>
-                    <div class="platform-levels">
-                      <div class="plat-row">
-                        <span class="plat-label">COMBAT UNIT</span>
-                        <span class="plat-lv marsmonster">LV 42</span>
-                        <div class="plat-bar">
-                          <div class="plat-fill" style="width: 78%"></div>
+              <!-- ── FOB ── -->
+              <div class="mb-subpanel" data-subpanel="mb-fobs">
+                <div class="subpanel-header">
+                  <button class="subpanel-back-btn mb-back-btn">
+                    <i class="fas fa-chevron-left"></i> BACK
+                  </button>
+                  <span class="subpanel-title">FORWARD OPERATING BASES</span>
+                </div>
+                <div
+                  class="subpanel-body"
+                  style="
+                    flex-direction: column;
+                    overflow-y: auto;
+                    padding: 0 24px 24px;
+                  "
+                >
+                  <div class="fob-layout">
+                    <div class="fob-card fob-main">
+                      <div class="fob-card-header">
+                        <span class="fob-type">MAIN BASE</span>
+                        <span class="fob-status fob-secure">SECURE</span>
+                      </div>
+                      <div class="fob-name">DIAMOND DOGS HQ</div>
+                      <div class="fob-stats">
+                        <div class="fob-stat">
+                          <span class="fob-stat-label">SECURITY</span>
+                          <div class="fob-bar">
+                            <div class="fob-fill" style="width: 91%"></div>
+                          </div>
+                        </div>
+                        <div class="fob-stat">
+                          <span class="fob-stat-label">PLATFORMS</span>
+                          <span class="fob-num marsmonster">6 / 8</span>
+                        </div>
+                        <div class="fob-stat">
+                          <span class="fob-stat-label">STAFF ASSIGNED</span>
+                          <span class="fob-num marsmonster">312</span>
                         </div>
                       </div>
-                      <div class="plat-row">
-                        <span class="plat-label">R&amp;D UNIT</span>
-                        <span class="plat-lv marsmonster">LV 38</span>
-                        <div class="plat-bar">
-                          <div class="plat-fill" style="width: 63%"></div>
+                    </div>
+                    <div class="fob-card">
+                      <div class="fob-card-header">
+                        <span class="fob-type">F.O.B. #1</span>
+                        <span class="fob-status fob-secure">SECURE</span>
+                      </div>
+                      <div class="fob-name">STEEL PHANTOM</div>
+                      <div class="fob-stats">
+                        <div class="fob-stat">
+                          <span class="fob-stat-label">SECURITY</span>
+                          <div class="fob-bar">
+                            <div class="fob-fill" style="width: 74%"></div>
+                          </div>
+                        </div>
+                        <div class="fob-stat">
+                          <span class="fob-stat-label">PLATFORMS</span>
+                          <span class="fob-num marsmonster">3 / 8</span>
+                        </div>
+                        <div class="fob-stat">
+                          <span class="fob-stat-label">STAFF ASSIGNED</span>
+                          <span class="fob-num marsmonster">128</span>
                         </div>
                       </div>
-                      <div class="plat-row">
-                        <span class="plat-label">SUPPORT UNIT</span>
-                        <span class="plat-lv marsmonster">LV 29</span>
-                        <div class="plat-bar">
-                          <div class="plat-fill" style="width: 48%"></div>
-                        </div>
+                    </div>
+                    <div class="fob-card fob-alert">
+                      <div class="fob-card-header">
+                        <span class="fob-type">F.O.B. #2</span>
+                        <span class="fob-status fob-danger">UNDER ATTACK</span>
                       </div>
-                      <div class="plat-row">
-                        <span class="plat-label">INTEL UNIT</span>
-                        <span class="plat-lv marsmonster">LV 35</span>
-                        <div class="plat-bar">
-                          <div class="plat-fill" style="width: 58%"></div>
+                      <div class="fob-name">IRON RAMPART</div>
+                      <div class="fob-stats">
+                        <div class="fob-stat">
+                          <span class="fob-stat-label">SECURITY</span>
+                          <div class="fob-bar">
+                            <div
+                              class="fob-fill fob-fill-danger"
+                              style="width: 32%"
+                            ></div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="plat-row">
-                        <span class="plat-label">MEDICAL UNIT</span>
-                        <span class="plat-lv marsmonster">LV 21</span>
-                        <div class="plat-bar">
-                          <div class="plat-fill" style="width: 35%"></div>
+                        <div class="fob-stat">
+                          <span class="fob-stat-label">PLATFORMS</span>
+                          <span class="fob-num marsmonster">2 / 8</span>
+                        </div>
+                        <div class="fob-stat">
+                          <span class="fob-stat-label">STAFF ASSIGNED</span>
+                          <span class="fob-num marsmonster">64</span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- /mb-development -->
-
-              <!-- ── FOB ────────────────────────────── -->
-              <div class="mb-section" id="mb-fobs">
-                <div class="mb-panel-header">
-                  <h2 class="mb-panel-title">FORWARD OPERATING BASES</h2>
-                </div>
-
-                <div class="fob-layout">
-                  <div class="fob-card fob-main">
-                    <div class="fob-card-header">
-                      <span class="fob-type">MAIN BASE</span>
-                      <span class="fob-status fob-secure">SECURE</span>
-                    </div>
-                    <div class="fob-name">DIAMOND DOGS HQ</div>
-                    <div class="fob-stats">
-                      <div class="fob-stat">
-                        <span class="fob-stat-label">SECURITY</span>
-                        <div class="fob-bar">
-                          <div class="fob-fill" style="width: 91%"></div>
-                        </div>
-                      </div>
-                      <div class="fob-stat">
-                        <span class="fob-stat-label">PLATFORMS</span>
-                        <span class="fob-num marsmonster">6 / 8</span>
-                      </div>
-                      <div class="fob-stat">
-                        <span class="fob-stat-label">STAFF ASSIGNED</span>
-                        <span class="fob-num marsmonster">312</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="fob-card">
-                    <div class="fob-card-header">
-                      <span class="fob-type">F.O.B. #1</span>
-                      <span class="fob-status fob-secure">SECURE</span>
-                    </div>
-                    <div class="fob-name">STEEL PHANTOM</div>
-                    <div class="fob-stats">
-                      <div class="fob-stat">
-                        <span class="fob-stat-label">SECURITY</span>
-                        <div class="fob-bar">
-                          <div class="fob-fill" style="width: 74%"></div>
-                        </div>
-                      </div>
-                      <div class="fob-stat">
-                        <span class="fob-stat-label">PLATFORMS</span>
-                        <span class="fob-num marsmonster">3 / 8</span>
-                      </div>
-                      <div class="fob-stat">
-                        <span class="fob-stat-label">STAFF ASSIGNED</span>
-                        <span class="fob-num marsmonster">128</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="fob-card fob-alert">
-                    <div class="fob-card-header">
-                      <span class="fob-type">F.O.B. #2</span>
-                      <span class="fob-status fob-danger">UNDER ATTACK</span>
-                    </div>
-                    <div class="fob-name">IRON RAMPART</div>
-                    <div class="fob-stats">
-                      <div class="fob-stat">
-                        <span class="fob-stat-label">SECURITY</span>
-                        <div class="fob-bar">
-                          <div
-                            class="fob-fill fob-fill-danger"
-                            style="width: 32%"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="fob-stat">
-                        <span class="fob-stat-label">PLATFORMS</span>
-                        <span class="fob-num marsmonster">2 / 8</span>
-                      </div>
-                      <div class="fob-stat">
-                        <span class="fob-stat-label">STAFF ASSIGNED</span>
-                        <span class="fob-num marsmonster">64</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /mb-fobs -->
+              <!-- /.mb-subpanel[mb-fobs] -->
             </div>
-            <!-- /mb-content -->
+            <!-- /#mb-subpanels -->
           </div>
           <!-- /panel-mission -->
 
@@ -972,130 +850,385 @@
           <!-- /panel-map -->
 
           <!-- ─────────────────────────────────────────
-             PANEL 3 — MISSIONS
-        ──────────────────────────────────────────── -->
+   PANEL 3 — MISSIONS
+──────────────────────────────────────────── -->
           <div class="tab-panel" id="panel-missions">
-            <ul>
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <img
-                    class="menu-item-icon-ghost menu-item-icon-img"
-                    src="./assets/icons/supply-drop-icon.svg"
-                    alt=""
-                  />
-                  <img
-                    class="menu-item-icon menu-item-icon-img"
-                    src="./assets/icons/supply-drop-icon.svg"
-                    alt=""
-                  />
-                  <span class="menu-item-badge">3</span>
-                </div>
-                <div class="menu-item-title-wrap">
-                  <p class="menu-item-title">SUPPLY DROP</p>
-                  <p class="menu-item-subtitle">
-                    Request resupply of weapons, ammo, etc.
-                  </p>
-                </div>
-              </li>
+            <!-- ── Layer A: lista menu principale ── -->
+            <div id="missions-menu">
+              <ul>
+                <li class="menu-item" data-panel="supply-drop">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/supply-drop-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/supply-drop-icon.svg"
+                      alt=""
+                    />
+                    <span class="menu-item-badge">3</span>
+                  </div>
+                  <div class="menu-item-title-wrap">
+                    <p class="menu-item-title">SUPPLY DROP</p>
+                    <p class="menu-item-subtitle">
+                      Request resupply of weapons, ammo, etc.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <img
-                    class="menu-item-icon-ghost menu-item-icon-img"
-                    src="./assets/icons/buddy-support-icon.svg"
-                    alt=""
-                  />
-                  <img
-                    class="menu-item-icon menu-item-icon-img"
-                    src="./assets/icons/buddy-support-icon.svg"
-                    alt=""
-                  />
-                  <span class="menu-item-badge">1</span>
-                </div>
-                <div>
-                  <p class="menu-item-title">BUDDY SUPPORT</p>
-                  <p class="menu-item-subtitle">
-                    Request resupply of weapons, ammo, etc.
-                  </p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="buddy-support">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/buddy-support-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/buddy-support-icon.svg"
+                      alt=""
+                    />
+                    <span class="menu-item-badge">1</span>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">BUDDY SUPPORT</p>
+                    <p class="menu-item-subtitle">
+                      Request resupply of weapons, ammo, etc.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <img
-                    class="menu-item-icon-ghost menu-item-icon-img"
-                    src="./assets/icons/helicopter.svg"
-                    alt=""
-                  />
-                  <img
-                    class="menu-item-icon menu-item-icon-img"
-                    src="./assets/icons/helicopter.svg"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <p class="menu-item-title">HELICOPTER</p>
-                  <p class="menu-item-subtitle">Request helicopter support.</p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="helicopter">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/helicopter-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/helicopter-icon.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <p class="menu-item-title">HELICOPTER</p>
+                    <p class="menu-item-subtitle">
+                      Request helicopter support.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <i class="fas fa-parachute-box menu-item-icon"></i>
-                  <span class="menu-item-badge">12</span>
-                </div>
-                <div>
-                  <p class="menu-item-title">MISSION LIST</p>
-                  <p class="menu-item-subtitle">
-                    Browse and select available missions.
-                  </p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="mission-list">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/mission-list-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/mission-list-icon.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <p class="menu-item-title">MISSION LIST</p>
+                    <p class="menu-item-subtitle">
+                      Browse and select available missions.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <i class="fas fa-parachute-box menu-item-icon"></i>
-                  <span class="menu-item-badge">5</span>
-                </div>
-                <div>
-                  <p class="menu-item-title">SIDE OPS LIST</p>
-                  <p class="menu-item-subtitle">
-                    Optional side operation objectives.
-                  </p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="side-ops">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/side-ops-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/side-ops-icon.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <p class="menu-item-title">SIDE OPS LIST</p>
+                    <p class="menu-item-subtitle">
+                      Optional side operation objectives.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <i class="fas fa-parachute-box menu-item-icon"></i>
-                  <span class="menu-item-badge badge-dot"></span>
-                </div>
-                <div>
-                  <p class="menu-item-title">CASSETTE TAPES</p>
-                  <p class="menu-item-subtitle">
-                    Audio recordings and intel logs.
-                  </p>
-                </div>
-              </li>
+                <li class="menu-item" data-panel="tapes">
+                  <div class="menu-item-icon-wrap">
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/cassette-tapes-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/cassette-tapes-icon.svg"
+                      alt=""
+                    />
+                    <span class="menu-item-badge">1</span>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">CASSETTE TAPES</p>
+                    <p class="menu-item-subtitle">
+                      Audio recordings and intel logs.
+                    </p>
+                  </div>
+                </li>
 
-              <li class="menu-item">
-                <div class="menu-item-icon-wrap">
-                  <i class="fas fa-parachute-box menu-item-icon"></i>
+                <li class="menu-item" data-panel="logs">
+                  <div class="menu-item-icon-wrap">
+                    <i class="fas fa-list menu-item-icon"></i>
+                  </div>
+                  <div>
+                    <p class="menu-item-title">LOGS</p>
+                    <p class="menu-item-subtitle">
+                      Mission and activity history.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- /#missions-menu -->
+
+            <!-- ── Layer B: sottopannelli ── -->
+            <div id="missions-subpanels">
+              <!-- ── TAPES ── -->
+              <div class="missions-subpanel" data-subpanel="tapes">
+                <div class="subpanel-body">
+                  <!-- Contenuto tapes -->
+                  <div id="column_1" class="column">
+                    <div class="top_column">
+                      <div role="tablist" id="main_tablist">
+                        <button
+                          role="tab"
+                          aria-selected="true"
+                          class="tape_tab"
+                          aria-label="tapes"
+                        >
+                          <i class="fas fa-scroll"></i>
+                        </button>
+                        <button
+                          role="tab"
+                          class="tape_tab"
+                          aria-label="music"
+                          tabindex="-1"
+                          aria-hidden="true"
+                        >
+                          <i class="fas fa-music"></i>
+                        </button>
+                        <button
+                          role="tab"
+                          class="tape_tab"
+                          aria-label="tasks"
+                          tabindex="-1"
+                          aria-hidden="true"
+                        >
+                          <i class="fas fa-check"></i>
+                        </button>
+                      </div>
+                      <div role="tabpanel" id="main_tabpanel">
+                        <h1 id="tab_heading">Info</h1>
+                        <p>Listen to tape recordings of relevant intel</p>
+                      </div>
+                      <h3 class="default_heading">CASSETTE TAPES</h3>
+                    </div>
+                    <div id="column_1_tapes" class="column_tapes"></div>
+                    <div class="btn_settings">
+                      <button
+                        id="activeToStop"
+                        class="control_btn disabled_control"
+                        tabindex="-1"
+                        aria-hidden="true"
+                      >
+                        <span class="keyboard_key disabled_control"
+                          >[ SPACE ]</span
+                        >
+                        Stop
+                      </button>
+                      <button
+                        id="activeToContinue"
+                        class="control_btn disabled_control"
+                        tabindex="-1"
+                        aria-hidden="true"
+                      >
+                        <span class="keyboard_key disabled_control"
+                          >[ ENTER ]</span
+                        >
+                        Continue
+                      </button>
+                    </div>
+                  </div>
+
+                  <div id="column_2" class="column">
+                    <div class="top_column">
+                      <div id="media_box">
+                        <div id="media_box_headings">
+                          <h2>SELECTED CASSETTE TAPE</h2>
+                          <h3>
+                            <i class="fas fa-caret-left"></i> To Control Panel
+                          </h3>
+                        </div>
+                        <div id="tapes_playing">
+                          <div id="current_tape">
+                            <h2 id="current_tape_heading">
+                              CURRENT TAPE PLAYING
+                            </h2>
+                          </div>
+                          <div id="current_sub_tape">
+                            <h2 id="current_sub_tape_heading">TAPE PLAYING</h2>
+                          </div>
+                          <div id="progress_container">
+                            <i
+                              id="progress_audio"
+                              class="fas fa-volume-off"
+                            ></i>
+                            <div id="progress_bar_container">
+                              <div id="progress">
+                                <div id="progress_current"></div>
+                              </div>
+                            </div>
+                            <p id="current_progress">
+                              <span id="current_now">0</span>/<span
+                                id="current_length"
+                                >0</span
+                              >
+                            </p>
+                          </div>
+                        </div>
+                        <div id="media_controls">
+                          <button id="back_btn" class="media_control_btn">
+                            <i class="fas fa-backward"></i>
+                          </button>
+                          <button
+                            class="media_control_btn disabled"
+                            tabindex="-1"
+                            aria-hidden="true"
+                          >
+                            <i class="fas fa-pause"></i>
+                          </button>
+                          <button id="stop_btn" class="media_control_btn">
+                            <i class="fas fa-stop"></i>
+                          </button>
+                          <button
+                            class="media_control_btn disabled"
+                            tabindex="-1"
+                            aria-hidden="true"
+                          >
+                            <i class="fas fa-forward"></i>
+                          </button>
+                          <button
+                            class="media_control_btn disabled"
+                            tabindex="-1"
+                            aria-hidden="true"
+                          >
+                            <i class="fas fa-retweet"></i>
+                          </button>
+                          <button class="media_control_btn">
+                            <i class="far fa-closed-captioning"></i>
+                          </button>
+                          <button
+                            class="media_control_btn disabled"
+                            tabindex="-1"
+                            aria-hidden="true"
+                          >
+                            <i class="fas fa-volume-down"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="column_2_tapes" class="column_tapes"></div>
+                  </div>
                 </div>
-                <div>
-                  <p class="menu-item-title">LOGS</p>
-                  <p class="menu-item-subtitle">
-                    Mission and activity history.
-                  </p>
+              </div>
+              <!-- /.missions-subpanel[tapes] -->
+
+              <!-- ── SUPPLY DROP (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="supply-drop">
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-box-open"></i>
+                  <p>SUPPLY DROP INTERFACE</p>
+                  <span>— not yet implemented —</span>
                 </div>
-              </li>
-            </ul>
+              </div>
+
+              <!-- ── BUDDY SUPPORT (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="buddy-support">
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-dog"></i>
+                  <p>BUDDY SUPPORT INTERFACE</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+
+              <!-- ── HELICOPTER (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="helicopter">
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-helicopter"></i>
+                  <p>HELICOPTER SUPPORT INTERFACE</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+
+              <!-- ── MISSION LIST (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="mission-list">
+                <div class="subpanel-body subpanel-placeholder">
+                  <img src="./assets/icons/mission-list-icon.svg" alt="" />
+                  <p>MISSION LIST INTERFACE</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+
+              <!-- ── SIDE OPS (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="side-ops">
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <p>SIDE OPS INTERFACE</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+
+              <!-- ── LOGS (placeholder) ── -->
+              <div class="missions-subpanel" data-subpanel="logs">
+                <div class="subpanel-body subpanel-placeholder">
+                  <i class="fas fa-list-alt"></i>
+                  <p>MISSION LOGS</p>
+                  <span>— not yet implemented —</span>
+                </div>
+              </div>
+            </div>
+            <!-- /#missions-subpanels -->
           </div>
           <!-- /panel-missions -->
         </div>
         <!-- /tab-panels -->
       </div>
       <!-- /tabs-container -->
+
+      <!-- ═══════════════════════════════════════════════════
+   FOOTER LEFT — back button drill-down
+════════════════════════════════════════════════════ -->
+      <div id="footer-left">
+        <div class="blue-rectangle">
+          <div class="top-row">
+            <div class="inner-rectangle footer-back-btn" id="footer-back-btn">
+              <div class="stats_section">
+                <i class="fas fa-chevron-left"></i>
+                <p>BACK</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- ═══════════════════════════════════════════════════
          HUD BOTTOM — STATS
@@ -1367,56 +1500,5 @@
         });
       })();
     </script>
-
-    <!-- ─────────────────────────────────────────────────
-       MAP TILE COLOR FILTER (CSS overrides)
-  ──────────────────────────────────────────────────── -->
-    <style>
-      #idroid-map-filters {
-        position: absolute;
-        width: 0;
-        height: 0;
-        overflow: hidden;
-        pointer-events: none;
-      }
-      #idroid-map .leaflet-tile-pane {
-        filter: url(#idroid-color-matrix);
-      }
-      #idroid-map .leaflet-control-zoom {
-        display: none;
-      }
-      #idroid-map .leaflet-control-attribution {
-        background: rgba(10, 25, 33, 0.75) !important;
-        color: #496d7b !important;
-        font-size: 0.48rem !important;
-        font-family: monospace !important;
-        border-radius: 0 !important;
-      }
-      #idroid-map .leaflet-control-attribution a {
-        color: #7496a1 !important;
-      }
-      .leaflet-container {
-        background: none !important;
-      }
-      .idroid-marker-pulse {
-        width: 12px;
-        height: 12px;
-        background: #eeed53;
-        border: 2px solid rgba(238, 237, 83, 0.4);
-        border-radius: 50%;
-        animation: idroid-gps-pulse 2s ease-out infinite;
-      }
-      @keyframes idroid-gps-pulse {
-        0% {
-          box-shadow: 0 0 0 0 rgba(238, 237, 83, 0.7);
-        }
-        70% {
-          box-shadow: 0 0 0 14px rgba(238, 237, 83, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 0 rgba(238, 237, 83, 0);
-        }
-      }
-    </style>
   </body>
 </html>

@@ -1,383 +1,349 @@
-// ID of page to get
-const pageID = '49536';
+/* ══════════════════════════════════════════════════════════
+   iDROID — Cassette Tapes
+   Carica i trascritti da Metal Gear Wiki via MediaWiki API
+   (action=parse, non più rvparse deprecato)
+══════════════════════════════════════════════════════════ */
+
+const WIKI_PAGE = 'Metal Gear Solid V: The Phantom Pain/Cassette Transcripts';
+const API_URL   = `https://metalgear.fandom.com/api.php?action=parse&page=${encodeURIComponent(WIKI_PAGE)}&prop=text&format=json&origin=*`;
+
+/* ── Struttura dati globale ── */
 const dataObj = {
-	'elements_from_start': '',
-	'start_section': '', // Heading of section
-	'tree_structure': {}
-}
+  tree_structure: { parentTopic: {} }
+};
 
+/* ══════════════════════════════════════════════════════════
+   1. FETCH + PARSE
+══════════════════════════════════════════════════════════ */
 function loadData() {
-	$.ajax(`https://metalgear.wikia.com/api.php?format=json&action=query&prop=revisions&rvprop=content&pageids=${pageID}&rvparse=1`, { // Add &rvparse=1 for html response
-		dataType: 'jsonp'
-	})
-	.done(function (data) {
-		// Check if data is valid
-		try {
-			if (data.query.pages[pageID].revisions.length) {
-				console.log('Data loaded');
-				// Pass data HTML (text) to function
-				parseHTMLData(data.query.pages[pageID].revisions[0]['*']);
-			}
-		} catch(err) { // if data.query.pages ... can't be found, i.e, no length
-		console.log(`Error: ${err.name}\nFailed to get data.`);
-	}
-})
-.fail(function() {
-	console.log('Failed to get data');
-});
+  fetch(API_URL)
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
+    .then(json => {
+      const html = json?.parse?.text?.['*'];
+      if (!html) throw new Error('Nessun HTML nella risposta API');
+      parseHTMLData(html);
+    })
+    .catch(err => {
+      console.error('Tapes: caricamento fallito —', err);
+      showLoadError();
+    });
 }
 
-function parseHTMLData(data) {
-	var dataHTML = $(data);
-
-	// Find the index of the heading that contains "Info Tapes"
-	var indexHeading = Object.values(dataHTML).indexOf(dataHTML.filter('h2:contains("Info Tapes")')[0]); // -1 for including this heading
-
-	// Get all elements starting from indexHeading (index)
-	var fromStart = Object.values(dataHTML).filter((currItem, currCount) => currCount > indexHeading);
-
-	dataObj['elements_from_start'] = fromStart;
-
-	// Confirm element from index is h2
-	dataObj['start_section'] = $(Object.values(dataHTML)[indexHeading]).is('h2') ?  Object.values(dataHTML)[indexHeading] : '';
-
-	// Get the tape topic, and the within that topic tapes
-	var treeStructure = {
-		parentTopic: {} // Parent Topic > Sub Topic > children of sub topic
-		// Example:
-		/* parentTopic: {
-		'Sub Topic': {
-		'Children': {
-		['array of conversation']
-	}
-}
-} */
+function showLoadError() {
+  $('#column_1_tapes').html(
+    '<p style="color:var(--text-secondary);font-size:0.7rem;padding:12px;">UNABLE TO LOAD TAPE DATA</p>'
+  );
 }
 
-function addTreeStructure() {
-	var currentIndexes = [];
-	var characters = [];
-	var textPara = [];
+/* ══════════════════════════════════════════════════════════
+   2. PARSING HTML → tree_structure
+══════════════════════════════════════════════════════════ */
+function parseHTMLData(html) {
+  /* Crea un DOM temporaneo */
+  const parser  = new DOMParser();
+  const doc     = parser.parseFromString(html, 'text/html');
+  const content = doc.querySelector('.mw-parser-output');
+  if (!content) { showLoadError(); return; }
 
-	function checkCharacter(char, ele) {
-		var eleChild = ele.children('b').text();
-		// If the only element in the <p> tag is the <b> text...
-		if (!eleChild.replace(char, '').length) {
-			return false;
-		}
-		return true;
-	}
+  const tree = dataObj.tree_structure.parentTopic;
 
-	/* Parent Topic */
-	Object.values($(dataObj['elements_from_start']).filter('h3')).map(function(currElem) {
-		if ($(currElem).length === 1 && $(currElem).text().length) { // jQuery returns object of all filtered H3 elements at the end, this ensures that currElem is always 1 && ensure element has text content within
+  let currentParent  = null;
+  let currentSub     = null;
 
-			// Dev-Note: ## If dataObj[...].filter(...) length IS only 1, this will most likely lead to a duplicate
-			treeStructure.parentTopic[$(currElem).children('span.mw-headline').text().trim()] = {};
-			currentIndexes.push(dataObj['elements_from_start'].indexOf(currElem));
-		}
-	});
+  Array.from(content.children).forEach(el => {
+    const tag = el.tagName.toUpperCase();
 
-	// Used to parse text the contains entire conversation, instead of broken up into multiple elements
-	function checkText(text) {
-		// Split text by \n
-		var linesParsed = text.split('\n')
-		linesParsed.pop();
+    /* H2 non ci interessa come categoria (es. "Info Tapes") — usalo come
+       guardia per non raccogliere contenuto prima della sezione giusta */
+    if (tag === 'H2') {
+      const txt = el.textContent.trim();
+      /* Resetta se arriviamo a sezioni fuori tema */
+      if (txt.toLowerCase().includes('cassette') ||
+          txt.toLowerCase().includes('tape') ||
+          txt.toLowerCase().includes('info')) {
+        /* ok, siamo nella sezione giusta — non fare nulla */
+      }
+      return;
+    }
 
-		linesParsed = linesParsed.map(x => [x.substr(0, x.indexOf(':') + 1), x.substr(x.indexOf(':') + 1, x.length).trim()]);
-		if (linesParsed.length > 1) {
-			return [true, linesParsed];
-		} else {
-			return [false];
-		}
-	}
+    /* H3 → Parent Topic */
+    if (tag === 'H3') {
+      currentParent = el.querySelector('.mw-headline')?.textContent.trim()
+                    || el.textContent.trim();
+      if (currentParent && !tree[currentParent]) {
+        tree[currentParent] = {};
+      }
+      currentSub = null;
+      return;
+    }
 
-	/* Sub Topic */
-	currentIndexes.map(function(currIndex) {
-		var currElems = dataObj['elements_from_start'];
-		var mostRecentSubTopic = '';
+    /* H4 → Sub Topic */
+    if (tag === 'H4') {
+      if (!currentParent) return;
+      currentSub = el.querySelector('.mw-headline')?.textContent.trim()
+                 || el.textContent.trim();
+      if (currentSub && !tree[currentParent][currentSub]) {
+        tree[currentParent][currentSub] = [];
+      }
+      return;
+    }
 
-		// If this is the last 'h3', make prevTopicIndex the total amount of elements within array, else make it the index of the next 'h3'
-		var prevTopicIndex = currentIndexes[currentIndexes.indexOf(currIndex) + 1] === undefined ? dataObj['elements_from_start'].length : currentIndexes[currentIndexes.indexOf(currIndex) + 1];
+    /* P → dialogo */
+    if (tag === 'P' && currentParent && currentSub) {
+      const lines = parseDialogueParagraph(el);
+      lines.forEach(line => tree[currentParent][currentSub].push(line));
+    }
+  });
 
-		var subTopicContent = Object.values(currElems).filter((currItem, currCount) => currCount > currIndex && currCount < prevTopicIndex);
+  /* Se non ha trovato nulla con H3/H4, prova struttura alternativa (DL/UL) */
+  if (Object.keys(tree).length === 0) {
+    parseFallbackStructure(content, tree);
+  }
 
-		var currentParentTopic = $(dataObj['elements_from_start'][currIndex]).children('span.mw-headline').text().trim();
-		subTopicContent.map(function(this_index) {
-			// Subtopic "heading"
-			if (this_index.nodeName === 'H4') {
-				treeStructure.parentTopic[currentParentTopic][$(this_index).children('span.mw-headline').text().trim()] = [];
-				mostRecentSubTopic = $(this_index).children('span.mw-headline').text().trim();
-			} else if (this_index.nodeName === 'P') { // Subtopic text
-				var character = $(this_index).children('b').eq(0).text().trim();
-				var charChecked = checkCharacter(character, $(this_index));
-				var parsedText = [false];
+  if (Object.keys(tree).length === 0) {
+    showLoadError();
+    return;
+  }
 
-				if (characters.indexOf(character) === -1 && charChecked === true) {
-					characters.push(character);
-				}
-
-				// If this contains multiple characters within one <p> element ...
-				if ($(this_index).children('b').length > 1) {
-					textPara.push($(this_index));
-					parsedText = checkText($(this_index).text());
-				}
-
-				if (!parsedText[0]) {
-					treeStructure.parentTopic[currentParentTopic][mostRecentSubTopic].push([{[character]: $(this_index).text().replace(character, '').trim()}]);
-				} else {
-					parsedText[1].map(function(currentParsed) {
-						treeStructure.parentTopic[currentParentTopic][mostRecentSubTopic].push([{[currentParsed[0]]: currentParsed[1]}]);
-					});
-				}
-			}
-		});
-	});
+  displayData(dataObj);
 }
 
-addTreeStructure();
-dataObj['tree_structure'] = treeStructure;
+/* Estrae righe di dialogo da un <p> */
+function parseDialogueParagraph(pEl) {
+  const fullText = pEl.textContent.trim();
+  if (!fullText) return [];
 
+  /* Prova a spezzare per "NOME:" */
+  const multiLine = fullText.split('\n').filter(l => l.trim());
+  if (multiLine.length > 1) {
+    return multiLine.map(l => lineToEntry(l));
+  }
 
-// DOM Manipulation
-displayData(dataObj);
-return dataObj;
+  /* Prova a spezzare per ". NOME:" (dialogo compatto) */
+  const compact = fullText.split(/(?<=\.)\s+(?=[A-Z][A-Z\s]+:)/);
+  if (compact.length > 1) {
+    return compact.map(l => lineToEntry(l.trim()));
+  }
+
+  return [lineToEntry(fullText)];
 }
 
-// Init
-loadData();
+function lineToEntry(text) {
+  const colonIdx = text.indexOf(':');
+  if (colonIdx > 0 && colonIdx < 40) {
+    const speaker = text.substring(0, colonIdx + 1).trim();
+    const line    = text.substring(colonIdx + 1).trim();
+    return [speaker, line];
+  }
+  return ['', text];
+}
 
-// Function used to display the data visually on the page
+/* Fallback per strutture non standard (DL, UL, ecc.) */
+function parseFallbackStructure(content, tree) {
+  let parent = 'TAPES';
+  let sub    = 'ALL';
+  tree[parent] = { [sub]: [] };
+
+  content.querySelectorAll('p').forEach(p => {
+    const t = p.textContent.trim();
+    if (!t) return;
+    tree[parent][sub].push(lineToEntry(t));
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   3. DISPLAY
+══════════════════════════════════════════════════════════ */
 function displayData(data) {
-	// Add the "parent topic" to the first column
-	Object.keys(data['tree_structure'].parentTopic).map(currTopic => $('#column_1_tapes').append(`<button class="topic_tape">${currTopic}</button>`));
+  const tree = data.tree_structure.parentTopic;
 
-	$('.topic_tape').click(function() {
-		// Remove "active" class from previously selected button(s)
-		$('.active_topic').removeClass('active_topic');
+  /* ── Colonna 1: parent topics ── */
+  $('#column_1_tapes').empty();
+  Object.keys(tree).forEach(topic => {
+    $('#column_1_tapes').append(
+      `<button class="topic_tape" data-topic="${escHtml(topic)}">${escHtml(topic)}</button>`
+    );
+  });
 
-		// Get the topic name
-		var this_topic = $(this).text();
+  /* ── Delegazione eventi colonna 1 ── */
+  $('#column_1_tapes').off('click', 'button.topic_tape')
+    .on('click', 'button.topic_tape', function () {
+      $('.active_topic').removeClass('active_topic');
+      $(this).addClass('active_topic');
 
-		// Clear the subtopic column
-		$('#column_2_tapes').empty();
-		Object.keys(data['tree_structure'].parentTopic[this_topic]).map(currSubTopic => $('#column_2_tapes').append(`<button class="topic_tape">${currSubTopic} <span class="sub_topic_playing">[<i class="fas fa-volume-up"></i>]</span></button>`));
+      const topic = $(this).data('topic');
+      $('#column_2_tapes').empty();
 
-		// Add "active" class
-		$(this).addClass('active_topic');
-	});
+      Object.keys(tree[topic] || {}).forEach(sub => {
+        $('#column_2_tapes').append(
+          `<button class="topic_tape" data-sub="${escHtml(sub)}">${escHtml(sub)} <span class="sub_topic_playing">[<i class="fas fa-volume-up"></i>]</span></button>`
+        );
+      });
+    });
 
-	// Accessibility
-	$('#main_body').on('keydown', 'button.topic_tape', function(currKeyPressed) {
-		var parentColumn = $(this).parents('.column').siblings().eq(0);
-		if (currKeyPressed.keyCode === 37 || currKeyPressed.keyCode === 39) {
-			// Focus first child button of parentColumn || current selected element
-			var focusTo = parentColumn.find('button.active_topic');
+  /* ── Delegazione eventi colonna 2 ── */
+  $('#column_2_tapes').off('click', 'button.topic_tape')
+    .on('click', 'button.topic_tape', function () {
+      if ($(this).hasClass('active_topic')) return;
 
-			if (!focusTo.length) {
-				focusTo = parentColumn.find('button.topic_tape').eq(0);
-			}
+      $('#column_2_tapes .active_topic').removeClass('active_topic');
+      $('.active_playing').removeClass('active_playing');
+      $('.disabled_control').removeClass('disabled_control');
+      $('#box_settings .btn_settings > button').removeAttr('aria-hidden tabindex');
 
-			focusTo.focus();
-			console.log(parentColumn.find('button.topic_tape').eq(0));
-			currKeyPressed.preventDefault();
-		}
-	});
+      $(this).addClass('active_topic');
+      $(this).children('.sub_topic_playing').addClass('active_playing');
 
-	$('#activeToContinue').click(function() {
-		$('#dialogueBox > .inner_box').click();
-	})
+      const parentTopic = $('#column_1_tapes .active_topic').data('topic');
+      const subTopic    = $(this).data('sub');
 
-	$('#column_2').on('click', 'button.topic_tape', function() {
-		var this_parent_topic = $('#column_1 .active_topic').text();
+      $('#progress_current').css('width', '0%');
+      $('#current_tape_heading').text(subTopic);
 
-		if (!$(this).hasClass('active_topic')) {
-			// Remove "active" class from previously selected button(s)
-			$('#column_2 .active_topic').removeClass('active_topic');
-			$('.active_playing').removeClass('active_playing');
-			$('.disabled_control').removeClass('disabled_control');
-			$('#box_settings .btn_settings > button').removeAttr('aria-hidden tabindex');
+      const tapeArr = tree[parentTopic]?.[subTopic] || [];
+      playTheTape(tapeArr);
 
+      $('#activeToContinue').focus();
+    });
 
-			// Add active class
-			$(this).addClass('active_topic');
-			$(this).children('.sub_topic_playing').addClass('active_playing');
+  /* Naviga con frecce sinistra/destra tra le colonne */
+  $('#column_1_tapes, #column_2_tapes').off('keydown', 'button.topic_tape')
+    .on('keydown', 'button.topic_tape', function (e) {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const sibling = $(this).closest('.column').siblings('.column').find('button.topic_tape');
+        const focus   = sibling.filter('.active_topic').length
+                        ? sibling.filter('.active_topic')
+                        : sibling.first();
+        focus.focus();
+        e.preventDefault();
+      }
+    });
 
-			$('#progress_current').css('width', '0%');
-			$('#current_tape_heading').text($(this).text().replace(/[[]]/gi, '').trim());
-
-			// Play the tape
-			playTheTape(data['tree_structure'].parentTopic[this_parent_topic][$(this).text().replace(/[[]]/gi, '').trim()]);
-
-			// Focus to button
-			$('#dialogueBox #activeToContinue').focus();
-		}
-	});
+  /* Continue / Stop buttons */
+  $('#activeToContinue').off('click').on('click', function () {
+    $('#dialogueBox > .inner_box').click();
+  });
 }
 
+/* ══════════════════════════════════════════════════════════
+   4. PLAYBACK
+══════════════════════════════════════════════════════════ */
 function playTheTape(tapeArr) {
-	// Split the tape conversations into sentences if exceeds x amount
-	var splitConvo = tapeArr.map(function(currArrItem) {
-		var currentKey = Object.keys(currArrItem[0]);
+  /* Normalizza: ogni item deve essere [speaker, text] */
+  const flat = [];
+  tapeArr.forEach(item => {
+    if (Array.isArray(item) && typeof item[0] === 'string') {
+      /* già [speaker, text] */
+      flat.push(item);
+    } else if (Array.isArray(item) && typeof item[0] === 'object') {
+      /* vecchio formato [{speaker: text}] */
+      const key = Object.keys(item[0])[0];
+      flat.push([key, item[0][key]]);
+    }
+  });
 
-		// If exceeds x amount ..
-		if (currArrItem[0][currentKey].length > 150) {
-			var splitBy = currArrItem[0][currentKey].split('. '); // Split by 'sentence. '
-			var splitArr = []; // Holds the sentences
-			var currCount = -1; // Keeps track of map function
+  /* Spezza frasi lunghe */
+  const newArr = [];
+  flat.forEach(([speaker, text]) => {
+    if (text.length > 150) {
+      const sentences = text.split(/(?<=\.)\s+/);
+      sentences.forEach(s => newArr.push([speaker, s.trim()]));
+    } else {
+      newArr.push([speaker, text]);
+    }
+  });
 
-			splitBy.map(function(currSentence) {
-				//.log(currSentence[0]);
-				if (currSentence[0] === currSentence[0].toLowerCase()) {
-					if (splitArr[currCount] !== undefined) {
-						splitArr[currCount] = [currentKey[0], splitArr[currCount] + ' ' + currSentence + '.'];
+  if (!newArr.length) {
+    $('#current_tape_heading').text('NO DATA');
+    return;
+  }
 
-						// Remove duplicate name
-						var currReg = new RegExp(currentKey[0] + ',', 'gi');
-						splitArr[currCount][1] = splitArr[currCount][1].replace(currReg, '');
+  $('#current_progress #current_length').text(newArr.length);
+  $('#current_progress #current_now').text('1');
 
-					}
-				} else {
-					splitArr.push([currentKey[0], currSentence + '.']);
-					currCount += 1;
-				}
-			});
+  function pct(curr) {
+    return Math.round(100 / newArr.length * curr);
+  }
 
-			return splitArr;
-		} else {
-			return [currentKey[0], currArrItem[0][currentKey]];
-		}
-	});
+  $('#progress_current').css('width', pct(1) + '%');
 
-	// Flatten the array
-	var newArr = [];
-	splitConvo.filter(function(curr) {
-		//if (curr.length > 2) {
-		if (typeof curr[0] === 'object') {
-			curr.map(x => newArr.push(x));
-		} else {
-			newArr.push(curr);
-		}
-	});
+  function setText(idx) {
+    const [spk, txt] = newArr[idx] || ['', ''];
+    $('#dialogueBox h2.current_text').text(spk ? spk + ' ' + txt : txt);
+    $('#current_sub_tape_heading').text(spk);
+    $('#current_progress #current_now').text(idx + 1);
+    $('#progress_current').css('width', pct(idx + 1) + '%');
+  }
 
-	$('#current_progress #current_length').text(newArr.length);
-	$('#current_progress #current_now').text('1');
-	function getCurrVal(max, curr) {
-		var currMax = max;
-		var curVal = curr;
-		return parseInt(100.0 / Math.floor(currMax) * Math.floor(curVal) + 0.5);
-	}
+  setText(0);
 
-	$('#progress_current').css('width', getCurrVal(newArr.length, 1) + '%');
+  let count = 1;
 
-	// Get current speaker
-	//var currentSpeaker = Object.keys(tapeArr[0][0])[0];
-	var currentSpeaker = newArr[0][0]
+  /* Rimuovi listener precedenti per evitare stack multipli */
+  $('#dialogueBox > .inner_box').off('click.tape').on('click.tape', function () {
+    if (count < newArr.length) { setText(count); count++; }
+  });
 
-	function determineFontSize(str) {
-		if (str.length > 245) {
-			$('#dialogueBox h2.current_text').addClass('length_text');
-		} else {
-			$('#dialogueBox h2.current_text').removeClass('length_text');
-		}
-	}
+  $('#back_btn').off('click.tape').on('click.tape', function () {
+    if (count > 1) { count = Math.max(1, count - 2); setText(count); count++; }
+  });
 
-	// Append content to "text box"
-	determineFontSize(newArr[0][1]);
-	$('.current_text').text(currentSpeaker + ' ' + newArr[0][1]);
-
-
-	var currentDialogueCount = 1;
-	// On click of dialogue box, change text
-
-	function changeText(subtract=false) {
-		if (currentDialogueCount < newArr.length) {
-			if (subtract && currentDialogueCount !== 0) {
-				currentDialogueCount--;
-			}
-
-			var currSpeaker = newArr[currentDialogueCount][0]
-			$('#current_progress #current_now').text(currentDialogueCount + 1);
-			$('#progress_current').css('width', getCurrVal(newArr.length, currentDialogueCount + 1) + '%');
-
-			// If character length too long ...
-			determineFontSize(newArr[currentDialogueCount][1]);
-			$('#dialogueBox h2.current_text').text(currSpeaker + ' ' +  newArr[currentDialogueCount][1]);
-			if (subtract === false) {
-				currentDialogueCount++;
-			}
-		}
-	}
-
-	$('#dialogueBox  > .inner_box').click(function() {
-		changeText();
-	});
-
-	$('#back_btn').click(function() {
-		changeText(true);
-	});
-
-	$('#activeToStop').click(function() {
-		currentDialogueCount = newArr.length;
-
-		// Reset everything
-		$('#current_progress #current_now, #current_progress #current_length').text('0');
-		$('#progress_current').css('width', '0%');
-		$('#dialogueBox h2.current_text').text('');
-		$('#column_2 .active_playing').removeClass('active_playing');
-
-		$('#box_settings .btn_settings *').addClass('disabled_control');
-		$('#box_settings .btn_settings > button').attr({'aria-hidden': 'true', 'tabindex': '-1'});
-	});
-
-	$('#stop_btn').click(function() {
-		$('#activeToStop').click();
-	});
-
+  $('#stop_btn, #activeToStop').off('click.tape').on('click.tape', function () {
+    count = newArr.length;
+    $('#current_progress #current_now, #current_progress #current_length').text('0');
+    $('#progress_current').css('width', '0%');
+    $('#dialogueBox h2.current_text').text('');
+    $('#column_2_tapes .active_playing').removeClass('active_playing');
+    $('#box_settings .btn_settings *').addClass('disabled_control');
+    $('#box_settings .btn_settings > button').attr({ 'aria-hidden': 'true', tabindex: '-1' });
+  });
 }
 
-// For working time
-(function() {
-    var colonVisible = true;
-
-    setInterval(function() {
-        var currDate = new Date();
-        var currHour = String(currDate.getHours()).padStart(2, '0');
-        var currMins = String(currDate.getMinutes()).padStart(2, '0');
-        colonVisible = !colonVisible;
-
-        $('#clock-hours').text(currHour);
-        $('#clock-colon').css('visibility', colonVisible ? 'visible' : 'hidden');
-        $('#clock-mins').text(currMins);
-    }, 1000);
-
-    // Inizializzazione immediata
-    var now = new Date();
-    $('#clock-hours').text(String(now.getHours()).padStart(2, '0'));
-    $('#clock-colon').css('visibility', 'visible');
-    $('#clock-mins').text(String(now.getMinutes()).padStart(2, '0'));
+/* ══════════════════════════════════════════════════════════
+   5. CLOCK
+══════════════════════════════════════════════════════════ */
+(function initClock() {
+  let colonOn = true;
+  function tick() {
+    const d = new Date();
+    $('#clock-hours').text(String(d.getHours()).padStart(2, '0'));
+    $('#clock-mins').text(String(d.getMinutes()).padStart(2, '0'));
+    $('#clock-colon').css('visibility', colonOn ? 'visible' : 'hidden');
+    colonOn = !colonOn;
+  }
+  tick();
+  setInterval(tick, 1000);
 })();
 
-// Replicate behavior of pressing "continue" button
-$('body').on('keydown', function(curr_key) {
-	if (curr_key.keyCode === 13) {
-		if (!$('#activeToContinue').hasClass('disabled_control')) {
-			$('#activeToContinue').click();
-		}
-	}
+/* ══════════════════════════════════════════════════════════
+   6. KEYBOARD SHORTCUTS
+══════════════════════════════════════════════════════════ */
+$('body').on('keydown', function (e) {
+  if (e.key === 'Enter' && !$('#activeToContinue').hasClass('disabled_control')) {
+    $('#activeToContinue').click();
+  }
+  if (e.key === ' ' && !$('#activeToStop').hasClass('disabled_control')) {
+    e.preventDefault();
+    $('#activeToStop').click();
+  }
 });
 
-// Replicate behavior of pressing "S" button
-$('body').on('keydown', function(curr_key) {
-	if (curr_key.keyCode === 32) {
-		if (!$('#activeToStop').hasClass('disabled_control')) {
-			$('#activeToStop').click();
-		}
-	}
-});
-
-try {
-	module.exports = {parseHTMLData};
-} catch (ReferenceError) {
-	console.log('Could not export module(s)');
+/* ══════════════════════════════════════════════════════════
+   7. UTILS
+══════════════════════════════════════════════════════════ */
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
+
+/* ── Avvio ── */
+loadData();
+
+/* ── Export per test Node.js (opzionale) ── */
+try { module.exports = { parseHTMLData, lineToEntry }; } catch (_) {}

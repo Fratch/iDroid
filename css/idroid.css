@@ -6,8 +6,8 @@
 }
 
 @font-face {
-  font-family: "Marsmonster";
-  src: url("../assets/fonts/MarsmonsterDemo-Regular.ttf") format("truetype");
+  font-family: "iDroid-font";
+  src: url("../assets/fonts/iDroid.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -63,9 +63,11 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(ellipse at center,
-      transparent 55%,
-      rgba(0, 0, 0, 0.55) 100%);
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -101,11 +103,13 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 9998;
-  background: repeating-linear-gradient(to bottom,
-      transparent 0px,
-      transparent 2px,
-      rgba(0, 0, 0, 0.07) 2px,
-      rgba(0, 0, 0, 0.07) 3px);
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.07) 2px,
+    rgba(0, 0, 0, 0.07) 3px
+  );
   animation: scanline-drift 12s linear infinite;
 }
 
@@ -119,7 +123,7 @@ body::after {
 
 #idroid_ver h2 {
   font-size: 1.2rem;
-  font-family: "Marsmonster", monospace;
+  font-family: "iDroid-font", monospace;
   color: white;
   margin: 0;
   letter-spacing: 0.08em;
@@ -154,9 +158,11 @@ body,
   position: absolute;
   top: 0;
   left: 0;
-  background-image: radial-gradient(circle,
-      rgba(101, 199, 238, 0.7) 1px,
-      transparent 1px);
+  background-image: radial-gradient(
+    circle,
+    rgba(101, 199, 238, 0.7) 1px,
+    transparent 1px
+  );
   background-size: 15px 15px;
   box-shadow: inset 0px 0px 40px 40px var(--bg-secondary);
   opacity: 0.5;
@@ -170,9 +176,11 @@ body,
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(circle,
-      rgba(101, 199, 238, 0.7) 1px,
-      transparent 1px);
+  background-image: radial-gradient(
+    circle,
+    rgba(101, 199, 238, 0.7) 1px,
+    transparent 1px
+  );
   background-size: 15px 15px;
   filter: blur(1px);
   z-index: 0;
@@ -230,8 +238,10 @@ body,
   width: 100%;
   height: 100%;
   background:
-    repeating-radial-gradient(#002f5570 0 0.0002%, #0093a770 0 0.0002%) 50% 0/250px 2500px,
-    repeating-conic-gradient(#002f5570 0 0.0001%, #0093a770 0 0.0002%) 60% 60%/250px 2500px;
+    repeating-radial-gradient(#002f5570 0 0.0002%, #0093a770 0 0.0002%) 50%
+      0/250px 2500px,
+    repeating-conic-gradient(#002f5570 0 0.0001%, #0093a770 0 0.0002%) 60%
+      60%/250px 2500px;
   background-blend-mode: difference;
   animation: b 0.2s infinite alternate;
   z-index: 9999;
@@ -293,7 +303,7 @@ body,
   margin-right: -6px;
   background: transparent;
   cursor: pointer;
-  font-family: "Marsmonster", monospace;
+  font-family: "iDroid-font", monospace;
   font-size: 1.5rem;
   letter-spacing: 0.1em;
   position: relative;
@@ -307,9 +317,9 @@ body,
   margin-right: 0;
 }
 
-#tab1:checked+label,
-#tab2:checked+label,
-#tab3:checked+label {
+#tab1:checked + label,
+#tab2:checked + label,
+#tab3:checked + label {
   top: 0;
   background: linear-gradient(to bottom, var(--border), transparent);
   border-bottom: 2px solid var(--glow-primary);
@@ -342,8 +352,8 @@ body,
     --glow-blue: 0 0 5px rgba(74, 144, 217, 0.55), 0 0 12px rgba(74, 144, 217, 0.18); */
 
 /* Tab adiacente DESTRA alla tab attiva */
-#tab1:checked~label[for="tab2"],
-#tab2:checked~label[for="tab3"] {
+#tab1:checked ~ label[for="tab2"],
+#tab2:checked ~ label[for="tab3"] {
   border-left-color: transparent;
 }
 
@@ -392,8 +402,8 @@ label[for="tab2"]:has(~ #tab3:checked) {
 /* ══════════════════════════════════════════════════════════
    UTILITY
 ══════════════════════════════════════════════════════════ */
-.marsmonster {
-  font-family: "Marsmonster", monospace;
+.iDroid-font {
+  font-family: "iDroid-font", monospace;
   letter-spacing: 0.05em;
   text-shadow:
     0 0 5px rgba(165, 188, 194, 0.3),
@@ -721,8 +731,31 @@ label[for="tab2"]:has(~ #tab3:checked) {
 #current_length,
 .inner-rectangle p,
 .stats_section p {
-  font-family: "Marsmonster", monospace;
+  font-family: "iDroid-font", monospace;
   letter-spacing: 0.05em;
+}
+
+#current_time {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  /* margin-right: 0; */
+}
+
+#clock-hours,
+#clock-mins {
+  display: inline-block;
+  width: 2ch; /* larghezza fissa — 2 caratteri */
+  text-align: center;
+  line-height: 1;
+}
+
+#clock-colon {
+  display: inline-block;
+  width: 0.6ch; /* larghezza fissa per il separatore */
+  text-align: center;
+  line-height: 1;
+  vertical-align: baseline;
 }
 
 #media_controls {
@@ -1118,11 +1151,11 @@ button.active_topic {
   color: var(--text-secondary);
 }
 
-.gmp-row .marsmonster {
+.gmp-row .iDroid-font {
   color: #4caf50;
 }
 
-.gmp-expense .marsmonster {
+.gmp-expense .iDroid-font {
   color: #e74c3c;
   text-shadow: var(--glow-danger);
 }
@@ -1460,7 +1493,7 @@ button.active_topic {
   color: var(--text-primary);
 }
 
-.map-region>i {
+.map-region > i {
   margin-top: 2px;
 }
 
@@ -1481,7 +1514,7 @@ button.active_topic {
 }
 
 .map-region-badge {
-  font-family: "Marsmonster", monospace;
+  font-family: "iDroid-font", monospace;
   font-size: 0.65rem;
   background: var(--ui-panel);
   color: var(--text-secondary);
@@ -1771,11 +1804,13 @@ button.active_topic {
   /* eredita la dimensione dal parent */
   object-fit: contain;
   /* per il colore SVG monocromatico usa filter */
-  filter: invert(60%) sepia(20%) saturate(400%) hue-rotate(160deg) brightness(90%);
+  filter: invert(60%) sepia(20%) saturate(400%) hue-rotate(160deg)
+    brightness(90%);
 }
 
 .menu-item:hover .menu-item-icon-img {
-  filter: invert(85%) sepia(20%) saturate(300%) hue-rotate(160deg) brightness(110%);
+  filter: invert(85%) sepia(20%) saturate(300%) hue-rotate(160deg)
+    brightness(110%);
 }
 
 .menu-item-icon-ghost {
@@ -1829,7 +1864,7 @@ button.active_topic {
   padding: 0 4px;
   background: var(--accent);
   color: var(--bg-primary);
-  font-family: "Marsmonster", monospace;
+  font-family: "iDroid-font", monospace;
   font-size: 0.9rem;
   font-weight: bold;
   letter-spacing: 0.04em;
@@ -1970,7 +2005,6 @@ button.active_topic {
    KEYFRAMES
 ══════════════════════════════════════════════════════════ */
 @keyframes blink-badge {
-
   0%,
   100% {
     opacity: 1;
@@ -1982,7 +2016,6 @@ button.active_topic {
 }
 
 @keyframes fob-pulse {
-
   0%,
   100% {
     box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
@@ -2084,8 +2117,8 @@ button.active_topic {
 /* ── Filtro colore iDROID sui tile OSM ── */
 #idroid-map .leaflet-tile {
   filter:
-    /* grayscale(1) */
-    hue-rotate(155deg) saturate(0.55) brightness(0.38) contrast(1.2);
+    /* grayscale(1) */ hue-rotate(155deg) saturate(0.55)
+    brightness(0.38) contrast(1.2);
 }
 
 /* ── Rimuovi UI Leaflet di default ── */
@@ -2317,10 +2350,11 @@ body.is-drilling-missions #footer-left {
 }
 
 /* Rimuovi la vecchia regola .footer-back-btn standalone */
-.footer-back-btn {}
+.footer-back-btn {
+}
 
 /* Visibile solo quando il panel missions è in drilling */
-#panel-missions.is-drilling~#footer-left .footer-back-btn,
+#panel-missions.is-drilling ~ #footer-left .footer-back-btn,
 body.is-drilling-missions #footer-left .footer-back-btn {
   opacity: 1;
   pointer-events: auto;
@@ -2333,7 +2367,7 @@ body.is-drilling-missions #footer-left .footer-back-btn {
 .idroid-breadcrumb {
   font-size: 1.2rem;
   /* uguale a h2 in #idroid_ver */
-  font-family: "Marsmonster", monospace;
+  font-family: "iDroid-font", monospace;
   letter-spacing: 0.08em;
   margin: 0;
   color: var(--accent);

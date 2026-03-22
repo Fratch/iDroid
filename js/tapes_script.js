@@ -338,24 +338,24 @@ function playTheTape(tapeArr) {
 
 // For working time
 (function() {
-	var colon = ':';
-	setInterval(function() {
-		var currDate = new Date;
-		var currHour = currDate.getHours();
-		var currMins = currDate.getMinutes();
+    var colonVisible = true;
 
-		if ($('#current_time').text().indexOf(':') >= 0) {
-			colon = ' ';
-		} else {
-			colon = ':';
-		}
+    setInterval(function() {
+        var currDate = new Date();
+        var currHour = String(currDate.getHours()).padStart(2, '0');
+        var currMins = String(currDate.getMinutes()).padStart(2, '0');
+        colonVisible = !colonVisible;
 
-		if (currMins < 10) {
-			currMins =  + '0' + currMins.toString();
-		}
+        $('#clock-hours').text(currHour);
+        $('#clock-colon').css('visibility', colonVisible ? 'visible' : 'hidden');
+        $('#clock-mins').text(currMins);
+    }, 1000);
 
-		$('#current_time').text(`${currHour}${colon}${currMins}`);
-	}, 1000)
+    // Inizializzazione immediata
+    var now = new Date();
+    $('#clock-hours').text(String(now.getHours()).padStart(2, '0'));
+    $('#clock-colon').css('visibility', 'visible');
+    $('#clock-mins').text(String(now.getMinutes()).padStart(2, '0'));
 })();
 
 // Replicate behavior of pressing "continue" button

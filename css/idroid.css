@@ -557,16 +557,6 @@ label[for="tab2"]:has(~ #tab3:checked) {
   border-color: var(--text-primary);
 }
 
-.new-badge {
-  font-size: 0.6rem;
-  background: var(--accent);
-  color: #000;
-  padding: 2px 6px;
-  margin-left: 10px;
-  vertical-align: middle;
-  animation: blink-badge 1.5s step-end infinite;
-}
-
 /* ══════════════════════════════════════════════════════════
    TAPES COLUMNS
 ══════════════════════════════════════════════════════════ */
@@ -1855,7 +1845,33 @@ button.active_topic {
   text-shadow: var(--glow-primary);
 }
 
+/* Badge neutro — notifica standard */
 .menu-item-badge {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  font-family: "Marsmonster", monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: none;
+  box-shadow: 0 0 4px rgba(73, 109, 123, 0.3);
+  z-index: 10;
+  line-height: 1;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+
+/* Badge urgente — notifica critica, giallo accent */
+.menu-item-badge-urgent {
   position: absolute;
   top: -6px;
   left: -6px;
@@ -1878,7 +1894,8 @@ button.active_topic {
   border-radius: 50%;
 }
 
-.menu-item-badge.badge-dot {
+.menu-item-badge.badge-dot,
+.menu-item-badge-urgent.badge-dot {
   min-width: 10px;
   height: 10px;
   padding: 0;
@@ -1972,7 +1989,7 @@ button.active_topic {
 
 .inner-rectangle {
   flex: 1;
-  background-color: rgba(73, 109, 123, 0.35);
+  background-color: rgba(150, 198, 218, 0.35);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1994,11 +2011,48 @@ button.active_topic {
 .stats_section p {
   margin: 10px;
   width: auto;
-  font-weight: bold;
+  font-size: large;
 }
 
 .stats_section i {
   margin: 5px;
+}
+
+/* bottom-row stacked variant */
+.bottom-row .inner-rectangle--stacked {
+  flex-direction: column;
+  align-items: stretch;
+  height: auto;
+  padding: 0;
+  gap: 0;
+}
+
+/* riga superiore: label a sinistra, valore a destra */
+.stats_section--split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 4px 10px;
+  height: 30px;
+}
+
+/* riga inferiore: tutto allineato a destra, sfondo più scuro */
+.stats_section--right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 95%;
+  padding: 4px 10px;
+  gap: 10px;
+    margin: 10px;
+    height: 20px;
+
+}
+
+.stats_section--dark {
+  background-color: rgba(9, 26, 33, 0.55);
+  border-top: 1px solid var(--border);
 }
 
 /* ══════════════════════════════════════════════════════════

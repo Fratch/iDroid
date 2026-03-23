@@ -1855,7 +1855,7 @@ button.active_topic {
   padding: 0 4px;
   background: var(--text-primary);
   color: var(--bg-primary);
-  font-family: "Marsmonster", monospace;
+  font-family: "iDroid-font", monospace;
   font-size: 0.9rem;
   font-weight: bold;
   letter-spacing: 0.04em;

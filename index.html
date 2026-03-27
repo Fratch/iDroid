@@ -23,14 +23,6 @@
 
   <body>
     <!-- ═══════════════════════════════════════════════════
-   VERSION BADGE + BREADCRUMB
-════════════════════════════════════════════════════ -->
-    <div id="idroid_ver">
-      <h2>iDROID VER 3.02</h2>
-      <h3 id="idroid-breadcrumb" class="idroid-breadcrumb"></h3>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════
        SVG MAP COLOR FILTER (hidden)
   ════════════════════════════════════════════════════ -->
     <svg id="idroid-map-filters" xmlns="http://www.w3.org/2000/svg">
@@ -59,6 +51,13 @@
        MAIN SHELL
   ════════════════════════════════════════════════════ -->
     <div class="idroid">
+      <!-- ═══════════════════════════════════════════════════
+   VERSION BADGE + BREADCRUMB
+════════════════════════════════════════════════════ -->
+      <div id="idroid_ver">
+        <h2>iDROID VER 3.02</h2>
+        <h3 id="idroid-breadcrumb" class="idroid-breadcrumb"></h3>
+      </div>
       <!-- Background dot grid -->
       <div id="dotgrid"></div>
 
@@ -75,6 +74,7 @@
 
           <input type="radio" name="tab" id="tab3" />
           <label for="tab3" class="tab">MISSIONS</label>
+          <div class="tab-underline"></div>
         </div>
 
         <!-- ═══════════════════════════════════════════
@@ -848,8 +848,8 @@
           <!-- /panel-map -->
 
           <!-- ─────────────────────────────────────────
-   PANEL 3 — MISSIONS
-──────────────────────────────────────────── -->
+            PANEL 3 — MISSIONS
+          ──────────────────────────────────────────── -->
           <div class="tab-panel" id="panel-missions">
             <!-- ── Layer A: lista menu principale ── -->
             <div id="missions-menu">
@@ -985,7 +985,16 @@
 
                 <li class="menu-item" data-panel="logs">
                   <div class="menu-item-icon-wrap">
-                    <i class="fas fa-list menu-item-icon"></i>
+                    <img
+                      class="menu-item-icon-ghost menu-item-icon-img"
+                      src="./assets/icons/logs-icon.svg"
+                      alt=""
+                    />
+                    <img
+                      class="menu-item-icon menu-item-icon-img"
+                      src="./assets/icons/logs-icon.svg"
+                      alt=""
+                    />
                   </div>
                   <div>
                     <p class="menu-item-title">LOGS</p>
@@ -1263,8 +1272,7 @@
                     <div
                       class="stats_section stats_section--right stats_section--dark"
                     >
-                      <p>HEROISM</p>
-                      <p>47200</p>
+                      <p>165840 + 295470</p><i class="fas fa-solid fa-globe"></i>
                     </div>
                   </div>
                 </div>

@@ -63,11 +63,9 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 55%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
+  background: radial-gradient(ellipse at center,
+      transparent 55%,
+      rgba(0, 0, 0, 0.55) 100%);
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -103,13 +101,11 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 9998;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 2px,
-    rgba(0, 0, 0, 0.07) 2px,
-    rgba(0, 0, 0, 0.07) 3px
-  );
+  background: repeating-linear-gradient(to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.07) 2px,
+      rgba(0, 0, 0, 0.07) 3px);
   animation: scanline-drift 12s linear infinite;
 }
 
@@ -122,10 +118,12 @@ body::after {
 }
 
 #idroid_ver h2 {
-  font-size: 1.2rem;
-  font-family: "iDroid-font", monospace;
-  color: white;
+  /* font-size: 1.2rem; */
+  font-family: "iDroid-font";
+  color: whitesmoke;
   margin: 0;
+  font-size: 18px;
+  font-weight: normal;
   letter-spacing: 0.08em;
   text-shadow:
     0 0 8px rgba(255, 255, 255, 0.5),
@@ -158,11 +156,9 @@ body,
   position: absolute;
   top: 0;
   left: 0;
-  background-image: radial-gradient(
-    circle,
-    rgba(101, 199, 238, 0.7) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle,
+      rgba(101, 199, 238, 0.7) 1px,
+      transparent 1px);
   background-size: 15px 15px;
   box-shadow: inset 0px 0px 40px 40px var(--bg-secondary);
   opacity: 0.5;
@@ -176,11 +172,9 @@ body,
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(
-    circle,
-    rgba(101, 199, 238, 0.7) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle,
+      rgba(101, 199, 238, 0.7) 1px,
+      transparent 1px);
   background-size: 15px 15px;
   filter: blur(1px);
   z-index: 0;
@@ -238,10 +232,8 @@ body,
   width: 100%;
   height: 100%;
   background:
-    repeating-radial-gradient(#002f5570 0 0.0002%, #0093a770 0 0.0002%) 50%
-      0/250px 2500px,
-    repeating-conic-gradient(#002f5570 0 0.0001%, #0093a770 0 0.0002%) 60%
-      60%/250px 2500px;
+    repeating-radial-gradient(#002f5570 0 0.0002%, #0093a770 0 0.0002%) 50% 0/250px 2500px,
+    repeating-conic-gradient(#002f5570 0 0.0001%, #0093a770 0 0.0002%) 60% 60%/250px 2500px;
   background-blend-mode: difference;
   animation: b 0.2s infinite alternate;
   z-index: 9999;
@@ -266,27 +258,28 @@ body,
   justify-content: center;
   width: 100%;
   z-index: 20;
+  height: 35px;
 }
 
 .tabs-wrapper::before,
 .tabs-wrapper::after {
   content: "";
   position: absolute;
-  bottom: -6px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   height: 2px;
-  background-color: var(--border);
+  background: var(--text-primary);
   pointer-events: none;
-  z-index: 20;
+  z-index: 21;
 }
 
 .tabs-wrapper::before {
   left: 0;
-  width: calc(2.75% + 6px);
 }
 
 .tabs-wrapper::after {
   right: 0;
-  width: calc(2.75% + 6px);
 }
 
 .tabs-container input[type="radio"] {
@@ -295,11 +288,11 @@ body,
 
 .tabs-container .tab {
   display: inline-block;
-  width: 31.5%;
+  width: 25%;
   text-align: center;
   padding: 5px 0;
   border: 2px solid var(--border);
-  border-bottom: 2px solid var(--border);
+  border-bottom: none;
   margin-right: -6px;
   background: transparent;
   cursor: pointer;
@@ -309,58 +302,30 @@ body,
   position: relative;
   top: 6px;
   transition: all 0.15s ease;
-  z-index: 20;
+  z-index: 21;
   color: whitesmoke;
+  margin-right: 5px;
 }
 
 .tabs-wrapper .tab:last-of-type {
   margin-right: 0;
 }
 
-#tab1:checked + label,
-#tab2:checked + label,
-#tab3:checked + label {
+#tab1:checked+label,
+#tab2:checked+label,
+#tab3:checked+label {
   top: 0;
-  background: linear-gradient(to bottom, var(--border), transparent);
-  border-bottom: 2px solid var(--glow-primary);
-  /* copre il bordo con il colore bg */
-  box-shadow:
-    0 -3px 0 0 #fff,
-    0 0 12px rgba(255, 255, 255, 0.12),
-    inset 0 0 20px rgba(255, 255, 255, 0.03);
-  z-index: 22;
-  /* backdrop-filter: blur(30px); */
-  margin-bottom: -6px;
-  padding-bottom: 16px;
-  text-shadow:
-    0 0 8px rgba(255, 255, 255, 0.6),
-    0 0 20px rgba(255, 255, 255, 0.2);
-}
-
-/*     --bg-primary: #122933;
-    --bg-secondary: #0f394c;
-    --ui-panel: #274e5f;
-    --border: #496d7b;
-    --text-secondary: #7496a1;
-    --text-primary: #d3feff;
-    --accent: #f7f852;
-    --glow-primary: 0 0 6px rgba(165, 188, 194, 0.35), 0 0 14px rgba(165, 188, 194, 0.12);
-    --glow-accent: 0 0 6px rgba(238, 237, 83, 0.6), 0 0 18px rgba(238, 237, 83, 0.25);
-    --glow-border: 0 0 4px rgba(73, 109, 123, 0.5), 0 0 10px rgba(73, 109, 123, 0.18);
-    --glow-danger: 0 0 6px rgba(231, 76, 60, 0.6), 0 0 16px rgba(231, 76, 60, 0.2);
-    --glow-ok: 0 0 5px rgba(76, 175, 80, 0.55), 0 0 12px rgba(76, 175, 80, 0.18);
-    --glow-blue: 0 0 5px rgba(74, 144, 217, 0.55), 0 0 12px rgba(74, 144, 217, 0.18); */
-
-/* Tab adiacente DESTRA alla tab attiva */
-#tab1:checked ~ label[for="tab2"],
-#tab2:checked ~ label[for="tab3"] {
-  border-left-color: transparent;
-}
-
-/* Tab adiacente SINISTRA alla tab attiva — usando :has() */
-label[for="tab1"]:has(~ #tab2:checked),
-label[for="tab2"]:has(~ #tab3:checked) {
-  border-right-color: transparent;
+  background: linear-gradient(to bottom, var(--border), var(--bg-secondary));
+  /* più opaco per coprire la linea */
+  border-bottom: 2px solid var(--glow-secondary);
+  border-right-color: var(--glow-primary);
+  border-left-color: var(--glow-primary);
+  box-shadow: 0 -3px 0 0 whitesmoke, 0 0 12px rgba(255, 255, 255, 0.12), inset 0 0 20px rgba(255, 255, 255, 0.03);
+  z-index: 23;
+  margin-bottom: -2px;
+  /* si sovrappone esattamente alla linea */
+  padding-bottom: 0;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 .tab-panels {
@@ -377,14 +342,19 @@ label[for="tab2"]:has(~ #tab3:checked) {
 .tab-panels::before {
   content: "";
   position: absolute;
-  top: 50px;
+  top: 35px;
   left: 0;
   right: 0;
   height: 15px;
-  border-left: 2px solid var(--border);
-  border-right: 2px solid var(--border);
+  border-left: 2px solid var(--text-primary);
+  border-right: 2px solid var(--text-primary);
   pointer-events: none;
   z-index: 20;
+}
+
+input[type=radio]:not(:checked)~.tab {
+    scale: 0.96;
+    margin-bottom: 5px;
 }
 
 .tab-panel {
@@ -398,6 +368,33 @@ label[for="tab2"]:has(~ #tab3:checked) {
 #panel-mission {
   display: flex;
 }
+
+.tab label {
+  position: relative;
+}
+
+.tab label::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  /* accorcia lato sinistro */
+  right: 6px;
+  /* accorcia lato destro */
+  border-bottom: 2px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+
+/* attivo */
+#tab1:checked+label::before,
+#tab2:checked+label::before,
+#tab3:checked+label::before {
+  border-bottom: 2px solid var(--glow-primary);
+  border-left-color: var(--glow-primary);
+  border-right-color: var(--glow-primary);
+}
+
 
 /* ══════════════════════════════════════════════════════════
    UTILITY
@@ -498,7 +495,7 @@ label[for="tab2"]:has(~ #tab3:checked) {
   padding: 0 24px 24px;
 }
 
-.mb-panel-header {
+/* .mb-panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -518,7 +515,7 @@ label[for="tab2"]:has(~ #tab3:checked) {
   margin: 0;
   letter-spacing: 0.12em;
   text-shadow: var(--glow-primary);
-}
+} */
 
 .mb-panel-controls {
   display: flex;
@@ -595,7 +592,7 @@ label[for="tab2"]:has(~ #tab3:checked) {
 #main_tabpanel,
 #media_box {
   font-family: "Rodin", monospace;
-  color: white;
+  color: var(--text-primary);
 }
 
 #main_tabpanel {
@@ -633,7 +630,7 @@ label[for="tab2"]:has(~ #tab3:checked) {
 .tape_tab[aria-selected="true"] {
   background-color: var(--ui-panel);
   opacity: 0.9;
-  color: white;
+  color: var(--text-primary);
 }
 
 .active_playing {
@@ -735,14 +732,16 @@ label[for="tab2"]:has(~ #tab3:checked) {
 #clock-hours,
 #clock-mins {
   display: inline-block;
-  width: 2ch; /* larghezza fissa — 2 caratteri */
+  width: 2ch;
+  /* larghezza fissa — 2 caratteri */
   text-align: center;
   line-height: 1;
 }
 
 #clock-colon {
   display: inline-block;
-  width: 0.6ch; /* larghezza fissa per il separatore */
+  width: 0.6ch;
+  /* larghezza fissa per il separatore */
   text-align: center;
   line-height: 1;
   vertical-align: baseline;
@@ -1483,7 +1482,7 @@ button.active_topic {
   color: var(--text-primary);
 }
 
-.map-region > i {
+.map-region>i {
   margin-top: 2px;
 }
 
@@ -1757,6 +1756,7 @@ button.active_topic {
   cursor: pointer;
   transition: 0.15s;
   position: relative;
+  width: 35%;
 }
 
 .menu-item div {
@@ -1785,6 +1785,7 @@ button.active_topic {
     text-shadow 0.15s;
   display: block;
   line-height: 1;
+  opacity: 60%;
 }
 
 .menu-item-icon-img {
@@ -1794,13 +1795,11 @@ button.active_topic {
   /* eredita la dimensione dal parent */
   object-fit: contain;
   /* per il colore SVG monocromatico usa filter */
-  filter: invert(60%) sepia(20%) saturate(400%) hue-rotate(160deg)
-    brightness(90%);
+  filter: invert(60%) sepia(20%) saturate(400%) hue-rotate(160deg) brightness(90%);
 }
 
 .menu-item:hover .menu-item-icon-img {
-  filter: invert(85%) sepia(20%) saturate(300%) hue-rotate(160deg)
-    brightness(110%);
+  filter: invert(85%) sepia(20%) saturate(300%) hue-rotate(160deg) brightness(110%);
 }
 
 .menu-item-icon-ghost {
@@ -1940,7 +1939,7 @@ button.active_topic {
   flex-direction: column;
   align-items: flex-end;
   padding: 12px;
-  color: white;
+  color: var(--text-primary);
   font-family: "Rodin", monospace;
   z-index: 9000;
   box-shadow:
@@ -2009,12 +2008,12 @@ button.active_topic {
 }
 
 .stats_section p {
-  margin: 10px;
+  padding: 10px;
   width: auto;
   font-size: large;
 }
 
-.stats_section i {
+.stats_section {
   margin: 5px;
 }
 
@@ -2039,26 +2038,32 @@ button.active_topic {
 
 /* riga inferiore: tutto allineato a destra, sfondo più scuro */
 .stats_section--right {
-  display: flex;
-  justify-content: flex-end;
+
   align-items: center;
-  width: 95%;
+  width: 90%;
   padding: 4px 10px;
   gap: 10px;
-    margin: 10px;
-    height: 20px;
+  margin: 10px;
+  height: 20px;
 
 }
 
 .stats_section--dark {
   background-color: rgba(9, 26, 33, 0.55);
   border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: right;
+}
+
+.stats_section--dark p {
+  font-size: 16px;
 }
 
 /* ══════════════════════════════════════════════════════════
    KEYFRAMES
 ══════════════════════════════════════════════════════════ */
 @keyframes blink-badge {
+
   0%,
   100% {
     opacity: 1;
@@ -2070,6 +2075,7 @@ button.active_topic {
 }
 
 @keyframes fob-pulse {
+
   0%,
   100% {
     box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
@@ -2171,8 +2177,8 @@ button.active_topic {
 /* ── Filtro colore iDROID sui tile OSM ── */
 #idroid-map .leaflet-tile {
   filter:
-    /* grayscale(1) */ hue-rotate(155deg) saturate(0.55)
-    brightness(0.38) contrast(1.2);
+    /* grayscale(1) */
+    hue-rotate(155deg) saturate(0.55) brightness(0.38) contrast(1.2);
 }
 
 /* ── Rimuovi UI Leaflet di default ── */
@@ -2404,11 +2410,10 @@ body.is-drilling-missions #footer-left {
 }
 
 /* Rimuovi la vecchia regola .footer-back-btn standalone */
-.footer-back-btn {
-}
+.footer-back-btn {}
 
 /* Visibile solo quando il panel missions è in drilling */
-#panel-missions.is-drilling ~ #footer-left .footer-back-btn,
+#panel-missions.is-drilling~#footer-left .footer-back-btn,
 body.is-drilling-missions #footer-left .footer-back-btn {
   opacity: 1;
   pointer-events: auto;
@@ -2421,7 +2426,7 @@ body.is-drilling-missions #footer-left .footer-back-btn {
 .idroid-breadcrumb {
   font-size: 1.2rem;
   /* uguale a h2 in #idroid_ver */
-  font-family: "iDroid-font", monospace;
+  font-family: "iDroid-font";
   letter-spacing: 0.08em;
   margin: 0;
   color: var(--accent);

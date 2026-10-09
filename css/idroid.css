@@ -52,7 +52,7 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: "Rodin", monospace;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   letter-spacing: 0.03em;
 }
 
@@ -353,8 +353,8 @@ body,
 }
 
 input[type=radio]:not(:checked)~.tab {
-    scale: 0.96;
-    margin-bottom: 5px;
+  scale: 0.96;
+  margin-bottom: 5px;
 }
 
 .tab-panel {
@@ -2205,4 +2205,241 @@ body.is-drilling-missions #footer-left .footer-back-btn {
   /* sotto scanlines (9998) e noise overlay (9999) */
   mix-blend-mode: screen;
   opacity: 0.018;
+}
+
+/* ══════════════════════════════════════════════════════════
+   MOTHER BASE — INFO PANEL (destra)
+══════════════════════════════════════════════════════════ */
+#mb-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 42%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: none;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* si dissolve come il menu quando si fa drill-down */
+#panel-mission.is-drilling #mb-info {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* ── Top: emblema + rank ── */
+.mbi-top {
+  position: relative;
+  /* ancora per .mbi-counts */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px 28px;
+  /* il 28px sotto riserva lo spazio per i contatori */
+  background: linear-gradient(to right, rgba(116, 150, 161, 0.22), rgba(15, 57, 76, 0.35));
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--glow-border);
+}
+
+.mbi-emblem {
+  flex-shrink: 0;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 50%;
+  /* unica eccezione: l'emblema è tondo nel gioco */
+  background: #0a0a14;
+  border: 2px solid var(--text-secondary);
+  box-shadow: var(--glow-primary);
+  position: relative;
+}
+
+.mbi-emblem span {
+  font-family: "iDroid-font", monospace;
+  font-size: 0.55rem;
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  color: #c27be8;
+  text-shadow: 0 0 6px rgba(194, 123, 232, 0.7);
+}
+
+.mbi-ranks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mbi-rank-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px;
+  /* era 2px 8px */
+  min-height: 20px;
+  /* altezza controllata, non più dettata dal font */
+  background: var(--text-secondary);
+  box-shadow: var(--glow-primary);
+  font-size: 1.25rem;
+  line-height: 1;
+  /* azzera il leading del font */
+}
+
+.mbi-rank-flag {
+  width: 22px;
+  height: 14px;
+  background: var(--ui-panel);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.mbi-rank-label {
+  flex: 1;
+  line-height: 1;
+  color: var(--text-primary);
+  text-shadow: var(--glow-primary);
+}
+
+.span.mbi-rank-label i {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.mbi-rank-val {
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.mbi-counts {
+  position: absolute;
+  /* fuori dal flusso: emblema e rank non si spostano */
+  left: 0;
+  right: 0;
+  /* copre tutta la larghezza di .mbi-top */
+  bottom: 6px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.mbi-counts i {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  margin-right: 4px;
+}
+
+.mbi-count-icon {
+  height: 1em;               /* segue il font-size di .mbi-counts */
+  width: auto;               /* mantiene le proporzioni, le tue SVG hanno viewBox diversi */
+  margin-right: 4px;
+  vertical-align: -0.1em;    /* allinea otticamente l'icona alla linea di base del testo */
+  filter: invert(80%) sepia(20%) saturate(400%) hue-rotate(160deg) brightness(90%);
+}
+
+/* ── Piattaforma ── */
+.mbi-platform {
+  padding: 10px 12px 12px;
+  background: linear-gradient(to right, rgba(116, 150, 161, 0.22), rgba(15, 57, 76, 0.35));
+  border-left: 1px solid var(--border);
+  box-shadow: var(--glow-border);
+}
+
+.mbi-platform-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.mbi-platform-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  background: var(--ui-panel);
+  border: 1px solid var(--border);
+}
+
+.mbi-platform-type {
+  font-size: 1.25rem;
+  line-height: 1;            /* elimina il leading del font */
+  padding-bottom: 0;
+  color: var(--text-primary);
+  text-shadow: var(--glow-primary);
+}
+
+.mbi-platform-name {
+  font-size: 1.25rem;
+  line-height: 1;
+  /* margin-top: -2px; */          /* avvicina ulteriormente i due blocchi */
+  color: var(--text-primary);
+  letter-spacing: 0.06em;
+}
+
+/* ── Tabella Base Info ── */
+.mbi-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.mbi-table th {
+  padding: 2px 6px 4px;
+  font-weight: normal;
+  font-size: 0.65rem;
+  text-align: left;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--border);
+}
+
+.mbi-table td {
+  padding: 3px 6px;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(73, 109, 123, 0.3);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.mbi-table td i {
+  width: 16px;
+  margin-right: 6px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.mbi-col-lv,
+.mbi-col-staff,
+.mbi-table td:nth-child(2),
+.mbi-table td:nth-child(3) {
+  width: 15%;
+  text-align: right;
+}
+
+.mbi-table tbody tr:hover td {
+  background: rgba(116, 150, 161, 0.18);
+  text-shadow: var(--glow-primary);
+}
+
+.mbi-table td.mbi-accent {
+  color: var(--accent);
+  text-shadow: var(--glow-accent);
+}
+
+.mbi-table tr.is-empty td {
+  color: var(--text-secondary);
 }

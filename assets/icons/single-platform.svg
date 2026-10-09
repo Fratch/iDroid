@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="78.313667mm"
+   height="67.859222mm"
+   viewBox="0 0 78.313667 67.859222"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="single-platform.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0242632"
+     inkscape:cx="140.10071"
+     inkscape:cy="144.98226"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-7"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-20.754606,-57.764114)">
+    <path
+       sodipodi:type="star"
+       style="fill:#000000;fill-opacity:1;stroke:#6e6150;stroke-width:0.105833;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:221.193;paint-order:markers stroke fill"
+       id="path1"
+       inkscape:flatsided="true"
+       sodipodi:sides="6"
+       sodipodi:cx="59.911438"
+       sodipodi:cy="91.693726"
+       sodipodi:r1="39.103924"
+       sodipodi:r2="33.86499"
+       sodipodi:arg1="1.052809"
+       sodipodi:arg2="1.5764077"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 79.273061,125.6679 40.169753,125.44847 20.80813,91.474297 40.549815,57.719553 79.653123,57.938982 99.014746,91.913154 Z"
+       inkscape:transform-center-y="-1.1550965e-06"
+       transform="rotate(-0.35582832,59.911438,91.693727)" />
+  </g>
+</svg>
